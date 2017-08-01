@@ -57,7 +57,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/static/js/";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 0);
@@ -65,9 +65,30 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Greeter = __webpack_require__(1);
+document.getElementById('root').appendChild(Greeter());
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var greeterings = __webpack_require__(2);
+
+module.exports = function() {
+  var Greeter = document.createElement('div');
+  Greeter.textContent = greeterings.greetText + ' without her';
+  return Greeter;
+}
+
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports) {
 
-throw new Error("Module parse failed: D:\\test\\webpack-restarter\\src\\app\\main.js Unexpected token (8:7)\nYou may need an appropriate loader to handle this file type.\n| import greeter from './greeter.js';\r\n| \r\n| render(<greeter />, document.getElementById('root'));");
+module.exports = {"greetText":"Hi there and greetings from JSON!"}
 
 /***/ })
 /******/ ]);

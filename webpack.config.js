@@ -20,7 +20,8 @@ module.exports = (options = {}) => ({
   },
   output: {
     path: __dirname + '/src/static/js',
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
+    publicPath: '/static/js/'
   },
   module: {
     rules: [
@@ -33,6 +34,13 @@ module.exports = (options = {}) => ({
           __dirname + '/node_modules'
         ],
         loader: 'babel-loader'
+      },
+      {
+        test: /\.css$/,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" }
+        ]
       }
     ]
   },
@@ -50,8 +58,6 @@ module.exports = (options = {}) => ({
     //     }
     //   }
     // },
-    historyApiFallback: true,
-    hot: true,
-    inline: true
+    historyApiFallback: true
   }
 })

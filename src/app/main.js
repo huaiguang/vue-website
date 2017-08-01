@@ -1,18 +1,4 @@
-// var greeter = require('./greeter.js');
-// document.getElementById('root').appendChild(greeter());
+var Greeter = require('./Greeter.js');
+import 'normalize.css'
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-// import Greeter from './Greeter.js';
-// import { greetings } from '../data/greetings.json'
-
-class Greeter extends React.Component {
-  render() {
-    return <div>Hi there and greetings !</div>
-  }
-}
-
-ReactDOM.render(
-  <Greeter />,
-  document.getElementById('root')
-);
+document.getElementById('root').appendChild(Greeter());
