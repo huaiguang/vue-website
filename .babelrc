@@ -1,21 +1,4 @@
 {
-  "presets": [
-    [
-      "env",
-      {
-        "targets": {
-          "browsers": ["last 2 versions", "safari >= 7", "ie >= 9"]
-        },
-        "modules": false,
-        "useBuiltIns": true,
-        "debug": false
-      }
-    ],
-    "flow"
-  ],
-  "plugins": [
-    "syntax-dynamic-import",
-    "transform-object-rest-spread",
-    "transform-vue-jsx"
-  ]
+  "presets": ["react","es2015","stage-0"],
+  "plugins": ["transform-react-jsx"],
 }

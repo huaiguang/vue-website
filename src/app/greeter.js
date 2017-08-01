@@ -7,16 +7,13 @@
 // }
 
 import { greetings } from '../data/greetings.json'
-import React, {Component} from 'react'
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-class greeter extends Component{
+class Greeter extends React.Component {
   render() {
-    return (
-      <div>
-        {greetings.greetText}
-      </div>
-    );
+    return <div>{greetings.greetText}</div>
   }
 }
 
-export default greeter
+export default Greeter

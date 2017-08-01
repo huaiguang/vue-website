@@ -12,6 +12,8 @@
 // }
 
 // new config
+const path = require('path')
+
 module.exports = (options = {}) => ({
   entry: {
     index: __dirname + '/src/app/main.js'
@@ -23,15 +25,14 @@ module.exports = (options = {}) => ({
   module: {
     rules: [
       {
-        resource: {
-          test: /\.js$/,
-          include: __dirname + '/src/app'
-        },
-        use: [
-          {
-            loader: 'babel-loader'
-          }
-        ]
+        test: /\.js$/,
+        include: [
+          __dirname + '/src/app'
+        ],
+        exclude: [
+          __dirname + '/node_modules'
+        ],
+        loader: 'babel-loader'
       }
     ]
   },
