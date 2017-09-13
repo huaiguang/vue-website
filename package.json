@@ -1,13 +1,15 @@
 {
   "name": "webpack-restarter",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --hot --inline",
-    "build:watch": "webpack --watch",
-    "build": "webpack"
+    "clean": "rm -rf ./dist",
+    "clean:all": "rm -rf ./node_modules && rm -rf ./dist",
+    "test": "cross-env NODE_ENV=dev webpack --config ./config/webpack.config.test",
+    "devServer": "webpack-dev-server --inline --config ./config/webpack.config.test",
+    "dev": "cross-env NODE_ENV=dev webpack --config ./config/webpack.config.dev",
+    "build": "cross-env NODE_ENV=prod webpack --config ./config/webpack.config.prod"
   },
   "keywords": [],
   "author": "chenjiaxin",
@@ -22,10 +24,16 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "cross-env": "^5.0.5",
     "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^2.30.1",
+    "rimraf": "^2.6.2",
     "style-loader": "^0.18.2",
     "webpack": "^3.4.1",
-    "webpack-dev-server": "^2.6.1"
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-dev-server": "^2.7.1",
+    "webpack-hot-middleware": "^2.19.1"
   },
   "dependencies": {
     "normalize.css": "^7.0.0",
