@@ -2,14 +2,36 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const forEach = require('lodash/forEach')
+const glob = require('glob');
+// eventsource-polyfill不需要声明即可引入
+
+function getEntriesWithHMR(globPath) {
+  const entries = {}
+  glob.sync(globPath).forEach(entry => {
+    const tmp = entry.split('/').splice(-2)
+    entries[tmp[0]] = ['eventsource-polyfill', entry]
+  })
+  return entries
+}
+
+// function getEntrierWithAsync(globPath) {
+//   const entries = {}
+//   glob(globPath, {}, function(err, matches) {
+//     matches.forEach(entry => {
+//       const tmp = entry.split('/').splice(-2)
+//       entries[tmp[0]] = ['eventsource-polyfill',entry]
+//     })
+//     return entries
+//   })
+// }
 
 module.exports = (options = {}) => ({
-  entry: {
-    index: path.resolve(__dirname, '../src/test/main.js')
-  },
+  entry: getEntriesWithHMR('./src/*/main.js'),
   output: {
-    path: path.resolve(__dirname, '../dist/js'),
-    filename: '[name].[hash].js'
+    path: path.resolve(__dirname, '../dist'),
+    publicPath: '/',
+    filename: 'js/[name].bundle.js'
   },
   module: {
     rules: [
@@ -31,12 +53,12 @@ module.exports = (options = {}) => ({
   plugins: [
     new HtmlWebpackPlugin({
       title: 'test.html',
-      filename: '../home.html',
+      filename: 'view/home.html',
       favicon: path.resolve(__dirname, '../public/favicon.ico'),
       template: path.resolve(__dirname, '../public/index.html')
     }),
     new ExtractTextPlugin({
-      filename: '../css/style.css'
+      filename: 'css/style.css'
     })
   ],
   resolve: {
@@ -49,7 +71,7 @@ module.exports = (options = {}) => ({
   // devServer
   devServer: {
     contentBase: path.resolve(__dirname, '../dist'),
-    // host: '127.0.0.1',
+    host: '127.0.0.1',
     port: 8009,
     // proxy: {
     //   'api': {
