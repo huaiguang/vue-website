@@ -1,10 +1,9 @@
-// new config
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const forEach = require('lodash/forEach')
+const htmlHandler = require('./html-handler');
+const forEach = require('lodash/forEach');
 const glob = require('glob');
-// eventsource-polyfill不需要声明即可引入
 
 function getEntriesWithHMR(globPath) {
   const entries = {}
@@ -25,6 +24,21 @@ function getEntriesWithHMR(globPath) {
 //     return entries
 //   })
 // }
+
+const ExtractCss = new ExtractTextPlugin({
+  filename: 'css/style.css'
+})
+
+const plugins = [
+  ExtractCss,
+  new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: false,
+      drop_debugger: true,
+      drop_console: true
+    }
+  })
+]
 
 module.exports = (options = {}) => ({
   entry: getEntriesWithHMR('./src/*/main.js'),
@@ -50,17 +64,39 @@ module.exports = (options = {}) => ({
       }
     ]
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'test.html',
-      filename: 'view/home.html',
-      favicon: path.resolve(__dirname, '../public/favicon.ico'),
-      template: path.resolve(__dirname, '../public/index.html')
-    }),
-    new ExtractTextPlugin({
-      filename: 'css/style.css'
+  // plugins: [
+  //   new HtmlWebpackPlugin({
+  //     title: 'test.html',
+  //     filename: 'view/home.html',
+  //     favicon: path.resolve(__dirname, '../public/favicon.ico'),
+  //     template: path.resolve(__dirname, '../public/index.html')
+  //   }),
+  //   new ExtractTextPlugin({
+  //     filename: 'css/style.css'
+  //   })
+  // ],
+  plugins: plugins.concat(
+    htmlHandler({
+      template: path.resolve(__dirname, '../public/index.html'),
+      // chunks: ['vendor', 'manifest'],
+      // If you use multiple chunks with commonChunksPlugin, this is the necessary
+      // setting in order to put webpack runtime code (manifest) in front of
+      // all chunks
+      chunksSortMode: 'dependency',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true
+      }
     })
-  ],
+  ),
   resolve: {
     alias: {
       src: path.resolve(__dirname, '../src'),
