@@ -14,17 +14,6 @@ function getEntriesWithHMR(globPath) {
   return entries
 }
 
-// function getEntrierWithAsync(globPath) {
-//   const entries = {}
-//   glob(globPath, {}, function(err, matches) {
-//     matches.forEach(entry => {
-//       const tmp = entry.split('/').splice(-2)
-//       entries[tmp[0]] = ['eventsource-polyfill',entry]
-//     })
-//     return entries
-//   })
-// }
-
 const ExtractCss = new ExtractTextPlugin({
   filename: 'css/style.css'
 })
@@ -79,9 +68,9 @@ module.exports = (options = {}) => ({
     htmlHandler({
       template: path.resolve(__dirname, '../public/index.html'),
       // chunks: ['vendor', 'manifest'],
-      // If you use multiple chunks with commonChunksPlugin, this is the necessary
-      // setting in order to put webpack runtime code (manifest) in front of
-      // all chunks
+      // // If you use multiple chunks with commonChunksPlugin, this is the necessary
+      // // setting in order to put webpack runtime code (manifest) in front of
+      // // all chunks
       chunksSortMode: 'dependency',
       minify: {
         removeComments: true,

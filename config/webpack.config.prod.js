@@ -29,12 +29,23 @@ const plugins = [
   })
 ]
 
-module.exports = require('./webpack.config.base')({
+module.exports = ({
   entry: getEntriesWithHMR('./src/*/main.js'),
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
     filename: 'js/[name].bundle.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader'
+        })
+      }
+    ]
   },
   plugins: plugins.concat(
     htmlHandler({

@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const glob = require('glob');
-// const htmlHandler = require('./html-handler');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const pageConfig = require('./page-config')
 
@@ -32,23 +31,16 @@ let webpackConfig = {
         exclude: path.resolve(__dirname, '/node_modules'),
         loader: 'babel-loader'
       }
-      // {
-      //   test: /\.css$/,
-      //   use: ExtractTextPlugin.extract({
-      //     fallback: 'style-loader',
-      //     use: 'css-loader'
-      //   })
-      // }
     ]
   },
   plugins: [
-    // new webpack.DefinePlugin({
-    //   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-    //   'process.env.APP_ENV': JSON.stringify(process.env.APP_ENV),
-    //   'process.env.API': JSON.stringify('/api/V4/')
-    // }),
-    // new webpack.ContextReplacementPlugin(/moment[\\]locale$/, /zh-cn/),
-    // new webpack.NamedModulesPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.APP_ENV': JSON.stringify(process.env.APP_ENV),
+      'process.env.API': JSON.stringify('/api/V4/')
+    }),
+    new webpack.ContextReplacementPlugin(/moment[\\]locale$/, /zh-cn/),
+    new webpack.NamedModulesPlugin(),
     new HtmlWebpackPlugin({
       title: 'html test',
       filename: 'view/test.html',
@@ -61,30 +53,30 @@ let webpackConfig = {
         removeAttrbuteQuotes: true
       }
     })
-  ]
-  // resolve: {
-  //   alias: {
-  //     src: path.resolve(__dirname, '../src'),
-  //     common: path.resolve(__dirname, '../src/common'),
-  //     dist: path.resolve(__dirname, '../dist')
-  //   },
-  //   aliasFields: ['browser'],
-  //   descriptionFiles: ['package.json'],
-  //   enforceExtension: false,
-  //   enforceModuleExtension: false,
-  //   extensions: ['.js', '.vue', '.json'],
-  //   mainFields: ['browser', 'module', 'main'],
-  //   mainFiles: ['index'],
-  //   modules: ['app', 'node_modules'],
-  //   unsafeCache: true
-  // },
-  // resolveLoader: {
-  //   modules: ['web_loaders', 'web_modules', 'node_loaders', 'node_modules'],
-  //   extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js'],
-  //   // packageMains: ['webpackLoader', 'webLoader', 'loader', 'main'],
-  //   moduleExtensions: []
-  // },
-  // target: 'web'
+  ],
+  resolve: {
+    alias: {
+      src: path.resolve(__dirname, '../src'),
+      common: path.resolve(__dirname, '../src/common'),
+      dist: path.resolve(__dirname, '../dist')
+    },
+    aliasFields: ['browser'],
+    descriptionFiles: ['package.json'],
+    enforceExtension: false,
+    enforceModuleExtension: false,
+    extensions: ['.js', '.vue', '.json'],
+    mainFields: ['browser', 'module', 'main'],
+    mainFiles: ['index'],
+    modules: ['app', 'node_modules'],
+    unsafeCache: true
+  },
+  resolveLoader: {
+    modules: ['web_loaders', 'web_modules', 'node_loaders', 'node_modules'],
+    extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js'],
+    // packageMains: ['webpackLoader', 'webLoader', 'loader', 'main'],
+    moduleExtensions: []
+  },
+  target: 'web'
   // devtool: options.devtool,
   // performance: options.performance || {}
 }
