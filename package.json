@@ -13,7 +13,6 @@
     "release": "cross-env NODE_ENV=prod node ./scripts/build.js"
   },
   "keywords": [
-    "restarter",
     "webpack",
     "postcss",
     "eslint",
