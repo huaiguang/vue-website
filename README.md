@@ -1,18 +1,15 @@
-# webpack-restarter
-> start to use webpack to build a frame for work,
-here is the list of loaders: webpack postcss eslint es6 vue react
-
-## webpack
-> use webpack-hot-middleware and webpack-dev-middleware to build frame for development
+# webpack
+> learn how to build a front-end project on webpack, which is flexible for develpers.
 
 ## es6
-> es6 has become the common configuration
+> provide many useful function and properties.
 
 ## postcss
-> use postcss to config the more feature of css, add sass
+> add many new properties of css-next.
 
 ## eslint
-> add eslint to format codes
+> keep the same style of code, and checkout basic errors.
+
 
 ## vue
 > vue ,as the one of the most popular front-end frameworks, should have a good master of it
