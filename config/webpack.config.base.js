@@ -31,17 +31,20 @@ let webpackConfig = {
         include: path.resolve(__dirname, '../src'),
         exclude: path.resolve(__dirname, '/node_modules'),
         loader: 'babel-loader'
+      },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader'
+        })
       }
-      // {
-      //   test: /\.css$/,
-      //   use: ExtractTextPlugin.extract({
-      //     fallback: 'style-loader',
-      //     use: 'css-loader'
-      //   })
-      // }
     ]
   },
   plugins: [
+    new ExtractTextPlugin({
+      filename: 'css/[name].css'
+    }),
     // new webpack.DefinePlugin({
     //   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     //   'process.env.APP_ENV': JSON.stringify(process.env.APP_ENV),

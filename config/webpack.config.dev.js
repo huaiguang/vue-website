@@ -14,21 +14,13 @@
 //   return entries
 // }
 //
-// const ExtractCss = new ExtractTextPlugin({
-//   filename: 'css/style.css'
-// })
-//
+
 // const plugins = [
-//   ExtractCss,
-//   new webpack.optimize.UglifyJsPlugin({
-//     compress: {
-//       warnings: false,
-//       drop_debugger: true,
-//       drop_console: true
-//     }
+//   new ExtractTextPlugin({
+//     filename: 'css/style.css'
 //   })
 // ]
-//
+
 // module.exports = require('./webpack.config.base')({
 //   entry: getEntriesWithHMR('./src/*/main.js'),
 //   output: {
@@ -68,28 +60,6 @@ Object.keys(baseWebpackConfig.entry).forEach(name => {
 
 let webpackConfig = merge(baseWebpackConfig, {
   devtool: '#cheap-module-eval-source-map',
-  // output: {
-  //   path: path.resolve(__dirname, '../dist'),
-  //   filename: 'static/scripts/[name].[hash:7].js',
-  //   chunkFilename: 'static/scripts/[name].[hash:7].js'
-  // },
-  module: {
-    rules: [{
-        resource: {
-          test: /\.css$/
-        },
-        use: [{
-          loader: 'style-loader'
-        }, {
-          loader: 'css-loader',
-          options: {
-            minimize: false,
-            sourceMap: false
-          }
-        }]
-      }
-    ]
-  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
