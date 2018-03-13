@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const htmlHandler = require('./html-handler');
+const merge = require('webpack-merge')
 const forEach = require('lodash/forEach');
 const glob = require('glob');
 
@@ -15,7 +16,7 @@ function getEntriesWithHMR(globPath) {
 }
 
 const ExtractCss = new ExtractTextPlugin({
-  filename: 'css/style.css'
+  filename: 'css/[name].css'
 })
 
 const plugins = [
@@ -29,24 +30,30 @@ const plugins = [
   })
 ]
 
-module.exports = ({
-  entry: getEntriesWithHMR('./src/*/main.js'),
-  output: {
-    path: path.resolve(__dirname, '../dist'),
-    publicPath: '/',
-    filename: 'js/[name].bundle.js'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader'
-        })
-      }
-    ]
-  },
+// module.exports = require('./webpack.config.base')({
+//   plugins: plugins.concat(
+//     htmlHandler({
+//       template: path.resolve(__dirname, '../public/index.html'),
+//       chunksSortMode: 'dependency',
+//       minify: {
+//         removeComments: true,
+//         collapseWhitespace: true,
+//         removeRedundantAttributes: true,
+//         useShortDoctype: true,
+//         removeEmptyAttributes: true,
+//         removeStyleLinkTypeAttributes: true,
+//         keepClosingSlash: true,
+//         minifyJS: true,
+//         minifyCSS: true,
+//         minifyURLs: true
+//       }
+//     })
+//   )
+// })
+
+const webpackBase = require('./webpack.config.base');
+
+module.exports = merge(webpackBase, {
   plugins: plugins.concat(
     htmlHandler({
       template: path.resolve(__dirname, '../public/index.html'),

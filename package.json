@@ -1,13 +1,13 @@
 {
-  "name": "webpack-restarter",
-  "version": "2.0.0",
-  "description": "",
+  "name": "webpack",
+  "version": "1.0.0",
+  "description": "to build a project based on webpack",
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf ./dist",
-    "clean:all": "rm -rf ./node_modules && rm -rf ./dist",
+    "clean:all": "rm -rf ./node_modules && rm -rf ./dist && rm yarn.lock",
     "test": "webpack --config ./config/webpack.config.test",
-    "devServer": "webpack-dev-server --inline --config ./config/webpack.config.test",
+    "devServer": "webpack-dev-server --config ./config/webpack.config.test",
     "dev": "cross-env NODE_ENV=dev node ./config/dev-server",
     "build": "cross-env NODE_ENV=prod webpack --config ./config/webpack.config.prod",
     "release": "cross-env NODE_ENV=prod node ./scripts/build.js"
@@ -24,7 +24,7 @@
   "private": false,
   "repository": {
     "type": "git",
-    "url": "git@github.com:huaiguang/webpack.git"
+    "url": "https://github.com/huaiguang/webpack"
   },
   "license": "MIT",
   "devDependencies": {
@@ -43,7 +43,7 @@
     "lodash": "^4.17.4",
     "rimraf": "^2.6.2",
     "style-loader": "^0.18.2",
-    "webpack": "^3.6.0",
+    "webpack": "^3.0.0",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-dev-server": "^2.7.1",
     "webpack-hot-middleware": "^2.19.1",

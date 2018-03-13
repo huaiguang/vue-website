@@ -14,19 +14,17 @@ function getEntriesWithHMR(globPath) {
   return entries
 }
 
-const ExtractCss = new ExtractTextPlugin({
-  filename: 'css/style.css'
-})
-
 const plugins = [
-  ExtractCss,
-  new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: false,
-      drop_debugger: true,
-      drop_console: true
-    }
+  new ExtractTextPlugin({
+    filename: 'css/[name].css'
   })
+  // new webpack.optimize.UglifyJsPlugin({
+  //   compress: {
+  //     warnings: false,
+  //     drop_debugger: true,
+  //     drop_console: true
+  //   }
+  // })
 ]
 
 module.exports = (options = {}) => ({
@@ -60,10 +58,6 @@ module.exports = (options = {}) => ({
   //     favicon: path.resolve(__dirname, '../public/favicon.ico'),
   //     template: path.resolve(__dirname, '../public/index.html')
   //   }),
-  //   new ExtractTextPlugin({
-  //     filename: 'css/style.css'
-  //   })
-  // ],
   plugins: plugins.concat(
     htmlHandler({
       template: path.resolve(__dirname, '../public/index.html'),
