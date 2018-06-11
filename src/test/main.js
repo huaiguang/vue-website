@@ -1,4 +1,4 @@
-var Greeter = require('./app/Greeter.js');
+import Greeter from './module/greeter';
 import 'normalize.css';
 import './assets/css/common.css';
 
