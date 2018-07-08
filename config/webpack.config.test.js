@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 const htmlHandler = require('./html-handler');
 const forEach = require('lodash/forEach');
 const glob = require('glob');
@@ -17,7 +18,8 @@ function getEntriesWithHMR(globPath) {
 const plugins = [
   new ExtractTextPlugin({
     filename: 'css/[name].css'
-  })
+  }),
+  new VueLoaderPlugin()
   // new webpack.optimize.UglifyJsPlugin({
   //   compress: {
   //     warnings: false,
@@ -36,6 +38,29 @@ module.exports = (options = {}) => ({
   },
   module: {
     rules: [
+      // {
+      //   enforce: 'pre',
+      //   test: /\.(js|vue)$/,
+      //   use: [{
+      //     loader: 'eslint-loader',
+      //     options: {
+      //       formatter: require('eslint-friendly-formatter')
+      //     }
+      //   }]
+      // },
+      {
+        test: /\.vue$/,
+        use: {
+          loader: 'vue-loader',
+          options: {
+            loaders: {
+              css: ['vue-style-loader', {
+                loader: 'css-loader'
+              }]
+            }
+          }
+        }
+      },
       {
         test: /\.js$/,
         include: path.resolve(__dirname, '../src'),

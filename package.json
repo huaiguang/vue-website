@@ -17,8 +17,7 @@
     "postcss",
     "eslint",
     "es6",
-    "vue",
-    "react"
+    "vue"
   ],
   "author": "chenjiaxin",
   "private": false,
@@ -28,12 +27,18 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^6.25.0",
-    "babel-loader": "^7.1.1",
-    "babel-preset-env": "^1.6.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.4",
+    "eslint": "^4.19.1",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-html": "^4.0.3",
+    "eslint-plugin-import": "^2.12.0",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.15.4",
     "extract-text-webpack-plugin": "^3.0.0",
@@ -43,6 +48,8 @@
     "lodash": "^4.17.4",
     "rimraf": "^2.6.2",
     "style-loader": "^0.18.2",
+    "vue-loader": "^15.2.4",
+    "vue-template-compiler": "^2.5.16",
     "webpack": "^3.0.0",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-dev-server": "^2.7.1",
@@ -52,6 +59,7 @@
   "dependencies": {
     "fullpage.js": "^2.9.7",
     "jquery": "^3.3.1",
-    "normalize.css": "^7.0.0"
+    "normalize.css": "^7.0.0",
+    "vue": "^2.5.16"
   }
 }

@@ -1,5 +1,8 @@
-import Greeter from './module/greeter';
-import 'normalize.css';
-import './assets/css/common.css';
+import Vue from 'vue'
+import app from './view/app.vue'
+import 'normalize.css'
 
-document.getElementById('root').appendChild(Greeter());
+new Vue({
+  el: '#app',
+  render: h => h(app)
+})

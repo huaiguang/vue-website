@@ -17,6 +17,3 @@
 
 ## vue
 > vue ,as the one of the most popular front-end frameworks, should have a good master of it
-
-## react
-> react, as the one of the most popular front-end frameworks, can help to solve the compatiblity of the different browsers and platfroms with react-native, maybe the main tendency.
