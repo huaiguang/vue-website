@@ -1,7 +1,7 @@
 {
-  "name": "webpack",
+  "name": "vue-website",
   "version": "1.0.0",
-  "description": "to build a project based on webpack",
+  "description": "large website template based on vue",
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf ./dist",
@@ -19,11 +19,11 @@
     "es6",
     "vue"
   ],
-  "author": "chenjiaxin",
+  "author": "Carlos",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/huaiguang/webpack"
+    "url": "https://github.com/huaiguang/vue-website.git"
   },
   "license": "MIT",
   "devDependencies": {
