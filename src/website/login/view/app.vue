@@ -17,13 +17,14 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       username: 'siQin',
       password: ''
     }
   }
 }
+
 </script>
 
 <style lang="scss">
@@ -79,7 +80,5 @@ export default {
     }
   }
 }
-
-
 
 </style>
