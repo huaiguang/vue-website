@@ -1,22 +1,12 @@
 const path = require('path');
-const glob = require('glob');
-const webpack = require('webpack');
 const merge = require('webpack-merge')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const htmlHandler = require('./html-handler');
 const webpackBaseConfig = require('./webpack.conf.base');
 
-const ExtractCss = new MiniCssExtractPlugin({
-  filename: 'css/[name].css',
-  chunkFilename: 'css/common.css'
-})
-
-const plugins = [
-  ExtractCss
-]
-
 module.exports = merge(webpackBaseConfig, {
-  plugins: plugins.concat(
+  mode: 'production',
+  devtool: '#cheap-module-source-map',
+  plugins: [].concat(
     htmlHandler({
       template: path.resolve(__dirname, '../public/index.html'),
       chunksSortMode: 'dependency',

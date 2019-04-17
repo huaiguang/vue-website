@@ -1,6 +1,6 @@
 <template>
   <div class="login-box">
-    <h1 class="title">登陆模块</h1>
+    <h1 class="title">登 陆</h1>
     <div class="form-item">
       <label class="" for="username">用户名：</label>
       <input name="username" v-model="username" type="text">

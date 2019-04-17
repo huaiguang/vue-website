@@ -1,12 +1,12 @@
 const path = require('path');
 const glob = require('glob');
 const { VueLoaderPlugin } = require('vue-loader');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const htmlHandler = require('./html-handler');
 
 function getEntries(globPath) {
   const entries = {}
   glob.sync(globPath).forEach(entry => {
-    console.log(entry);
     const tmp = entry.split('/').splice(-2)
     entries[tmp[0]] = ['eventsource-polyfill', entry]
   })
@@ -14,7 +14,10 @@ function getEntries(globPath) {
 }
 
 const plugins = [
-  new VueLoaderPlugin()
+  new VueLoaderPlugin(),
+  new MiniCssExtractPlugin({
+    filename: 'css/[name].css'
+  })
 ]
 
 module.exports = {
@@ -23,7 +26,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
-    filename: 'js/[name].bundle.js'
+    filename: 'js/[name].js'
   },
   module: {
     rules: [
@@ -63,14 +66,28 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          { loader: 'style-loader' },
+          { 
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              options: {
+                publicPath: '../'
+              }
+            }
+          },
           { loader: 'css-loader' }
         ]
       },
       {
         test: /\.scss$/,
         use: [
-          { loader: 'style-loader' },
+          { 
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              options: {
+                publicPath: '../'
+              }
+            }
+          },
           { loader: 'css-loader' },
           { loader: 'sass-loader' }
         ]
@@ -79,7 +96,7 @@ module.exports = {
   },
   plugins: plugins.concat(
     htmlHandler({
-      chunks: ['manifest', 'vendor']
+      chunks: ['manifest', 'vendor', 'common']
     })
   ),
   optimization: {
@@ -88,12 +105,12 @@ module.exports = {
     },
     splitChunks: {
       cacheGroups: {
-        // styles: {
-        //   name: 'common',
-        //   test: /\.css$/,
-        //   chunks: 'initial',
-        //   enforce: true
-        // },
+        styles: {
+          name: 'common',
+          test: /\.css$/,
+          chunks: 'initial',
+          enforce: true
+        },
         common: {
           name: "common",
           chunks: "initial",
@@ -101,12 +118,11 @@ module.exports = {
           priority: 0,
           minChunks: 1
         },
-        // 首先: 打包node_modules中的文件
         vendor: {
           name: "vendor",
-          test: /node_modules\/\*\*\/\.js$/,
+          test: /node_modules/,
           chunks: "initial",
-          priority: -10,
+          priority: 10,
           minChunks: 1,
         }
       }

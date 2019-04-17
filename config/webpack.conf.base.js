@@ -1,7 +1,6 @@
 const path = require('path');
 const glob = require('glob');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 const htmlHandler = require('./html-handler');
@@ -15,7 +14,7 @@ function getEntriesWithHMR(globPath) {
   return entries
 }
 
-const entries = getEntriesWithHMR('./src/*/main.js')
+const entries = getEntriesWithHMR('./src/**/main.js');
 
 module.exports = {
   entry: entries,
@@ -62,13 +61,33 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          {loader: 'style-loader'},
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../'
+            }
+          },
           {loader: 'css-loader'}
+        ]
+      },
+      {
+        test: /\.scss/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {}
+          },
+          {loader: 'css-loader'},
+          {loader: 'sass-loader'}
         ]
       }
     ]
   },
   plugins: [
+    new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css'
+    }),
     new FriendlyErrorsPlugin(),
     // new webpack.DefinePlugin({
     //   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
@@ -105,10 +124,7 @@ module.exports = {
   resolveLoader: {
     modules: ['web_loaders', 'web_modules', 'node_loaders', 'node_modules'],
     extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js'],
-    packageMains: ['webpackLoader', 'webLoader', 'loader', 'main'],
     moduleExtensions: []
   },
-  target: 'web',
-  devtool: options.devtool,
-  performance: options.performance || {}
+  target: 'web'
 }

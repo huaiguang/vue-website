@@ -9,10 +9,10 @@
     "eslint": "eslint ./src/",
     "eslint:fix": "",
     "test": "webpack --config ./config/webpack.conf.test",
-    "dev": "cross-env NODE_ENV=dev node ./config/dev-server",
-    "dev:server": "webpack-dev-server --config ./config/webpack.conf.test",
-    "build": "cross-env NODE_ENV=prod webpack --config ./config/webpack.conf.prod",
-    "release": "cross-env NODE_ENV=prod node ./scripts/build.js"
+    "dev": "cross-env NODE_ENV=development node ./config/dev-server",
+    "dev:server": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.conf.test",
+    "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.conf.prod",
+    "release": "cross-env NODE_ENV=production node ./scripts/build.js"
   },
   "keywords": [
     "webpack",
