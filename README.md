@@ -1,19 +1,32 @@
-# webpack
-> learn how to build a front-end project on webpack, which is flexible for develpers.
-- using webpack.dll.config.js to improve efficiency
-- using commonChunkPlugin to separate static plugins from the others.
 
-## es6
-> provide many useful function and properties.
-- using the lastest javascript features
+# explanation
+It provide a solution to build a website, which you can apply it to your personal page or large website.
 
-## postcss
-> add many new properties of css-next.
-- using the laster javascript css3, eg transform, animation, 
+# To start
 
-## eslint
-> keep the same style of code, and checkout basic errors.
-- ensure the quality of code.
+``` bash
+# install dependencies
+npm install
 
-## vue
-> vue ,as the one of the most popular front-end frameworks, should have a good master of it
+# serve with hot reload
+npm run dev
+
+# build for production with minification
+npm run build
+
+```
+
+# Folder structure
+* config - webpack config files
+* dist - build
+* public - html template files
+* scripts - nodejs server
+* src - your app
+    * assets
+    * website 
+
+# Browser support
+Modern browsers and IE 10+.
+
+# License
+[MIT](http://opensource.org/licenses/MIT)
