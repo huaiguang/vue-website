@@ -1,8 +1,8 @@
-const path = require('path');
-const glob = require('glob');
-const { VueLoaderPlugin } = require('vue-loader');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const htmlHandler = require('./html-handler');
+const path = require('path')
+const glob = require('glob')
+const { VueLoaderPlugin } = require('vue-loader')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const htmlHandler = require('./html-handler')
 
 function getEntries(globPath) {
   const entries = {}
@@ -48,7 +48,7 @@ module.exports = {
           options: {
             loaders: {
               css: [
-                'vue-style-loader', 
+                'vue-style-loader',
                 {
                   loader: 'css-loader'
                 }
@@ -66,7 +66,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          { 
+          {
             loader: MiniCssExtractPlugin.loader,
             options: {
               options: {
@@ -80,7 +80,7 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          { 
+          {
             loader: MiniCssExtractPlugin.loader,
             options: {
               options: {
@@ -112,18 +112,18 @@ module.exports = {
           enforce: true
         },
         common: {
-          name: "common",
-          chunks: "initial",
+          name: 'common',
+          chunks: 'initial',
           minSize: 1,
           priority: 0,
           minChunks: 1
         },
         vendor: {
-          name: "vendor",
+          name: 'vendor',
           test: /node_modules/,
-          chunks: "initial",
+          chunks: 'initial',
           priority: 10,
-          minChunks: 1,
+          minChunks: 1
         }
       }
     }

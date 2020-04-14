@@ -1,7 +1,7 @@
-const path = require('path');
+const path = require('path')
 const merge = require('webpack-merge')
-const htmlHandler = require('./html-handler');
-const webpackBaseConfig = require('./webpack.conf.base');
+const htmlHandler = require('./html-handler')
+const webpackBaseConfig = require('./webpack.conf.base')
 
 module.exports = merge(webpackBaseConfig, {
   mode: 'production',
@@ -37,19 +37,19 @@ module.exports = merge(webpackBaseConfig, {
           enforce: true
         },
         common: {
-          name: "common",
-          chunks: "initial",
+          name: 'common',
+          chunks: 'initial',
           minSize: 1,
           priority: 0,
           minChunks: 1
         },
         // 首先: 打包node_modules中的文件
         vendor: {
-          name: "vendor",
+          name: 'vendor',
           test: /node_modules/,
-          chunks: "initial",
+          chunks: 'initial',
           priority: 10,
-          minChunks: 1,
+          minChunks: 1
         }
       }
     }

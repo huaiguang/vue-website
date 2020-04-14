@@ -86,9 +86,9 @@ const opn = require('opn')
 
 const app = express()
 // respond with "hello express" when a GET request is made to the homepage
-app.get('/', function(req, res) {
-  res.send('hello express!');
-});
+app.get('/', (req, res) => {
+  res.send('hello express!')
+})
 
 // 传入静态资源所在的路径
 // express.static 基于 server-static
@@ -119,20 +119,21 @@ app.use(express.static('../dist'))
 //     }
 //   })
 // })
-// problem: the test.html is below the server,but the assets are below the css and js,different from the local,and display abnormal
+// problem: the test.html is below the server,but the assets are below the css and js
+// ,different from the local,and display abnormal
 
 // after error handing, app.get() can`t work well
 // add handing of 404
-app.use(function(req, res, next) {
-  res.status(404).send('Sorry can\'t find that!');
-});
+app.use((req, res, next) => {
+  res.status(404).send('Sorry can\'t find that!')
+})
 
 // add error handing
-app.use(function(err, req, res, next) {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
 
-app.listen(8009, function(req, res) {
+app.listen(8009, (req, res) => {
   console.log('8009')
 })

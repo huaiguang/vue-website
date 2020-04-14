@@ -15,7 +15,7 @@ module.exports = options =>
           filename: `${page.path}/${page.name}.html`,
           chunks: options.chunks ? [...options.chunks, page.name] : [page.name],
           chunksSortMode: 'auto',
-          inject: 'body',
+          inject: 'body'
         },
         options
       )

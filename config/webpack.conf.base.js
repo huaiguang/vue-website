@@ -1,9 +1,10 @@
-const path = require('path');
-const glob = require('glob');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
-const { VueLoaderPlugin } = require('vue-loader');
-const htmlHandler = require('./html-handler');
+const path = require('path')
+const glob = require('glob')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
+const htmlHandler = require('./html-handler')
+const devMode = process.env.NODE_ENV !== 'production'
 
 function getEntriesWithHMR(globPath) {
   const entries = {}
@@ -14,7 +15,7 @@ function getEntriesWithHMR(globPath) {
   return entries
 }
 
-const entries = getEntriesWithHMR('./src/**/main.js');
+const entries = getEntriesWithHMR('./src/**/main.js')
 
 module.exports = {
   entry: entries,
@@ -25,70 +26,89 @@ module.exports = {
   },
   module: {
     rules: [
+    {
+      enforce: 'pre',
+      test: /\.(js|vue)$/,
+      include: path.resolve(__dirname, '../src'),
+      exclude: /node_modules/,
+      use: [
       {
-        enforce: 'pre',
-        test: /\.(js|vue)$/,
-        include: path.resolve(__dirname, '../src'),
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'eslint-loader',
-            options: {
-              formatter: require("eslint-friendly-formatter")
-            }
-          }
-        ]
-      },
-      {
-        test: /\.vue$/,
-        use: {
-          loader: 'vue-loader',
-          options: {
-            loaders: {
-              css: ['vue-style-loader', {
-                loader: 'css-loader'
-              }]
-            }
-          }
+        loader: 'eslint-loader',
+        options: {
+          formatter: require('eslint-friendly-formatter')
         }
-      },
-      {
-        test: /\.js$/,
-        include: path.resolve(__dirname, '../src'),
-        exclude: path.resolve(__dirname, '/node_modules'),
-        loader: 'babel-loader'
-      },
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: '../'
-            }
-          },
-          {loader: 'css-loader'}
-        ]
-      },
-      {
-        test: /\.scss/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {}
-          },
-          {loader: 'css-loader'},
-          {loader: 'sass-loader'}
-        ]
+      }]
+    },
+    {
+      test: /\.vue$/,
+      use: {
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            css: ['vue-style-loader', {
+              loader: 'css-loader'
+              // options: {
+              //   modules: true,
+              //   localIdentName: '[local]_[hash:base64:8]'
+              // }
+            }]
+          }
+          // cssModules: {
+          //   localIdentName: '[path][name]---[local]---[hash:base64:5]',
+          //   camelCase: true
+          // }
+        }
       }
-    ]
+    },
+    {
+      test: /\.js$/,
+      include: path.resolve(__dirname, '../src'),
+      exclude: path.resolve(__dirname, '/node_modules'),
+      loader: 'babel-loader'
+    },
+    {
+      test: /\.css$/,
+      use: [
+        {
+          loader: devMode ? 'style-loader' : MiniCssExtractPlugin.loader
+        },
+        { loader: 'css-loader' }
+      ]
+    },
+    {
+      test: /\.scss/,
+      use: [
+        {
+          loader: devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          options: {}
+        },
+        {
+          loader: 'css-loader'
+          // options: {
+          //   modules: true,
+          //   localIdentName: '[local]_[hash:base64:5]'
+          // }
+        },
+        { loader: 'sass-loader' }
+      ]
+    },
+    {
+      test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
+      use: [{
+        loader: 'url-loader',
+        options: {
+          limit: 10000
+        }
+      }]
+    }
+  ]
   },
   plugins: [
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/[name].css'
     }),
-    new FriendlyErrorsPlugin(),
+    new FriendlyErrorsPlugin()
     // new webpack.DefinePlugin({
     //   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     //   'process.env.APP_ENV': JSON.stringify(process.env.APP_ENV),

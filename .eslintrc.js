@@ -229,7 +229,7 @@ module.exports = {
     'comma-dangle': ['error', 'never'], // 要求或禁止使用拖尾逗号
 
     // semi: ['error', 'always'],
-    'semi': ['error', 'never'], // 要求或禁止使用分号代替 ASI
+    // 'semi': ['error', 'never'], // 要求或禁止使用分号代替 ASI
 
     camelcase: ['error', {
       properties: 'never'
