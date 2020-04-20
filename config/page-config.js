@@ -13,6 +13,11 @@ const pages = [
     path: 'console',
     name: 'form',
     title: '表单'
+  },
+  {
+    path: 'console',
+    name: 'table',
+    tilte: '表格'
   }
 ]
 
