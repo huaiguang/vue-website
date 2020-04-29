@@ -1,4 +1,3 @@
-/*just for test*/
 body {
   margin: 0;
   font-family: "Microsoft Yahei";
@@ -6,6 +5,25 @@ body {
   line-height: 20px;
 }
 
-p {
-  margin: 0;
+ul {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  > li {
+    list-style-type: none;
+  }
+}
+
+h1 {
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.menu-wrap {
+  margin: 1em;
+  > .menu-item {
+    float: left;
+    margin-right: 1.5em;
+    margin-bottom: .5em;
+  }
 }

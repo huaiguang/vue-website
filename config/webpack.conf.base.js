@@ -22,7 +22,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
-    filename: 'js/[name].bundle.js'
+    filename: 'static/js/[name].bundle.js'
   },
   module: {
     rules: [
@@ -45,18 +45,8 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            css: ['vue-style-loader', {
-              loader: 'css-loader'
-              // options: {
-              //   modules: true,
-              //   localIdentName: '[local]_[hash:base64:8]'
-              // }
-            }]
+            css: ['vue-style-loader']
           }
-          // cssModules: {
-          //   localIdentName: '[path][name]---[local]---[hash:base64:5]',
-          //   camelCase: true
-          // }
         }
       }
     },
@@ -82,22 +72,27 @@ module.exports = {
           loader: devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           options: {}
         },
-        {
-          loader: 'css-loader'
-          // options: {
-          //   modules: true,
-          //   localIdentName: '[local]_[hash:base64:5]'
-          // }
-        },
+        { loader: 'css-loader' },
         { loader: 'sass-loader' }
       ]
     },
     {
-      test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
+      test: /\.(png|jpg|jpeg|gif)$/,
       use: [{
         loader: 'url-loader',
         options: {
-          limit: 10000
+          limit: 8192,
+          name: 'static/images/[name].[hash:7].[ext]'
+        }
+      }]
+    },
+    {
+      test: /\.(eot|ttf|woff2?|svg)$/,
+      use: [{
+        loader: 'url-loader',
+        options: {
+          limit: 8192,
+          name: 'static/fonts/[name].[hash:7].[ext]'
         }
       }]
     }
@@ -106,7 +101,7 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css'
+      filename: 'static/css/[name].css'
     }),
     new FriendlyErrorsPlugin()
     // new webpack.DefinePlugin({
