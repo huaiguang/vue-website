@@ -6,8 +6,8 @@
   "scripts": {
     "clean": "rm -rf ./dist",
     "clean:all": "rm -rf ./node_modules && rm -rf ./dist && rm package-lock.json",
-    "eslint": "eslint ./src",
-    "eslint:fix": "eslint ./src --fix",
+    "eslint": "eslint ./src/**",
+    "eslint:fix": "eslint ./src/** --fix",
     "test": "webpack --config ./config/webpack.conf.test",
     "dev": "cross-env NODE_ENV=development node ./config/dev-server",
     "dev:server": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.conf.test",
@@ -62,6 +62,7 @@
     "fullpage.js": "^3.0.4",
     "jquery": "^3.3.1",
     "jsencrypt": "^3.0.0-rc.1",
+    "jsrsasign": "^8.0.15",
     "normalize.css": "^8.0.1",
     "vue": "^2.5.16",
     "vue-router": "^3.1.6"
