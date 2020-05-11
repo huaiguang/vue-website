@@ -16,7 +16,7 @@ function getEntries(globPath) {
 const plugins = [
   new VueLoaderPlugin(),
   new MiniCssExtractPlugin({
-    filename: 'css/[name].css'
+    filename: 'static/css/[name].css?v=[hash:6]'
   })
 ]
 
@@ -26,7 +26,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
-    filename: 'js/[name].js'
+    filename: 'static/js/[name].js?v=[hash:6]'
   },
   module: {
     rules: [
@@ -65,10 +65,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: '../'
-            }
+            loader: MiniCssExtractPlugin.loader
           },
           { loader: 'css-loader' }
         ]
@@ -77,10 +74,7 @@ module.exports = {
         test: /\.scss$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: '../'
-            }
+            loader: MiniCssExtractPlugin.loader
           },
           { loader: 'css-loader' },
           { loader: 'sass-loader' }
@@ -92,7 +86,7 @@ module.exports = {
           loader: 'url-loader',
           options: {
             limit: 8192,
-            name: 'static/images/[name].[hash:7].[ext]'
+            name: 'static/images/[name].[ext]?v=[hash:6]'
           }
         }]
       },
@@ -102,7 +96,7 @@ module.exports = {
           loader: 'url-loader',
           options: {
             limit: 8192,
-            name: 'static/fonts/[name].[hash:7].[ext]'
+            name: 'static/fonts/[name].[ext]?v=[hash:6]'
           }
         }]
       }
