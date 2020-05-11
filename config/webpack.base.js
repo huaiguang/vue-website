@@ -2,7 +2,7 @@ const path = require('path')
 const glob = require('glob')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
-const { VueLoaderPlugin } = require('vue-loader')
+const { VueLoaderPlugin } = require('vue-loader/lib/plugin')
 const htmlHandler = require('./html-handler')
 const devMode = process.env.NODE_ENV !== 'production'
 
@@ -41,14 +41,7 @@ module.exports = {
     },
     {
       test: /\.vue$/,
-      use: {
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            css: ['vue-style-loader']
-          }
-        }
-      }
+      loader: 'vue-loader'
     },
     {
       test: /\.js$/,

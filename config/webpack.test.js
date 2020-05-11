@@ -33,13 +33,11 @@ module.exports = {
       {
         enforce: 'pre',
         test: /\.(js|vue)$/,
-        use: [
-          {
-            loader: 'eslint-loader',
-            options: {
-              formatter: require('eslint-friendly-formatter')
-            }
-        }]
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        options: {
+          formatter: require('eslint-friendly-formatter')
+        }
       },
       {
         test: /\.vue$/,
@@ -87,6 +85,26 @@ module.exports = {
           { loader: 'css-loader' },
           { loader: 'sass-loader' }
         ]
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 8192,
+            name: 'static/images/[name].[hash:7].[ext]'
+          }
+        }]
+      },
+      {
+        test: /\.(eot|ttf|woff2?|svg)$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 8192,
+            name: 'static/fonts/[name].[hash:7].[ext]'
+          }
+        }]
       }
     ]
   },

@@ -33,10 +33,13 @@ export default {
     encrypt() {
       // const start = Date.now()
       // console.log(start)
-      const aesKey = createAesKey()
-      const encryptedAesKey = rsaEncrypt(aesKey)
-      const aesEncryptedData = aesEncrypt(merchantInfo, aesKey)
+      // const aesKey = createAesKey()
+      // const encryptedAesKey = rsaEncrypt(aesKey)
+      // const aesEncryptedData = aesEncrypt(merchantInfo, aesKey)
+      const aesKey = 'bwue2o68acurklvx';
+      const aesEncryptedData = 'zge9D+xU0UWDn5Fer0EBgSr+FcBRwIp0QYkk9OIiYl9r5KADecIBmfihLoqjFxi/RbYuYbhAFnzS3lF1TiVcxA==';
       const decryptedAesData = aesDecrypt(aesEncryptedData, aesKey)
+      console.log(decryptedAesData)
       // console.log(Date.now() - start)
       // console.group()
       // console.log(aesKey)
