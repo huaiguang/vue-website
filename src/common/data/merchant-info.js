@@ -464,3 +464,50 @@ export const password = {
   validate: '096973736378807bcc9b7e9a792ab201',
   seccode: '096973736378807bcc9b7e9a792ab201|jordan'
 }
+
+export const data1 = {
+  mchtInfIndividualDraftDto:{
+    addr:'甘肃省临泽县新华镇大寨村社39号',
+    bankAccNo:'***************3378',
+    bankAccTel:'182******02',
+    birthDate:568080000000,
+    certNo:'6222*************8',
+    certType:'01',
+    docInfList:[
+      {
+        docDesc:'',
+        docFileKey:'709426283242586112',
+        docName:'身份证反面02.png',
+        docType:'01A',
+        modifyType:''
+      },
+      {
+        docDesc:'',
+        docFileKey:'709426324216741888',
+        docName:'身份证正面02.png',
+        docType:'01B',
+        modifyType:''
+      },
+      {
+        docDesc:'',
+        docFileKey:'709426373290098688',
+        docName:'手持身份证02.png',
+        docType:'01C',
+        modifyType:''
+      }
+    ],
+    expiryDateBegin:'2017-04-01',
+    expiryDateEnd:'2027-04-01',
+    gender:'1',
+    id:'709426504844443648',
+    longEffective:'0',
+    nameEn:'zhao ping',
+    nameZh:'赵萍',
+    regCountryCode:'CHN'
+  },
+  signinId:'000000',
+  mchtNo: null,
+  mchtType: '01',
+  needSaveDiff: true
+}
+

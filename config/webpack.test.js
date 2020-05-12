@@ -41,19 +41,7 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        use: {
-          loader: 'vue-loader',
-          options: {
-            loaders: {
-              css: [
-                'vue-style-loader',
-                {
-                  loader: 'css-loader'
-                }
-              ]
-            }
-          }
-        }
+        loader: 'vue-loader'
       },
       {
         test: /\.js$/,
@@ -81,7 +69,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpg|jpeg|gif)$/,
+        test: /\.(png|jpg|jpeg|gif|svg2?)$/,
         use: [{
           loader: 'url-loader',
           options: {
@@ -91,7 +79,7 @@ module.exports = {
         }]
       },
       {
-        test: /\.(eot|ttf|woff2?|svg)$/,
+        test: /\.(eot|ttf|woff2?)$/,
         use: [{
           loader: 'url-loader',
           options: {
@@ -99,6 +87,14 @@ module.exports = {
             name: 'static/fonts/[name].[ext]?v=[hash:6]'
           }
         }]
+      },
+      {
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: 'static/media/[name].[ext]?v=[hash:6]'
+        }
       }
     ]
   },
@@ -131,14 +127,14 @@ module.exports = {
           test: /node_modules/,
           chunks: 'initial',
           priority: 10,
-          minChunks: 1
+          minChunks: 3
         }
       }
     }
   },
   resolve: {
     alias: {
-      src: path.resolve(__dirname, '../src'),
+      '@': path.resolve(__dirname, '../src/'),
       dist: path.resolve(__dirname, '../dist')
     }
   },

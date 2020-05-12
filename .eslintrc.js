@@ -209,13 +209,13 @@ module.exports = {
 
     'object-curly-spacing': ['error', 'always'],
 
-    'max-len': ['error', 100, 2, {
-      ignoreUrls: true,
-      ignoreComments: false,
-      ignoreRegExpLiterals: true,
-      ignoreStrings: true,
-      ignoreTemplateLiterals: true,
-    }],
+    // 'max-len': ['error', 100, 0, {
+    //   ignoreUrls: true,
+    //   ignoreComments: false,
+    //   ignoreRegExpLiterals: true,
+    //   ignoreStrings: true,
+    //   ignoreTemplateLiterals: true,
+    // }],
 
     'comma-style': ['error', 'last'],
 

@@ -22,7 +22,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
-    filename: 'static/js/[name].bundle.js'
+    filename: 'static/js/[name].js?v=[hash:6]'
   },
   module: {
     rules: [
@@ -31,13 +31,10 @@ module.exports = {
       test: /\.(js|vue)$/,
       include: path.resolve(__dirname, '../src'),
       exclude: /node_modules/,
-      use: [
-      {
-        loader: 'eslint-loader',
-        options: {
-          formatter: require('eslint-friendly-formatter')
-        }
-      }]
+      loader: 'eslint-loader',
+      options: {
+        formatter: require('eslint-friendly-formatter')
+      }
     },
     {
       test: /\.vue$/,
@@ -45,8 +42,7 @@ module.exports = {
     },
     {
       test: /\.js$/,
-      include: path.resolve(__dirname, '../src'),
-      exclude: path.resolve(__dirname, '/node_modules'),
+      exclude: /node_modules/,
       loader: 'babel-loader'
     },
     {
@@ -63,7 +59,6 @@ module.exports = {
       use: [
         {
           loader: devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          options: {}
         },
         { loader: 'css-loader' },
         { loader: 'sass-loader' }
@@ -75,7 +70,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 8192,
-          name: 'static/images/[name].[hash:7].[ext]'
+          name: 'static/images/[name].[ext]?v=[hash:6]'
         }
       }]
     },
@@ -85,7 +80,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 8192,
-          name: 'static/fonts/[name].[hash:7].[ext]'
+          name: 'static/fonts/[name].[ext]?v=[hash:6]'
         }
       }]
     }
@@ -94,7 +89,7 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'static/css/[name].css'
+      filename: 'static/css/[name].css?v=[hash:6]'
     }),
     new FriendlyErrorsPlugin()
     // new webpack.DefinePlugin({
@@ -115,9 +110,8 @@ module.exports = {
   ),
   resolve: {
     alias: {
-      src: path.resolve(__dirname, '../src'),
-      common: path.resolve(__dirname, '../src/common'),
-      dist: path.resolve(__dirname, '../dist')
+      '@': path.resolve(__dirname, '../src/'),
+      dist: path.resolve(__dirname, '../dist/')
     },
     aliasFields: ['browser'],
     descriptionFiles: ['package.json'],

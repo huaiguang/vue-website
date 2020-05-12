@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import Banner from 'src/common/assets/images/banner.jpeg'
-import { createAesKey, aesEncrypt, rsaEncrypt, aesDecrypt } from 'src/common/assets/js/encryption'
-import { merchantInfo } from 'src/common/data/merchant-info'
+import Banner from '@/common/assets/images/banner.jpeg'
+import { createAesKey, aesEncrypt, rsaEncrypt, aesDecrypt } from '@/common/assets/js/encryption'
+import { merchantInfo, data1 } from '@/common/data/merchant-info'
 
 export default {
   data() {
@@ -36,10 +36,12 @@ export default {
       // const aesKey = createAesKey()
       // const encryptedAesKey = rsaEncrypt(aesKey)
       // const aesEncryptedData = aesEncrypt(merchantInfo, aesKey)
-      const aesKey = 'bwue2o68acurklvx';
-      const aesEncryptedData = 'zge9D+xU0UWDn5Fer0EBgSr+FcBRwIp0QYkk9OIiYl9r5KADecIBmfihLoqjFxi/RbYuYbhAFnzS3lF1TiVcxA==';
+      // const aesEncryptedData = aesEncrypt(data1, aesKey)
+      // console.log('encrypted', data1, aesEncryptedData)
+      const aesKey = 'gn9mcfix1fvmrf29';
+      const aesEncryptedData = 'KnA5dTxoISo5mUU5ZsE3rFNoaukOFPPCzY8+QVSgxvjfFtEFQtJG7gcohjBoP16I6nlq+MdJgXJXPVpZasyoIJCn7VeVekNl/K3c3fgCzo2eoAKvbj8/nX4AJq+L/TBBKcs/sIkZ/Aca+N+vMuJGgQrLuI/yAzJCTbRFPtxm9sY5vVXOwSFL9n7WSpg+bZeLsz+TqRxA1j4fwj9Ow5cPItV1zt1ZwUysbGz40v8g1+ChHOX5mNyqVHVwDi2r/h1mwrwdSaYhyHxKr+FnSrSJ+A==';
       const decryptedAesData = aesDecrypt(aesEncryptedData, aesKey)
-      console.log(decryptedAesData)
+      console.log('decrypted', decryptedAesData)
       // console.log(Date.now() - start)
       // console.group()
       // console.log(aesKey)

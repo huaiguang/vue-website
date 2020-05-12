@@ -53,7 +53,6 @@ export function aesEncrypt(word, keyStr) {
  * @returns {string} 返回解密字符串
  */
 export function aesDecrypt(word, keyStr) {
-  keyStr = keyStr || aesKey
   const key = CryptoJS.enc.Utf8.parse(keyStr)
   const decrypt = CryptoJS.AES.decrypt(word, key, {
     // iv: key, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7
