@@ -7,8 +7,11 @@
           <li class="menu-item">
             <el-link type="primary" href="./form.html">表单（form）</el-link>
           </li>
-          <li>
+          <li class="menu-item">
             <el-link type="primary" href="./table.html">表格（table）</el-link>
+          </li>
+          <li class="menu-item">
+            <el-link type="primary" href="./encrypt.html">加解密</el-link>
           </li>
         </ul>
       </el-col>

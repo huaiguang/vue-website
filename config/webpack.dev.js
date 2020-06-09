@@ -1,6 +1,6 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const baseWebpackConfig = require('./webpack.conf.base')
+const baseWebpackConfig = require('./webpack.base')
 
 Object.keys(baseWebpackConfig.entry).forEach(name => {
   baseWebpackConfig.entry[name] = ['./config/dev-client'].concat(baseWebpackConfig.entry[name])

@@ -8,4 +8,4 @@ function createUniqueId() {
   return str
 }
 
-
+export default createUniqueId

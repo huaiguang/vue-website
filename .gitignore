@@ -1,16 +1,17 @@
-# platform
 .DS_Store
-.vscode
-.idea
-
-dist/
-node_modules/
-package-lock.json
-yarn.lock
-
-debug-result.json
-debug.log
 npm-debug.log*
+package-lock.json
 yarn-debug.log*
 yarn-error.log*
-lerna-debug.log*
+yarn.lock
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+node_modules/
+dist/

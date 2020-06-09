@@ -18,6 +18,11 @@ const pages = [
     path: 'console',
     name: 'table',
     tilte: '表格'
+  },
+  {
+    path: 'console',
+    name: 'encrypt',
+    title: '加解密'
   }
 ]
 

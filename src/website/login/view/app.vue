@@ -17,8 +17,8 @@
 
 <script>
 import Banner from '@/common/assets/images/banner.jpeg'
-import { createAesKey, aesEncrypt, rsaEncrypt, aesDecrypt } from '@/common/assets/js/encryption'
-import { merchantInfo, data1 } from '@/common/data/merchant-info'
+import { createAesKey, aesEncrypt, rsaEncrypt, aesDecrypt } from '@/common/utils/encryption'
+import createXHR from '@/common/utils/server-xhr'
 
 export default {
   data() {
@@ -28,6 +28,9 @@ export default {
         password: ''
       }
     }
+  },
+  created() {
+    // this.getUserInfo()
   },
   methods: {
     encrypt() {
@@ -50,11 +53,28 @@ export default {
       // console.log(decryptedAesData)
       // console.groupEnd()
     },
+    getUserInfo() {
+      createXHR({
+        url: 'http://localhost:8084/getUserList',
+        method: 'get'
+      }).then(data => {
+        if (data.code === '000000') {
+          alert('获取用户信息成功')
+        }
+      })
+    },
     login() {
-      this.encrypt()
-      if (this.loginForm.password === '1234#abc') {
-        location.href = '../console/home.html'
-      }
+      createXHR({
+        url: 'http://localhost:8084/login',
+        method: 'post',
+        data: this.loginForm
+      }).then(data => {
+        if (data.code === '000000') {
+          console.log(data.code)
+          return
+          location.href = '../console/home.html'
+        }
+      })
     }
   }
 }

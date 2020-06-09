@@ -1,9 +1,9 @@
 import CryptoJS from 'crypto-js'
 
 // clent 端生成随机数
-// const secretkey = 'I have a dream';
 
-function aesEncrypt(data) {
+
+function aesEncrypt(data, secretkey) {
   if (!data) {
     return ''
   }
@@ -16,7 +16,7 @@ function aesEncrypt(data) {
   return CryptoJS.AES.encrypt(encryptedStr, secretkey).toString()
 }
 
-function aesDecrypt(data, isObject = true) {
+function aesDecrypt(data, isObject = true, secretkey) {
   if (!data) {
     return ''
   }
@@ -30,7 +30,6 @@ function aesDecrypt(data, isObject = true) {
 }
 
 export {
-  secretkey,
   aesEncrypt,
   aesDecrypt
 }
