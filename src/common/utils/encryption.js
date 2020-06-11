@@ -5,19 +5,6 @@ const rsaPublicKey = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCtCn6P1d/Z42v7/R1Pdv
 
 const encryptor = new JSEncrypt()
 
-// 生成 AESKEY
-export const aesKey = createAesKey()
-
-export function createAesKey() {
-  const expect = 16
-  let str = Math.random().toString(36).substr(2)
-  while (str.length < expect) {
-    str += Math.random().toString(36).substr(2)
-  }
-  str = str.substr(0, 16)
-  return str
-}
-
 /**
  * AES 加密
  * @param word 待加密字段
@@ -25,7 +12,7 @@ export function createAesKey() {
  * @returns {string} 返回加密字段
  */
 export function aesEncrypt(word, keyStr) {
-  keyStr = keyStr || aesKey
+  keyStr = keyStr
   const key = CryptoJS.enc.Utf8.parse(keyStr)
   let srcs = ''
   switch (typeof (word)) {

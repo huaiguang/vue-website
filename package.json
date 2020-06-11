@@ -4,8 +4,6 @@
   "description": "large website template based on vue",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf ./dist",
-    "clean:all": "rm -rf ./node_modules && rm -rf ./dist && rm package-lock.json",
     "eslint": "eslint ./src/**",
     "eslint:fix": "eslint ./src/** --fix",
     "test": "webpack --config ./config/webpack.test",

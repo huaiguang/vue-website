@@ -13,7 +13,7 @@
         <div class="item-title">rsa pubKey</div>
         <el-input class="item-encrypt" v-model="pubKey" placeholder="输入rsa公钥"></el-input>
         <el-input class="item-encrypt" type="textarea" v-model="encryptedText01" readonly></el-input>
-        <el-button class="item-encrypt" @click="decryptTextByRsa">rsa加密</el-button>
+        <el-button class="item-encrypt" @click="decryptTextByRsa">rsa解密</el-button>
         <el-input class="item-encrypt" type="textarea" v-model="originalText01" placeholder="请输入原文"></el-input>
       </el-col>
     </el-row>

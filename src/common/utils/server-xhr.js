@@ -39,27 +39,34 @@ function createXHR(opts) {
     // xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
     // xhr.setRequestHeader('Content-Type', 'text/plain;charset=UTF-8')
 
-    // get时没有参数，post时请求的参数`
-    // console.log(opts.data)
-    // formData lv1
-    // const formData = new FormData()
-    // for (const key in opts.data) {
-    //   formData.append(key, opts.data[key])
-    // }
-    // xhr.send(formData)
-
-    // formData lv2
-    let str = ''
-    for (const key in opts.data) {
-      console.log(key)
-      str += `${key}=${opts.data[key]}&`
+    switch (opts.method) {
+      case 'post':
+        // post时请求的参数`
+        if (opts.dataType === 'qs') {
+          // formData lv1
+          let str = ''
+          for (const key in opts.data) {
+            str += `${key}=${opts.data[key]}&`
+          }
+          str = str.slice(0,-1)
+          xhr.send(str)
+        } else if (opts.dataType === 'formData') {
+          // formData lv2
+          const formData = new FormData()
+          for (const key in opts.data) {
+            formData.append(key, opts.data[key])
+          }
+          xhr.send(formData)
+        } else {
+          // application/json
+          xhr.send(JSON.stringify(opts.data))
+        }
+        break
+      case 'get':
+        // get时参数可通过qs附加到url上
+        xhr.send()
+        break
     }
-    str = str.slice(0,-1)
-    console.log('str', str)
-    xhr.send(str)
-
-    // application/json
-    // xhr.send(JSON.stringify(opts.data))
   })
 }
 

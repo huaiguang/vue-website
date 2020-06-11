@@ -28,3 +28,21 @@ h1 {
     vertical-align: top;
   }
 }
+
+a {
+  text-decoration: none;
+  // color: #999;
+  color: #666;
+}
+
+// router-link-exact-active
+.router-link-active {
+  color: rgba(32, 160, 232, .9);
+  &:hover {
+    text-shadow: 0 0 1px rgba(32, 160, 232, .3);
+  }
+}
+
+.text-center {
+  text-align: center;
+}

@@ -6,10 +6,11 @@
         <el-input v-model="loginForm.username" placeholder="请填写用户名"></el-input>
       </el-form-item>
       <el-form-item label="登陆密码" prop="password">
-        <el-input v-model="loginForm.password" placeholder="请填写登陆密码"></el-input>
+        <el-input type="password" v-model="loginForm.password" placeholder="请填写登陆密码"></el-input>
       </el-form-item>
-      <el-form-item>
-        <el-button type="primary" plain @click="login">登 陆</el-button>
+      <el-form-item class="text-center">
+        <el-button type="primary" plain @click="login">登陆</el-button>
+        <el-button type="primary" plain @click="register">注册</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -30,36 +31,27 @@ export default {
     }
   },
   created() {
-    // this.getUserInfo()
+    this.getUserInfo()
   },
   methods: {
-    encrypt() {
-      // const start = Date.now()
-      // console.log(start)
-      // const aesKey = createAesKey()
-      // const encryptedAesKey = rsaEncrypt(aesKey)
-      // const aesEncryptedData = aesEncrypt(merchantInfo, aesKey)
-      // const aesEncryptedData = aesEncrypt(data1, aesKey)
-      // console.log('encrypted', data1, aesEncryptedData)
-      const aesKey = 'gn9mcfix1fvmrf29';
-      const aesEncryptedData = 'KnA5dTxoISo5mUU5ZsE3rFNoaukOFPPCzY8+QVSgxvjfFtEFQtJG7gcohjBoP16I6nlq+MdJgXJXPVpZasyoIJCn7VeVekNl/K3c3fgCzo2eoAKvbj8/nX4AJq+L/TBBKcs/sIkZ/Aca+N+vMuJGgQrLuI/yAzJCTbRFPtxm9sY5vVXOwSFL9n7WSpg+bZeLsz+TqRxA1j4fwj9Ow5cPItV1zt1ZwUysbGz40v8g1+ChHOX5mNyqVHVwDi2r/h1mwrwdSaYhyHxKr+FnSrSJ+A==';
-      const decryptedAesData = aesDecrypt(aesEncryptedData, aesKey)
-      console.log('decrypted', decryptedAesData)
-      // console.log(Date.now() - start)
-      // console.group()
-      // console.log(aesKey)
-      // console.log(encryptedAesKey)
-      // console.log(aesEncryptedData)
-      // console.log(decryptedAesData)
-      // console.groupEnd()
-    },
     getUserInfo() {
       createXHR({
-        url: 'http://localhost:8084/getUserList',
+        url: 'http://localhost:8084/userList?username=chen&password=123a',
         method: 'get'
       }).then(data => {
         if (data.code === '000000') {
-          alert('获取用户信息成功')
+          console.log('获取用户信息成功')
+        }
+      })
+    },
+    register() {
+      createXHR({
+        url: 'http://localhost:8084/register',
+        method: 'post',
+        data: this.loginForm
+      }).then(data => {
+        if (data.code === '000000') {
+          console.log('注册成功')
         }
       })
     },
@@ -67,12 +59,12 @@ export default {
       createXHR({
         url: 'http://localhost:8084/login',
         method: 'post',
-        data: this.loginForm
+        data: this.loginForm,
+        dataType: 'qs'
       }).then(data => {
         if (data.code === '000000') {
-          console.log(data.code)
-          return
-          location.href = '../console/home.html'
+          console.log('登陆成功')
+          window.location.href = '/console/home.html'
         }
       })
     }
@@ -91,6 +83,7 @@ export default {
   width: 270px;
   height: 280px;
   > h1 {
+    margin-left: 80px;
     text-align: center;
   }
 }
