@@ -1,12 +1,6 @@
-import Vue from 'vue'
-import ElementUI from 'element-ui'
-import 'normalize.css'
-import 'element-ui/lib/theme-chalk/index.css'
-// import '@/common/assets/css/common/theme.scss'
-import '@/common/assets/css/common/common.scss'
+import 'common/assets/console-common-style.js'
+import { Vue } from 'common/assets/console-common-script.js'
 import app from './view/app.vue'
-
-Vue.use(ElementUI)
 
 new Vue({
   el: '#app',

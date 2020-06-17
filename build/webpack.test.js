@@ -16,7 +16,7 @@ function getEntries(globPath) {
 const plugins = [
   new VueLoaderPlugin(),
   new MiniCssExtractPlugin({
-    filename: 'static/css/[name].css?v=[hash:6]'
+    filename: 'static/css/[name].[contenthash:8].css'
   })
 ]
 
@@ -26,7 +26,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
-    filename: 'static/js/[name].js?v=[hash:6]'
+    filename: 'static/js/[name].[chunkhash:8].js'
   },
   module: {
     rules: [
@@ -74,7 +74,7 @@ module.exports = {
           loader: 'url-loader',
           options: {
             limit: 8192,
-            name: 'static/images/[name].[ext]?v=[hash:6]'
+            name: 'static/images/[name].[ext]?v=[hash:8]'
           }
         }]
       },
@@ -84,7 +84,7 @@ module.exports = {
           loader: 'url-loader',
           options: {
             limit: 8192,
-            name: 'static/fonts/[name].[ext]?v=[hash:6]'
+            name: 'static/fonts/[name].[ext]?v=[hash:8]'
           }
         }]
       },
@@ -93,7 +93,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: 'static/media/[name].[ext]?v=[hash:6]'
+          name: 'static/media/[name].[ext]?v=[hash:8]'
         }
       }
     ]

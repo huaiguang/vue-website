@@ -19,14 +19,14 @@ const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler, {
 })
 
 const webpackHotMiddlewareInstance = webpackHotMiddleware(compiler)
-compiler.plugin('compilation', compilation => {
-  compilation.plugin('html-webpack-plugin-after-emit', (data, cb) => {
-    webpackHotMiddlewareInstance.publish({
-      action: 'reload'
-    })
-    cb()
-  })
-})
+// compiler.plugin('compilation', compilation => {
+//   compilation.plugin('html-webpack-plugin-after-emit', (data, cb) => {
+//     webpackHotMiddlewareInstance.publish({
+//       action: 'reload'
+//     })
+//     cb()
+//   })
+// })
 
 app.use(webpackDevMiddlewareInstance)
 app.use(webpackHotMiddlewareInstance)

@@ -22,7 +22,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
-    filename: 'static/js/[name].js?v=[hash:6]'
+    filename: 'static/js/[name].[chunkhash:8].js'
   },
   module: {
     rules: [
@@ -70,7 +70,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 8192,
-          name: 'static/images/[name].[ext]?v=[hash:6]'
+          name: 'static/images/[name].[hash:8].[ext]'
         }
       }]
     },
@@ -80,7 +80,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 8192,
-          name: 'static/fonts/[name].[ext]?v=[hash:6]'
+          name: 'static/fonts/[name].[hash:8].[ext]'
         }
       }]
     }
@@ -89,7 +89,7 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'static/css/[name].css?v=[hash:6]'
+      filename: 'static/css/[name].[contenthash:8].css'
     }),
     new FriendlyErrorsPlugin()
     // new webpack.DefinePlugin({
@@ -111,7 +111,7 @@ module.exports = {
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '../src/'),
-      dist: path.resolve(__dirname, '../dist/')
+      common: path.resolve(__dirname, '../src/common/')
     },
     aliasFields: ['browser'],
     descriptionFiles: ['package.json'],

@@ -6,10 +6,10 @@
   "scripts": {
     "eslint": "eslint ./src/**",
     "eslint:fix": "eslint ./src/** --fix",
-    "test": "webpack --config ./config/webpack.test",
-    "dev": "cross-env NODE_ENV=development node ./config/dev-server",
-    "dev:server": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.test",
-    "build": "cross-env NODE_ENV=production webpack --config ./config/webpack.prod",
+    "test": "webpack --config ./build/webpack.test",
+    "dev": "cross-env NODE_ENV=development node ./build/dev-server",
+    "dev:server": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.test",
+    "build": "node build/build.js",
     "release": "cross-env NODE_ENV=production node ./scripts/build.js"
   },
   "author": "Carlos",
@@ -48,6 +48,7 @@
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
     "opn": "^6.0.0",
+    "ora": "^4.0.4",
     "rimraf": "^3.0.2",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
@@ -71,7 +72,17 @@
     "jsencrypt": "^3.0.0-rc.1",
     "jsrsasign": "^8.0.15",
     "normalize.css": "^8.0.1",
+    "nprogress": "^0.2.0",
     "vue": "^2.6.11",
     "vue-router": "^3.1.6"
-  }
+  },
+  "engines": {
+    "node": ">= 12.0.0",
+    "npm": ">= 6.14.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }

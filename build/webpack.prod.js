@@ -1,9 +1,9 @@
 const path = require('path')
 const merge = require('webpack-merge')
 const htmlHandler = require('./html-handler')
-const webpackBaseConfig = require('./webpack.conf.base')
+const webpackBase = require('./webpack.base')
 
-module.exports = merge(webpackBaseConfig, {
+const webpackConfig = merge(webpackBase, {
   mode: 'production',
   devtool: '#cheap-module-source-map',
   plugins: [].concat(
@@ -55,3 +55,5 @@ module.exports = merge(webpackBaseConfig, {
     }
   }
 })
+
+module.exports = webpackConfig
