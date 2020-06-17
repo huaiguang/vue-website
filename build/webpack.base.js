@@ -22,7 +22,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
-    filename: 'static/js/[name].[chunkhash:8].js'
+    filename: 'static/js/[name].[hash:8].js'
   },
   module: {
     rules: [
@@ -89,7 +89,7 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'static/css/[name].[contenthash:8].css'
+      filename: 'static/css/[name].[hash:8].css'
     }),
     new FriendlyErrorsPlugin()
     // new webpack.DefinePlugin({

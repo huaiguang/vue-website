@@ -7,10 +7,9 @@
     "eslint": "eslint ./src/**",
     "eslint:fix": "eslint ./src/** --fix",
     "test": "webpack --config ./build/webpack.test",
-    "dev": "cross-env NODE_ENV=development node ./build/dev-server",
+    "dev": "node build/dev-server",
     "dev:server": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.test",
-    "build": "node build/build.js",
-    "release": "cross-env NODE_ENV=production node ./scripts/build.js"
+    "build": "node build/build.js"
   },
   "author": "Carlos",
   "private": false,
