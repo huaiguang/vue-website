@@ -1,20 +1,24 @@
 <template>
-  <div class="wrap">
-    <router-view></router-view>
-  </div>
+  <console-layout :activeIndex="'3-1'">
+    <div class="wrapper">
+      <router-view></router-view>
+    </div>
+  </console-layout>
 </template>
 
 <script>
+import ConsoleLayout from 'common/components/BaseLayout/ConsoleLayout'
+
 export default {
-  data() {
-    return {
-    }
+  components: {
+    ConsoleLayout
+  },
+  methods: {
+
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Helvetica, sans-serif;
-}
+<style lang="scss" scoped>
+
 </style>

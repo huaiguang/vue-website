@@ -2,7 +2,7 @@
   <div class="base-layout">
     <base-header></base-header>
     <el-container>
-      <base-aside></base-aside>
+      <base-aside :activeIndex="activeIndex"></base-aside>
       <el-main>
         <slot></slot>
       </el-main>
@@ -19,6 +19,12 @@ export default {
   components: {
     BaseHeader,
     BaseAside
+  },
+  props: {
+    activeIndex: {
+      type: String,
+      required: true
+    }
   },
   data() {
     return {

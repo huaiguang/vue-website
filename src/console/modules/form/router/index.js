@@ -11,20 +11,20 @@ const routes = [
   {
     name: 'index',
     path: '/index',
-    component: () => import('../view/index.vue'),
-    children: [
-      {
-        name: 'reset',
-        path: 'reset',
-        component: () => import('../view/ResetFields.vue')
-      }
-    ]
+    component: () => import('../view/index.vue')
+    // children: [
+    //   {
+    //     name: 'reset',
+    //     path: 'reset',
+    //     component: () => import('../view/ResetFields.vue')
+    //   }
+    // ]
+  },
+  {
+    name: 'reset',
+    path: '/reset',
+    component: () => import('../view/ResetFields.vue')
   }
-  // {
-  //   name: 'reset',
-  //   path: '/reset',
-  //   component: () => import('../view/ResetFields.vue')
-  // }
 ]
 
 export default new VueRouter({

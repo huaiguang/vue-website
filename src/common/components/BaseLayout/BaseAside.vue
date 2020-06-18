@@ -1,20 +1,24 @@
 <template>
   <el-aside style="width: 200px;">
     <el-menu
-      default-active="2"
+      unique-opened
+      :default-active="activeIndex"
       @select="handleSelect">
+      <!-- .is-active 指当前选中的 menuItem, .is-opened 指当前展开的 submenu
+      .is-active.is-opened 指当前展开的 submenu 中有选中的 menuItem -->
       <el-menu-item index="1">
-        <i class="el-icon-menu"></i>
-        <span slot="title">首页</span>
+        <i class="el-icon-s-home"></i>
+        <a slot="title" href="/console/home.html">首页</a>
       </el-menu-item>
-      <el-submenu index="2">
+      <el-submenu v-for="item in menu" :index="item.index" :key="item.index">
         <template slot="title">
-          <i class="el-icon-location"></i>
-          <span>表单</span>
+          <i :class="item.icon"></i>
+          <span>{{ item.title }}</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item index="1-1">重置</el-menu-item>
-          <el-menu-item index="1-2">校验</el-menu-item>
+          <el-menu-item v-for="child in item.children" :index="child.index" :key="child.index">
+            <a :href="child.url">{{ child.title }}</a>
+          </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
     </el-menu>
@@ -22,11 +26,19 @@
 </template>
 
 <script>
+import menu from 'common/config/menu'
+
 export default {
   name: 'BaseAside',
+  props: {
+    activeIndex: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
-
+      menu
     }
   },
   created() {
