@@ -5,20 +5,13 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/'
-    // redirect: 'index'
+    path: '/',
+    redirect: 'index'
   },
   {
     name: 'index',
     path: '/index',
     component: () => import('../view/index.vue')
-    // children: [
-    //   {
-    //     name: 'reset',
-    //     path: 'reset',
-    //     component: () => import('../view/ResetFields.vue')
-    //   }
-    // ]
   },
   {
     name: 'reset',

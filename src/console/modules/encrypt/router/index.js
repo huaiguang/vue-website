@@ -10,12 +10,12 @@ const routes = [
   },
   {
     name: 'rsaEncrypt',
-    path: '/rsa-encrypt',
+    path: '/encrypt-rsa',
     component: () => import('../view/RsaEncrypt.vue')
   },
   {
     name: 'aesEncrypt',
-    path: '/aes-encrypt',
+    path: '/encrypt-aes',
     component: () => import('../view/AesEncrypt.vue')
   }
 ]

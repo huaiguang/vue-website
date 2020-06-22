@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2>rsa加解密</h2>
+    <h2>aes加解密</h2>
     <el-row :gutter="10">
       <el-col :span="12">
         <div class="item-title">aes pubKey</div>

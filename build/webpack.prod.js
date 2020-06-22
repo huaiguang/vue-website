@@ -49,7 +49,7 @@ const webpackConfig = merge(webpackBase, {
           test: /node_modules/,
           chunks: 'initial',
           priority: 10,
-          minChunks: 1
+          minChunks: 3
         }
       }
     }

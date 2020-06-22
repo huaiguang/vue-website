@@ -2,11 +2,6 @@
   <console-layout :activeIndex="'2-1'">
     <div class="wrapper">
       <h1>表单注意点</h1>
-      <el-row>
-        <el-col :span="4">
-          <router-link to="/index">表单介绍</router-link>
-        </el-col>
-      </el-row>
       <router-view></router-view>
     </div>
   </console-layout>

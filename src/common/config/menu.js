@@ -19,7 +19,7 @@ const menu = [
         title: '校验',
         icon: '',
         index: '2-2',
-        url: '/console/form.html#/validate'
+        url: '/console/form.html#/index'
       }
     ]
   },

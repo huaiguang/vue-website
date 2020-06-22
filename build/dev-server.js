@@ -21,14 +21,6 @@ const webpackDevMiddlewareInstance = webpackDevMiddleware(compiler, {
 })
 
 const webpackHotMiddlewareInstance = webpackHotMiddleware(compiler)
-// compiler.plugin('compilation', compilation => {
-//   compilation.plugin('html-webpack-plugin-after-emit', (data, cb) => {
-//     webpackHotMiddlewareInstance.publish({
-//       action: 'reload'
-//     })
-//     cb()
-//   })
-// })
 
 app.use(webpackDevMiddlewareInstance)
 app.use(webpackHotMiddlewareInstance)
@@ -41,7 +33,7 @@ module.exports = app.listen(local.dev.port, err => {
     return
   }
 
-  const uri = 'http://localhost:' + local.dev.port + local.dev.autoOpenBrowserURL;
+  const uri = 'http://localhost:' + local.dev.port + local.dev.autoOpenBrowserURL
   console.log('Listening at ' + uri + '\n')
 
   if (local.dev.autoOpenBrowser) {
