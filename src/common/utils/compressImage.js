@@ -91,17 +91,17 @@ function compressImageBySize(image, options) {
   const imageHeight = image.height
   // initial scale
   let scale = 1
-  const settingWidth = options.width
-  if (imageWidth > settingWidth) {
-    scale = settingWidth / imageWidth
+  const { width, ratio } = options
+  if (imageWidth > width) {
+    scale = width / imageWidth
   }
-  canvas.width = settingWidth
+  canvas.width = imageWidth * scale
   canvas.height = imageHeight * scale
   //
   context.drawImage(image, 0, 0, canvas.width, canvas.height)
   // output base64
   // ratio 0.92 default
-  const data = canvas.toDataURL('image/jpeg', options.ratio)
+  const data = canvas.toDataURL('image/jpeg', ratio)
   return data
 }
 
@@ -132,7 +132,7 @@ function compressImage({ file, target }, callback) {
         width,
         ratio
       })
-      download(data, file.name)
+      // download(data, file.name)
       const newFile = base64ToFile(data, file.name)
 
       console.group()
@@ -149,5 +149,6 @@ function compressImage({ file, target }, callback) {
 export {
   download,
   base64ToFile,
-  compressImage
+  compressImage,
+  blobToBase64
 }

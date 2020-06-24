@@ -5,6 +5,7 @@ body {
 
 body {
   margin: 0;
+  min-width: 1280px;
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", Tahoma, "Hiragino Sans GB", "Heiti SC", Arial, "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   font-size: 14px;
   line-height: 20px;

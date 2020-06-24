@@ -5,3 +5,9 @@
 .hidden {
   display: none;
 }
+
+.divider {
+  margin: .5em auto;
+  height: 1px;
+  background-color: #cdcdcd;
+}

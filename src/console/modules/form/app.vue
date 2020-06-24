@@ -1,7 +1,10 @@
 <template>
   <console-layout :activeIndex="'2-1'">
     <div class="wrapper">
-      <h1>表单注意点</h1>
+      <div class="submenu">
+        <router-link class="submenu-item" to="/index">一般功能</router-link>
+        <router-link class="submenu-item" to="/reset">表单重置</router-link>
+      </div>
       <router-view></router-view>
     </div>
   </console-layout>
@@ -21,5 +24,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.submenu {
+  margin-bottom: 1em;
+  > .submenu-item {
+    display: inline-block;
+    margin-right: 1em;
+  }
+}
 </style>

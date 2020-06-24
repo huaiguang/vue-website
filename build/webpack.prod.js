@@ -26,7 +26,7 @@ const webpackConfig = merge(webpackBase, {
   ),
   optimization: {
     runtimeChunk: {
-      name: 'manifest'
+      name: 'runtime'
     },
     splitChunks: {
       cacheGroups: {
@@ -41,7 +41,7 @@ const webpackConfig = merge(webpackBase, {
           chunks: 'initial',
           minSize: 1,
           priority: 0,
-          minChunks: 1
+          minChunks: 2
         },
         // 首先: 打包node_modules中的文件
         vendor: {
