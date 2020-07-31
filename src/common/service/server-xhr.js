@@ -2,7 +2,7 @@ function createXHR(opts) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
     // 设置默认参数
-    xhr.timeout = 3000
+    xhr.timeout = 6000
     xhr.responseType = 'json'
 
     // 创建请求，默认为异步

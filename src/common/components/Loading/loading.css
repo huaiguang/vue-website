@@ -1,0 +1,81 @@
+/* em 相对父元素的fontSize */
+
+.wrap-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  /* 设置父元素的基准fontSize */
+  font-size: 50px;
+  background-color: rgba(255, 255, 255, .65);
+}
+
+.wrap-loading .loader {
+  position: absolute;
+  top: calc(50% - .125em);
+  left: calc(50% - .125em);
+  width: .25em;
+  height: .25em;
+  transform: rotate(165deg);
+}
+
+.wrap-loading .loader:before,
+.wrap-loading .loader:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: .25em;
+  height: .25em;
+  border-radius: .125em;
+  transform: translate(-50%, -50%);
+}
+
+.loader:before {
+  animation: before 2s infinite;
+}
+
+.loader:after {
+  animation: after 2s infinite;
+}
+
+@keyframes before {
+  0% {
+    width: .25em;
+    box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75), -1em 0.5em rgba(111, 202, 220, 0.75);
+  }
+  35% {
+    width: 1.25em;
+    box-shadow: 0 -0.5em rgba(225, 20, 98, 0.75), 0 0.5em rgba(111, 202, 220, 0.75);
+  }
+  70% {
+    width: .25em;
+    box-shadow: -1em -0.5em rgba(225, 20, 98, 0.75), 1em 0.5em rgba(111, 202, 220, 0.75);
+  }
+  100% {
+    box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75), -1em 0.5em rgba(111, 202, 220, 0.75);
+  }
+}
+
+@keyframes after {
+  0% {
+    height: .25em;
+    box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
+  }
+  35% {
+    height: 1.25em;
+    box-shadow: 0.5em 0 rgba(61, 184, 143, 0.75), -0.5em 0 rgba(233, 169, 32, 0.75);
+  }
+  70% {
+    height: .25em;
+    box-shadow: 0.5em -1em rgba(61, 184, 143, 0.75), -0.5em 1em rgba(233, 169, 32, 0.75);
+  }
+  100% {
+    box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
+  }
+}

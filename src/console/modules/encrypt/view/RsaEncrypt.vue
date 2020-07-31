@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { rsaEncrypt, rsaDecrypt } from '@/common/utils/encrypt-rsa'
+import { rsaEncrypt, rsaDecrypt } from '@/common/utils/encryption'
 
 export default {
   name: 'RsaEncrypt',
