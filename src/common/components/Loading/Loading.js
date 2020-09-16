@@ -25,6 +25,7 @@ Loading.hide = () => {
   }
 }
 
+// 实际上，Loading 被挂载在 Vue.prototype 上，通过 Vue.use() 在实例中执行
 // 避免重复 install, 设立 flag
 Loading.installed = false
 Loading.install = function(Vue) {
@@ -43,8 +44,8 @@ Loading.install = function(Vue) {
       `
     })
     // 创建实例，挂载到文档
+    // html dom节点
     const loadingTemplate = new LoadingTpl().$mount().$el
-    console.log('loadingTemplate', loadingTemplate)
     document.body.appendChild(loadingTemplate)
     // 防止遮罩滑动
     document.querySelector('.wrap-loading').addEventListener('touchmove', e => {

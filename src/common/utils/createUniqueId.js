@@ -1,3 +1,6 @@
+/**
+ * create a unique string
+ */
 function createUniqueId() {
   const expect = 16
   let str = Math.random().toString(36).substr(2)

@@ -242,7 +242,7 @@ var CacheAPIImpl = {
     var length = this.storage.length
     var deleteKeys = []
     var _this = this
-    for (var i = 0 i < length i++) {
+    for (var i = 0; i < length; i++) {
       var key = this.storage.key(i)
       var cacheItem = null
       try {

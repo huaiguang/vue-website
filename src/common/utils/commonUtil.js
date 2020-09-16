@@ -18,9 +18,9 @@ import storage from './CacheStorage'
  * */
 function storageMethod(val) {
   return val === 'local' ? storage.getInstance({
-    storage: "localStorage"
+    storage: 'localStorage'
   }) : storage.getInstance({
-    storage: "sessionStorage"
+    storage: 'sessionStorage'
   })
 }
 
@@ -112,23 +112,23 @@ function calculateTwoNumber(arg1, arg2, type) {
       s1 = arg1.toString(),
       s2 = arg2.toString()
     try {
-      m += s1.split(".")[1].length
+      m += s1.split('.')[1].length
     } catch (e) {
     }
     try {
-      m += s2.split(".")[1].length
+      m += s2.split('.')[1].length
     } catch (e) {
     }
-    return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m)
+    return Number(s1.replace('.', '')) * Number(s2.replace('.', '')) / Math.pow(10, m)
   } else if (type === '+' || type === '-') { //加减法
     let sq1, sq2, x
     try {
-      sq1 = arg1.toString().split(".")[1].length
+      sq1 = arg1.toString().split('.')[1].length
     } catch (e) {
       sq1 = 0
     }
     try {
-      sq2 = arg2.toString().split(".")[1].length
+      sq2 = arg2.toString().split('.')[1].length
     } catch (e) {
       sq2 = 0
     }
@@ -143,15 +143,15 @@ function calculateTwoNumber(arg1, arg2, type) {
       t2 = 0,
       r1, r2
     try {
-      t1 = arg1.toString().split(".")[1].length
+      t1 = arg1.toString().split('.')[1].length
     } catch (e) {
     }
     try {
-      t2 = arg2.toString().split(".")[1].length
+      t2 = arg2.toString().split('.')[1].length
     } catch (e) {
     }
-    r1 = Number(arg1.toString().replace(".", ""))
-    r2 = Number(arg2.toString().replace(".", ""))
+    r1 = Number(arg1.toString().replace('.', ''))
+    r2 = Number(arg2.toString().replace('.', ''))
     return (r1 / r2) * Math.pow(10, t2 - t1)
   }
 }
@@ -181,7 +181,7 @@ function getBase64(options, callback) {
     }
     canvas.width = Img.width * scale
     canvas.height = Img.height * scale //计算等比缩小后图片宽高
-    canvas.getContext("2d").drawImage(Img, 0, 0, canvas.width, canvas.height) //将图片绘制到canvas中
+    canvas.getContext('2d').drawImage(Img, 0, 0, canvas.width, canvas.height) //将图片绘制到canvas中
     dataURL = canvas.toDataURL('image/png', options.compressRatio) //转换图片为dataURL
     callback ? callback(dataURL) : null //调用回调函数
   }

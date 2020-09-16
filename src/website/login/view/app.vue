@@ -42,17 +42,11 @@ export default {
       }
     }
   },
-  beforeCreate() {
-    // Loading.show()
-    // setTimeout(() => {
-    //   Loading.hide()
-    // }, 30000)
-  },
   created() {
     this.$loading.show()
-    setTimeout(() => {
+    this.$nextTick(() => {
       this.$loading.hide()
-    }, 30000)
+    })
     // this.getUserInfo()
     const addressList = [
       '甘肃省临泽县新华镇大寨村六社39号',

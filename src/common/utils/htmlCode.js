@@ -13,6 +13,9 @@ function htmlDecode(html) {
   return a.textContent
 }
 
+// RSA 非对称嘉敏
+// AES 对称加密
+
 export {
   htmlEncode,
   htmlDecode

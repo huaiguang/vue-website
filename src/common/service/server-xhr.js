@@ -7,12 +7,14 @@ function createXHR(opts) {
 
     // 创建请求，默认为异步
     xhr.open(opts.method, opts.url)
+
     // 注册相关事件回调处理函数
     xhr.onload = function(e) {
       if (this.status === 200 || this.status === 304) {
         console.log('load', this.response)
       }
     }
+
     xhr.onreadystatechange = function() {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
@@ -22,12 +24,15 @@ function createXHR(opts) {
         }
       }
     }
+
     xhr.ontimeout = function(e) {
       console.log('timeout', e)
     }
+
     xhr.onerror = function(e) {
       console.log('error', e)
     }
+
     xhr.upload.onprogress = function(e) {
       console.log('progress', e)
     }
