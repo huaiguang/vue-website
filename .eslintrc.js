@@ -21,7 +21,7 @@ module.exports = {
     }
   },
   // global: {
-  //   //
+  //   'define': true
   // },
   rules: {
 
@@ -328,7 +328,9 @@ module.exports = {
     //   'js': 'never',
     //   'vue': 'never'
     // }],
-    'import/extensions': ['off']
+    'import/extensions': ['off'],
+
+    'no-undef': ['off']
 
   }
 }
