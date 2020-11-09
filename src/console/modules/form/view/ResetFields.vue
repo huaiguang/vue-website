@@ -47,10 +47,6 @@
 </template>
 
 <script>
-// import add from '@/common/utils/math'
-// const add = require('@/common/utils/math')
-// console.log('add', add)
-
 export default {
   name: 'ResetFields',
   data() {
