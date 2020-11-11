@@ -2,6 +2,8 @@ const path = require('path')
 const merge = require('webpack-merge')
 const htmlHandler = require('./html-handler')
 const webpackBase = require('./webpack.base')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 const webpackConfig = merge(webpackBase, {
   mode: 'production',
@@ -28,29 +30,54 @@ const webpackConfig = merge(webpackBase, {
     runtimeChunk: {
       name: 'runtime'
     },
+    minimize: true,
+    minimizer: [
+      new OptimizeCssAssetsPlugin({
+        // assetNameRegExp: /\.css(\?.*)?$/g,
+        cssProcessor: require('cssnano'),
+        cssProcessorOptions: {
+          // 导出sourcemap
+          // inline true 会内联sourcemap
+          // inline false，annotation add external sourcemap
+          map: {
+            inline: false,
+            annotation: true
+          }
+        },
+        cssProcessorPluginOptions: {
+          preset: ['default', {
+            normalizeUnicode: false
+          }],
+        },
+        canPrint: true
+      }),
+      new TerserPlugin()
+    ],
     splitChunks: {
       cacheGroups: {
-        styles: {
-          name: 'common',
-          test: /\.css$/,
-          chunks: 'initial',
-          enforce: true
-        },
-        common: {
-          name: 'common',
-          chunks: 'initial',
-          minSize: 1,
-          priority: 0,
-          minChunks: 2
-        },
         // 首先: 打包node_modules中的文件
         vendor: {
           name: 'vendor',
           test: /node_modules/,
           chunks: 'initial',
-          priority: 10,
-          minChunks: 3
-        }
+          minChunks: 3,
+          priority: 20,
+        },
+        // styles: {
+        //   name: 'common',
+        //   test: /\.css$/,
+        //   chunks: 'initial',
+        //   priority: 10,
+        //   enforce: true
+        // },
+        // common: {
+        //   name: 'common',
+        //   test: /\.js$/,
+        //   chunks: 'initial',
+        //   minSize: 1,
+        //   priority: 10,
+        //   minChunks: 2
+        // },
       }
     }
   }
