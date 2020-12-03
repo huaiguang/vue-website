@@ -17,7 +17,7 @@
         </template>
         <el-menu-item-group>
           <el-menu-item v-for="child in item.children" :index="child.index" :key="child.index">
-            <a :href="child.url">{{ child.title }}</a>
+            <a class="menu-route" :href="child.url">{{ child.title }}</a>
           </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
@@ -59,5 +59,9 @@ export default {
 .el-aside {
   color: #333;
   background-color: #D3DCE6;
+}
+
+.menu-route {
+  display: block;
 }
 </style>

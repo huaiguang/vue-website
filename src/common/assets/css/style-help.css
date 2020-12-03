@@ -6,13 +6,3 @@
   display: none;
 }
 
-.divider {
-  margin: .5em auto;
-  height: 1px;
-  background-color: #cdcdcd;
-}
-
-.wrap-content {
-  padding: 6px 8px;
-  background-color: #fff;
-}

@@ -1,0 +1,28 @@
+.divider {
+  margin: .5em auto;
+  height: 1px;
+  background-color: #cdcdcd;
+}
+
+.wrap-content {
+  padding: 6px 8px;
+  height: calc(100vh - 92px);
+  background-color: #fff;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.search-form {
+  position: sticky;
+  top: 0;
+  /* 需要大于4(element中复制的操作栏为4) */
+  z-index: 9;
+  border-bottom: 1px solid #eee;
+  background-color: rgba(255, 255, 255, .75);
+  box-shadow: 6px 6px 3px #fff;
+}
+
+.search-form .el-form-item {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

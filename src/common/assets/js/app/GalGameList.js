@@ -50,7 +50,8 @@ const GalGameList = [
     size: '',
     summary: '',
     details: '',
-    cleared: true,
+    owned: '1',
+    cleared: '1',
   },
   {
     name: '夏空彼方',
@@ -156,7 +157,7 @@ const GalGameList = [
     size: '',
     summary: '',
     details: '',
-    owned: true,
+    owned: '1',
   },
   {
     name: '120日元合集',
@@ -164,7 +165,7 @@ const GalGameList = [
     size: '',
     summary: '',
     details: '',
-    owned: true,
+    owned: '1',
   },
   {
     name: '家族计画',

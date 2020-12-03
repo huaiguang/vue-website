@@ -64,9 +64,14 @@ h1 {
   background-color: #E9EEF3;
 }
 
+/* menu */
 .el-menu > .el-menu-item,
 .el-menu > .el-submenu {
   border-bottom: 1px solid rgba(205, 205, 205, .3);
+}
+
+.el-menu-item.is-active {
+  background-color: #ecf5ff;
 }
 
 .el-menu-item.is-active > a {
@@ -96,5 +101,5 @@ h1 {
 }
 
 .el-table .cell .el-button--text {
-  padding: 0 .8em;
+  padding: 0;
 }
