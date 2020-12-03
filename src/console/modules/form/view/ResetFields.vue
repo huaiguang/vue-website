@@ -13,13 +13,24 @@
       <el-form-item label="活动日期">
         <el-col :span="11">
           <el-form-item prop="startDate">
-            <el-date-picker type="date" placeholder="选择开始日期" v-model="sizeForm.startDate" style="width: 100%;"></el-date-picker>
+            <el-date-picker
+              type="date"
+              placeholder="选择开始日期"
+              v-model="sizeForm.startDate"
+              style="width: 100%"
+            ></el-date-picker>
           </el-form-item>
         </el-col>
         <el-col class="line" :span="2">-</el-col>
         <el-col :span="11">
           <el-form-item prop="endDate">
-            <el-date-picker type="date" placeholder="选择结束时间" v-model="sizeForm.endDate" style="width: 100%;" @change="changeEndDate">
+            <el-date-picker
+              type="date"
+              placeholder="选择结束时间"
+              v-model="sizeForm.endDate"
+              style="width: 100%"
+              @change="changeEndDate"
+            >
             </el-date-picker>
           </el-form-item>
         </el-col>

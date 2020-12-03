@@ -217,8 +217,7 @@ module.exports = {
     //   ignoreTemplateLiterals: true,
     // }],
 
-    'comma-style': ['error', 'last'],
-
+    // 'comma-style': ['error', 'last'],
     // 'comma-dangle': ['error', {
     //   arrays: 'always-multiline',
     //   objects: 'always-multiline',
@@ -226,10 +225,10 @@ module.exports = {
     //   exports: 'always-multiline',
     //   functions: 'always-multiline',
     // }],
-    'comma-dangle': ['error', 'never'], // 要求或禁止使用拖尾逗号
+    'comma-dangle': 0, // 要求或禁止使用拖尾逗号
 
     // semi: ['error', 'always'],
-    // 'semi': ['error', 'never'], // 要求或禁止使用分号代替 ASI
+    'semi': ['error', 'never'], // 要求或禁止使用分号代替 ASI
 
     camelcase: ['error', {
       properties: 'never'

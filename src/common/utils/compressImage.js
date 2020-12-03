@@ -132,7 +132,7 @@ function compressImage({ file, target }, callback) {
       const data = compressImageBySize(image, {
         orientation,
         width,
-        ratio
+        ratio,
       })
       // download(data, file.name)
       const newFile = base64ToFile(data, file.name)
@@ -270,15 +270,15 @@ function compressImage({ file, target }, callback) {
 // 步骤一
 // base64转ArrayBuffer对象
 function base64ToArrayBuffer(base64) {
-  base64 = base64.replace(/^data:([^;]+);base64,/gmi, '');
-  const binary = atob(base64);
-  const len = binary.length;
-  const buffer = new ArrayBuffer(len);
-  const view = new Uint8Array(buffer);
+  base64 = base64.replace(/^data:([^;]+);base64,/gim, '')
+  const binary = atob(base64)
+  const len = binary.length
+  const buffer = new ArrayBuffer(len)
+  const view = new Uint8Array(buffer)
   for (let i = 0; i < len; i++) {
-    view[i] = binary.charCodeAt(i);
+    view[i] = binary.charCodeAt(i)
   }
-  return buffer;
+  return buffer
 }
 
 // 步骤二，Unicode码转字符串
@@ -299,71 +299,71 @@ function getStringFromCharCode(dataView, start, length) {
 // 6	顺时针90°
 // 8	逆时针90°
 function getOrientation(arrayBuffer) {
-  const dataView = new DataView(arrayBuffer);
-  const length = dataView.byteLength;
-  let orientation;
-  let exifIDCode;
-  let tiffOffset;
-  let firstIFDOffset;
-  let littleEndian;
-  let endianness;
-  let app1Start;
-  let ifdStart;
-  let offset;
-  let i;
+  const dataView = new DataView(arrayBuffer)
+  const length = dataView.byteLength
+  let orientation
+  let exifIDCode
+  let tiffOffset
+  let firstIFDOffset
+  let littleEndian
+  let endianness
+  let app1Start
+  let ifdStart
+  let offset
+  let i
   // Only handle JPEG image (start by 0xFFD8)
-  if (dataView.getUint8(0) === 0xFF && dataView.getUint8(1) === 0xD8) {
-    offset = 2;
+  if (dataView.getUint8(0) === 0xff && dataView.getUint8(1) === 0xd8) {
+    offset = 2
     while (offset < length) {
-      if (dataView.getUint8(offset) === 0xFF && dataView.getUint8(offset + 1) === 0xE1) {
-        app1Start = offset;
-        break;
+      if (dataView.getUint8(offset) === 0xff && dataView.getUint8(offset + 1) === 0xe1) {
+        app1Start = offset
+        break
       }
-      offset++;
+      offset++
     }
   }
   console.log('app1Start', app1Start)
   if (app1Start) {
-    exifIDCode = app1Start + 4;
-    tiffOffset = app1Start + 10;
+    exifIDCode = app1Start + 4
+    tiffOffset = app1Start + 10
     if (getStringFromCharCode(dataView, exifIDCode, 4) === 'Exif') {
-      endianness = dataView.getUint16(tiffOffset);
-      littleEndian = endianness === 0x4949;
+      endianness = dataView.getUint16(tiffOffset)
+      littleEndian = endianness === 0x4949
 
-      if (littleEndian || endianness === 0x4D4D /* bigEndian */) {
-        if (dataView.getUint16(tiffOffset + 2, littleEndian) === 0x002A) {
-          firstIFDOffset = dataView.getUint32(tiffOffset + 4, littleEndian);
+      if (littleEndian || endianness === 0x4d4d /* bigEndian */) {
+        if (dataView.getUint16(tiffOffset + 2, littleEndian) === 0x002a) {
+          firstIFDOffset = dataView.getUint32(tiffOffset + 4, littleEndian)
 
           if (firstIFDOffset >= 0x00000008) {
-            ifdStart = tiffOffset + firstIFDOffset;
+            ifdStart = tiffOffset + firstIFDOffset
           }
         }
       }
     }
   }
   if (ifdStart) {
-    length = dataView.getUint16(ifdStart, littleEndian);
+    length = dataView.getUint16(ifdStart, littleEndian)
 
     for (i = 0; i < length; i++) {
-      offset = ifdStart + i * 12 + 2;
+      offset = ifdStart + i * 12 + 2
       if (dataView.getUint16(offset, littleEndian) === 0x0112 /* Orientation */) {
         // 8 is the offset of the current tag's value
-        offset += 8;
+        offset += 8
 
         // Get the original orientation value
-        orientation = dataView.getUint16(offset, littleEndian);
+        orientation = dataView.getUint16(offset, littleEndian)
 
         // Override the orientation with its default value for Safari (#120)
-        const isUiwebview = /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(navigator.userAgent);
-        const isSafariOrUiwebview = /(iPhone|iPod|iPad).*AppleWebKit/i.test(navigator.userAgent);
+        const isUiwebview = /(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/i.test(navigator.userAgent)
+        const isSafariOrUiwebview = /(iPhone|iPod|iPad).*AppleWebKit/i.test(navigator.userAgent)
         if (isSafariOrUiwebview) {
-          dataView.setUint16(offset, 1, littleEndian);
+          dataView.setUint16(offset, 1, littleEndian)
         }
-        break;
+        break
       }
     }
   }
-  return orientation;
+  return orientation
 }
 
 export {
@@ -372,6 +372,6 @@ export {
   compressImage,
   blobToBase64,
   base64ToArrayBuffer,
-  getOrientation
+  getOrientation,
   // resetOrientation
 }

@@ -24,14 +24,20 @@ const menu = [
     ]
   },
   {
-    title: '列表',
+    title: '表格',
     icon: 'el-icon-s-data',
     index: '3',
     children: [
       {
-        title: '合并',
+        title: '筛选',
         icon: '',
         index: '3-1',
+        url: '/console/table.html#/screen'
+      },
+      {
+        title: '合并',
+        icon: '',
+        index: '3-2',
         url: '/console/table.html#/combine'
       }
     ]

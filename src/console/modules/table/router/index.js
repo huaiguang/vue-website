@@ -14,9 +14,14 @@ const routes = [
     component: () => import('../view/index.vue')
   },
   {
+    name: 'screen',
+    path: '/screen',
+    component: () => import('../view/TableScreen.vue')
+  },
+  {
     name: 'combine',
     path: '/combine',
-    component: () => import('../view/Combine.vue')
+    component: () => import('../view/TableCombine.vue')
   }
 ]
 

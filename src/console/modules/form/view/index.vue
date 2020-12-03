@@ -1,28 +1,21 @@
 <template>
   <div class="container">
     <label class="btn-upload" for="upload">点击上传文件</label>
-    <input class="hidden" type="file" id="upload">
+    <input class="hidden" type="file" id="upload" />
     <div class="divider"></div>
-    <el-image ref="showcase"
-      class="uploaded-image"
-      fit="contain"
-      :src="compressedImagesrc"
-      @load="loadImg"
-    ></el-image>
+    <el-image ref="showcase" class="uploaded-image" fit="contain" :src="compressedImagesrc" @load="loadImg"></el-image>
   </div>
 </template>
 
 <script>
 import EXIF from 'exif-js'
-import {
-  download, compressImage, blobToBase64
-} from 'common/utils/compressImage'
+import { download, compressImage, blobToBase64 } from 'common/utils/compressImage'
 
 export default {
   name: 'index',
   data() {
     return {
-      compressedImagesrc: ''
+      compressedImagesrc: '',
     }
   },
   mounted() {
@@ -32,7 +25,7 @@ export default {
         const target = {
           size: 30,
           width: 1920,
-          orientation
+          orientation,
         }
         compressImage({ file: fileObj, target }, file => {
           // console.log('done', file)
@@ -46,9 +39,9 @@ export default {
   methods: {
     getEXIFInfo(fileObj, callback) {
       EXIF.getData(fileObj, function() {
-        EXIF.getAllTags(this);
-        const make = EXIF.getTag(this, 'Make');
-        const model = EXIF.getTag(this, 'Model');
+        EXIF.getAllTags(this)
+        const make = EXIF.getTag(this, 'Make')
+        const model = EXIF.getTag(this, 'Model')
         const orientation = EXIF.getTag(this, 'Orientation')
         console.group()
         console.log('make', make)
@@ -62,9 +55,9 @@ export default {
       const img = document.querySelector('img')
       if (img.complete) {
         EXIF.getData(img, function() {
-          EXIF.getAllTags(this);
-          const make = EXIF.getTag(this, 'Make');
-          const model = EXIF.getTag(this, 'Model');
+          EXIF.getAllTags(this)
+          const make = EXIF.getTag(this, 'Make')
+          const model = EXIF.getTag(this, 'Model')
           const orientation = EXIF.getTag(this, 'Orientation')
           console.group()
           console.log('compressed')
@@ -74,8 +67,8 @@ export default {
           console.groupEnd()
         })
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

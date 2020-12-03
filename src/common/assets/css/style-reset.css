@@ -59,7 +59,7 @@ h1 {
 }
 
 .el-main {
-  padding: 15px;
+  padding: 10px;
   color: #333;
   background-color: #E9EEF3;
 }
@@ -81,4 +81,20 @@ h1 {
 
 .el-menu-item-group__title {
   display: none;
+}
+
+/* pagination */
+.el-pagination {
+  margin-top: 10px;
+  text-align: right;
+}
+
+/* table */
+.el-table td,
+.el-table th {
+  padding: .5em 0;
+}
+
+.el-table .cell .el-button--text {
+  padding: 0 .8em;
 }

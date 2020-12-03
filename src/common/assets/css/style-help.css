@@ -11,3 +11,8 @@
   height: 1px;
   background-color: #cdcdcd;
 }
+
+.wrap-content {
+  padding: 6px 8px;
+  background-color: #fff;
+}
