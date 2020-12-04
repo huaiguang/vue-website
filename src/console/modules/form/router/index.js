@@ -5,10 +5,6 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    redirect: 'index'
-  },
-  {
     name: 'index',
     path: '/index',
     component: () => import('../view/index.vue')
@@ -17,6 +13,11 @@ const routes = [
     name: 'reset',
     path: '/reset',
     component: () => import('../view/ResetFields.vue')
+  },
+  {
+    name: 'index',
+    path: '/*',
+    component: () => import('../view/index.vue')
   }
 ]
 

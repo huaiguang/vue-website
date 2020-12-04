@@ -5,15 +5,6 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    redirect: '/index'
-  },
-  {
-    name: 'index',
-    path: '/index',
-    component: () => import('../view/index.vue')
-  },
-  {
     name: 'screen',
     path: '/screen',
     component: () => import('../view/TableScreen.vue')
@@ -22,6 +13,11 @@ const routes = [
     name: 'combine',
     path: '/combine',
     component: () => import('../view/TableCombine.vue')
+  },
+  {
+    name: '404',
+    path: '/*',
+    component: () => import('../view/TableScreen.vue')
   }
 ]
 

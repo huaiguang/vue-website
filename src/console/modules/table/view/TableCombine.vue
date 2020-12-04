@@ -30,7 +30,6 @@
         </el-table>
       </el-col>
     </el-row>
-
   </div>
 </template>
 
@@ -87,7 +86,6 @@ export default {
         }
       }
     },
-
     objectSpanMethod({ row, column, rowIndex, columnIndex }) {
       if (columnIndex === 0) {
         if (rowIndex % 2 === 0) {
