@@ -1,3 +1,12 @@
+.wrapper {
+  padding: 10px;
+  height: calc(100vh - 100px);
+  /* 总体设置背景
+  若进一步追求精致，这里不做设置 */
+  background-color: #fff;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.08);;
+}
+
 .divider {
   margin: .5em auto;
   height: 1px;

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <label class="btn-upload" for="upload">点击上传文件</label>
+    <label class="btn-upload" for="upload">点击上传图片</label>
     <input class="hidden" type="file" id="upload" />
     <div class="divider"></div>
     <el-image ref="showcase" class="uploaded-image" fit="contain" :src="compressedImagesrc" @load="loadImg"></el-image>

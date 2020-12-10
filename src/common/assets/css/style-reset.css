@@ -103,3 +103,10 @@ h1 {
 .el-table .cell .el-button--text {
   padding: 0;
 }
+
+/* form */
+/* - el-select */
+/* el-select 组件中 el-select-dropdown 通过 style 有 min-width: 193px; */
+.el-select {
+  width: 100%;
+}

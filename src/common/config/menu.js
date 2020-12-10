@@ -10,16 +10,22 @@ const menu = [
     index: '2',
     children: [
       {
-        title: '重置',
+        title: '基础',
         icon: '',
         index: '2-1',
-        url: '/console/form.html#/reset'
+        url: '/console/form.html#/base'
       },
       {
         title: '校验',
         icon: '',
         index: '2-2',
-        url: '/console/form.html#/index'
+        url: '/console/form.html#/valid'
+      },
+      {
+        title: '上传',
+        icon: '',
+        index: '2-3',
+        url: '/console/form.html#/upload'
       }
     ]
   },

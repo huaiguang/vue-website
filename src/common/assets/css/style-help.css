@@ -6,3 +6,15 @@
   display: none;
 }
 
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.desc-added {
+  font-size: 13px;
+  color: #8492a6;
+}

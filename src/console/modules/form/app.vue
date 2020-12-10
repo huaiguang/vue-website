@@ -2,8 +2,9 @@
   <console-layout :activeIndex="'2-1'">
     <div class="wrapper">
       <div class="submenu">
-        <router-link class="submenu-item" to="/index">图片上传</router-link>
-        <router-link class="submenu-item" to="/reset">表单重置</router-link>
+        <router-link class="submenu-item" to="/base">基础</router-link>
+        <router-link class="submenu-item" to="/valid">校验</router-link>
+        <router-link class="submenu-item" to="/upload">上传</router-link>
       </div>
       <router-view></router-view>
     </div>
@@ -16,9 +17,6 @@ import ConsoleLayout from '@/common/components/BaseLayout/ConsoleLayout'
 export default {
   components: {
     ConsoleLayout
-  },
-  methods: {
-
   }
 }
 </script>

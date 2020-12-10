@@ -87,22 +87,29 @@ export default {
         }
       })
       const searchKeys = ['name', 'owned', 'cleared']
-      const filteredGameList = gameList.filter(item => {
-        let isFlag = true
-        searchKeys.forEach(key => {
-          const searchValue = params[key]
-          if (searchValue) {
-            if (key === 'name' && item.name.indexOf(searchValue) === -1) {
-              isFlag = false
-            } else if ((key === 'owned' || key === 'cleared') && item[key] !== searchValue) {
-              isFlag = false
+      const filteredGameList = gameList.filter(item =>
+        searchKeys.every(key => {
+          const searchParam = params[key]
+          let isPassed = false
+          if (searchParam) {
+            if (key === 'name' && item.name.indexOf(searchParam) > -1) {
+              isPassed = true
+            } else if (key === 'owned' || key === 'cleared') {
+              if ((item[key] && item[key] === searchParam) || (!item[key] && searchParam === '0')) {
+                isPassed = true
+              } else {
+                isPassed = false
+              }
             }
+          } else {
+            isPassed = true
           }
+          return isPassed
         })
-        return isFlag
-      })
+      )
+
       // 分页
-      const length = gameList.length
+      const length = filteredGameList.length
       const { currentPage, pageSize } = params
       const totalPage = Math.ceil(length / pageSize)
       const currentList = filteredGameList.slice(pageSize * (currentPage - 1), pageSize * currentPage)

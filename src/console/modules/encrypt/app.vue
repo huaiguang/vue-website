@@ -14,12 +14,5 @@ export default {
   components: {
     ConsoleLayout
   },
-  methods: {
-
-  }
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

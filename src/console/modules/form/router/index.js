@@ -10,9 +10,14 @@ const routes = [
     component: () => import('../view/index.vue')
   },
   {
-    name: 'reset',
-    path: '/reset',
-    component: () => import('../view/ResetFields.vue')
+    name: 'base',
+    path: '/base',
+    component: () => import('../view/FormBase.vue')
+  },
+  {
+    name: 'valid',
+    path: '/valid',
+    component: () => import('../view/FormValid.vue')
   },
   {
     name: 'index',
