@@ -1,7 +1,7 @@
 /**
  * GalGame list
  */
-const GalGameList = [
+const GameList = [
 ]
 
-export default GalGameList
+export default GameList
