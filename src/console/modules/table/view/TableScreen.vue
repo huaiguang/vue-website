@@ -24,7 +24,7 @@
     <el-table stripe :data="gameList">
       <el-table-column prop="name" label="作品名"></el-table-column>
       <el-table-column prop="tagName" label="标签"></el-table-column>
-      <el-table-column prop="size" label="大小" width="80" align="right"></el-table-column>
+      <el-table-column prop="developer" label="开发商" width="160"></el-table-column>
       <el-table-column prop="ownedText" label="是否持有" width="100" align="center"></el-table-column>
       <el-table-column prop="clearedText" label="是否通关" width="100" align="center"></el-table-column>
       <el-table-column label="操作" fixed="right">
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import gameList from '@/common/assets/js/app/GalGameList'
+import gameList from '@/common/assets/js/app/GameList'
 
 export default {
   data() {
