@@ -17,9 +17,6 @@ export default {
     return {
       activeIndex: '3-1'
     }
-  },
-  mounted() {
-    console.log(location.hash)
-  },
+  }
 }
 </script>

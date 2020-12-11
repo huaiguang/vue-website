@@ -38,9 +38,9 @@
       <el-form-item label="活动性质" prop="type">
         <!-- 多选框中添加设置 -->
         <el-checkbox-group v-model="sizeForm.type">
-          <div class="active-item">
+          <!-- <div class="active-item">
             <div class="active-name">活动性质一:</div>
-            <el-checkbox label="00" name="type">美食/餐厅线上活动</el-checkbox>
+            <el-checkbox label="00" name="type">线上主题活动</el-checkbox>
           </div>
           <div class="active-item">
             <div class="active-name">活动性质二:</div>
@@ -48,7 +48,12 @@
           </div>
           <div class="active-item">
             <div class="active-name">活动性质三:</div>
-            <el-checkbox label="02" name="type">线下主题活动</el-checkbox>
+            <el-checkbox label="02" name="type">美食餐厅</el-checkbox>
+            <el-checkbox label="03" name="type">咖啡厅</el-checkbox>
+          </div> -->
+          <div class="active-item" v-for="group in activityTypes" :key="group.id">
+            <div class="active-name">{{ group.name }}:</div>
+            <el-checkbox v-for="item in group.options" :key="item.value" name="type" :label="item.value">{{ item.name }}</el-checkbox>
           </div>
         </el-checkbox-group>
       </el-form-item>
@@ -68,12 +73,14 @@
 
 <script>
 import regionList from '@/common/assets/js/app/RegionList'
+import { activityTypes } from '@/common/assets/js/app/EnumList'
 
 export default {
   name: 'ResetFields',
   data() {
     return {
       regionList,
+      activityTypes,
       sizeForm: {
         name: '',
         region: '',
