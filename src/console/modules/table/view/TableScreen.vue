@@ -1,5 +1,6 @@
 <template>
   <div class="wrap-content">
+    <!-- 搜索表单 -->
     <el-form class="search-form" :model="searchForm" inline label-width="80px" label-suffix=":">
       <el-form-item label="作品名称">
         <el-input v-model="searchForm.name" clearable placeholder="请输入作品名称"></el-input>
@@ -22,18 +23,19 @@
     </el-form>
     <!-- 表格展示 -->
     <el-table stripe :data="gameList">
-      <el-table-column prop="name" label="作品名"></el-table-column>
-      <el-table-column prop="tagName" label="标签"></el-table-column>
-      <el-table-column prop="developer" label="开发商" width="160"></el-table-column>
-      <el-table-column prop="ownedText" label="是否持有" width="100" align="center"></el-table-column>
-      <el-table-column prop="clearedText" label="是否通关" width="100" align="center"></el-table-column>
-      <el-table-column label="操作" fixed="right">
+      <el-table-column prop="name" label="作品名" min-width="160"></el-table-column>
+      <el-table-column prop="tagName" label="标签" min-width="260"></el-table-column>
+      <el-table-column prop="developer" label="开发商" min-width="140"></el-table-column>
+      <el-table-column prop="ownedText" label="是否持有" min-width="90" align="center"></el-table-column>
+      <el-table-column prop="clearedText" label="是否通关" min-width="90" align="center"></el-table-column>
+      <el-table-column label="操作" width="120" fixed="right">
         <template slot-scope="scope">
           <el-button type="text" @click="showDetail(scope, scope.row)">详情</el-button>
           <el-button type="text" @click="beforeUpdateDetail(scope.row)">修改</el-button>
         </template>
       </el-table-column>
     </el-table>
+    <!-- 表格数据分页 -->
     <el-pagination
       background
       layout="total, sizes, prev, pager, next, jumper"
