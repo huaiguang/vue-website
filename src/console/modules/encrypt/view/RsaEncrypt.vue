@@ -1,23 +1,57 @@
 <template>
   <div class="container">
-    <h2>rsa加解密</h2>
-    <el-row :gutter="10">
-      <el-col :span="24">
-        <div>生成随机数</div>
-        <el-input class="item-encrypt" type="textarea" v-model="randomDigit" placeholder="唯一的随机数"></el-input>
-        <el-button @click="createUniqueRandomNumber">随机数</el-button>
-      </el-col>
-      <el-col :span="12">
+    <div class="wrapper-item">
+      <h2>生成唯一的随机数</h2>
+      <div class="item-detail">
+        <div class="item-name">10进制随机数:</div>
+        <div class="item-desc">{{ this.decRandomDigit }}</div>
+      </div>
+      <div class="item-detail">
+        <div class="item-name">10进制的随机数位数:</div>
+        <div class="item-desc">{{ this.decRandomDigit.length }}</div>
+      </div>
+      <div class="item-detail">
+        <div class="item-name">36进制随机数:</div>
+        <div class="item-desc">{{ this.s36RandomDigit }}</div>
+      </div>
+      <div class="item-detail">
+        <div class="item-name">36进制随机数位数:</div>
+        <div class="item-desc">{{ this.s36RandomDigit.length }}</div>
+      </div>
+      <el-button @click="createUniqueRandomNumber">生成随机数</el-button>
+    </div>
+
+    <div class="wrapper-item">
+      <h2>rsa加解密</h2>
+      <div class="item-encrypt">
         <div class="item-title">rsa 加密</div>
-        <el-input class="item-encrypt" type="textarea" v-model="originalText" placeholder="请输入原文"></el-input>
-        <el-button class="item-encrypt" @click="encryptTextByRsa">rsa加密</el-button>
-      </el-col>
-      <el-col :span="12">
+        <div class="item-detail">
+          <div class="item-name with-input">待加密的数据:</div>
+          <div class="item-desc">
+            <el-input v-model="decryptedRsaText01" placeholder="请输入原文"></el-input>
+          </div>
+        </div>
+        <div class="item-detail">
+          <div class="item-name">加密后的数据:</div>
+          <div class="item-desc">{{ encryptedRsaText01 }}</div>
+        </div>
+        <el-button class="btn-encrypt" @click="encryptTextByRsa">rsa加密</el-button>
+      </div>
+      <div class="item-encrypt">
         <div class="item-title">rsa 解密</div>
-        <el-input class="item-encrypt" type="textarea" :rows="3" v-model="encryptedText"></el-input>
-        <el-button class="item-encrypt" @click="decryptTextByRsa">rsa解密</el-button>
-      </el-col>
-    </el-row>
+        <div class="item-detail">
+          <div class="item-name">加密后的数据:</div>
+          <div class="item-desc">
+            <el-input type="textarea" :rows="3" v-model="encryptedRsaText02"></el-input>
+          </div>
+        </div>
+        <div class="item-detail">
+          <div class="item-name">解密后的数据:</div>
+          <div class="item-desc">{{ decryptedRsaText02 }}</div>
+        </div>
+        <el-button class="btn-encrypt"  @click="decryptTextByRsa">rsa解密</el-button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -28,30 +62,104 @@ export default {
   name: 'RsaEncrypt',
   data() {
     return {
-      randomDigit: '',
-      // 加密
-      originalText: '',
-      encryptedText: ''
+      // 随机数
+      // 10进制的随机数
+      decRandomDigit: '',
+      // 36进制的随机数
+      s36RandomDigit: '',
+
+      // rsa加密
+      // 加密的正文
+      encryptedRsaText01: '',
+      decryptedRsaText01: '',
+      // 解密的正文
+      encryptedRsaText02: '',
+      decryptedRsaText02: '',
     }
   },
   methods: {
     createUniqueRandomNumber() {
-      this.randomDigit = Number(Math.random().toString().substr(2)).toString(36)
+      const decRandomDigit = Math.random().toString().substr(2)
+      const s36RandomDigit = Number(decRandomDigit).toString(36)
+      console.group()
+      console.log(decRandomDigit, decRandomDigit.length)
+      console.log(s36RandomDigit, s36RandomDigit.length)
+      console.groupEnd()
+      this.decRandomDigit = decRandomDigit
+      this.s36RandomDigit = s36RandomDigit
     },
     encryptTextByRsa() {
-      console.log(rsaEncrypt(this.originalText))
+      this.encryptedRsaText01 = rsaEncrypt(this.decryptedRsaText01)
+      console.log(this.encryptedRsaText01)
     },
     decryptTextByRsa() {
-      console.log(rsaDecrypt(this.encryptedText, false))
+      this.decryptedRsaText02 = rsaDecrypt(this.encryptedRsaText02, false)
+      console.log(this.decryptedRsaText02)
     }
   }
 }
 </script>
 
 <style lang="scss">
-.item-title,
-.item-encrypt {
+.wrapper-item {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #DCE5EB;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+  & > h2 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+  }
+}
+
+.item-detail {
+  display: flex;
   margin-top: 10px;
   margin-bottom: 10px;
+  .item-name {
+    margin-right: 10px;
+    width: 140px;
+    text-align: right;
+    color: #6F7F89;
+    &.with-input {
+      line-height: 40px;
+    }
+  }
+  .item-desc {
+    color: #21333F;
+  }
+}
+
+.item-encrypt {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 80%;
+  border-bottom: 1px solid #DCE5EB;
+  &:last-of-type {
+    border-bottom: none;
+  }
+  .item-title {
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .item-detail {
+    margin-bottom: 10px;
+    width: 100%;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    .item-name {
+      width: 100px;
+    }
+    .item-desc {
+      width: 700px;
+      word-break: break-all;
+    }
+  }
 }
 </style>
