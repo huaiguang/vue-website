@@ -11,25 +11,48 @@ const rsaPrivateKey = 'MIICXQIBAAKBgQDmK3+dSUiPAUZL4QpSZts8yWhVuwjVT5KZ33WyWm7QC
 
 const encryptor = new JSEncrypt()
 
+export function createAesKey() {
+  const expect = 16
+  let str = Math.random().toString(36).substr(2)
+  while (str.length < expect) {
+    str += Math.random().toString(36).substr(2)
+  }
+  str = str.substr(0, 16)
+  return str
+}
+
+// // Encrypt
+// var ciphertext = CryptoJS.AES.encrypt('my message', 'secret key 123').toString();
+
+// // Decrypt
+// var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
+// var originalText = bytes.toString(CryptoJS.enc.Utf8);
+
+// // Encrypt
+// var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(data), 'secret key 123').toString();
+
+// // Decrypt
+// var bytes  = CryptoJS.AES.decrypt(ciphertext, 'secret key 123');
+// var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+
 /**
  * AES 加密
- * @param word 待加密字段
- * @param keyStr 加密 key
+ * @param text 待加密字段
+ * @param aesKey aes密钥
  * @returns {string} 返回加密字段
  */
-export function aesEncrypt(word, keyStr) {
-  keyStr = keyStr
-  const key = CryptoJS.enc.Utf8.parse(keyStr)
+export function aesEncrypt(text, aesKey) {
+  const key = CryptoJS.enc.Utf8.parse(aesKey)
   let srcs = ''
-  switch (typeof (word)) {
+  switch (typeof (text)) {
     case 'string':
-      srcs = CryptoJS.enc.Utf8.parse(word)
+      srcs = CryptoJS.enc.Utf8.parse(text)
       break
     case 'object':
-      srcs = CryptoJS.enc.Utf8.parse(JSON.stringify(word))
+      srcs = CryptoJS.enc.Utf8.parse(JSON.stringify(text))
       break
     default:
-      srcs = CryptoJS.enc.Utf8.parse(word.toString())
+      srcs = CryptoJS.enc.Utf8.parse(text.toString())
   }
   const encrypted = CryptoJS.AES.encrypt(srcs, key, {
     // iv: key, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7
@@ -41,18 +64,25 @@ export function aesEncrypt(word, keyStr) {
 
 /**
  * AES 解密
- * @param word 待解密数据
- * @param keyStr 解密 key
+ * @param text 待解密数据
+ * @param aesKey aes密钥
  * @returns {string} 返回解密字符串
  */
-export function aesDecrypt(word, keyStr) {
-  const key = CryptoJS.enc.Utf8.parse(keyStr)
-  const decrypt = CryptoJS.AES.decrypt(word, key, {
+export function aesDecrypt(text, aesKey) {
+  const key = CryptoJS.enc.Utf8.parse(aesKey)
+  const decrypt = CryptoJS.AES.decrypt(text, key, {
     // iv: key, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7
     mode: CryptoJS.mode.ECB,
     padding: CryptoJS.pad.Pkcs7
   })
-  return CryptoJS.enc.Utf8.stringify(decrypt).toString()
+  const decryptedData = CryptoJS.enc.Utf8.stringify(decrypt).toString()
+  let decryptedObj = null
+  try {
+    decryptedObj = JSON.parse(decryptedData)
+  } catch (err) {
+    decryptedObj = decryptedData
+  }
+  return decryptedObj
 }
 
 /**
