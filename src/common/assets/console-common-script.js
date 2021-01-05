@@ -1,4 +1,5 @@
 import Vue from 'vue'
+// import Vue from 'vue/dist/vue.esm.js'
 import VueRouter from 'vue-router'
 import ElementUI from 'element-ui'
 

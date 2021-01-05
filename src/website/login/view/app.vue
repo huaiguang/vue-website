@@ -26,7 +26,7 @@ import createXHR from '@/common/service/server-xhr'
 import Banner from '@/common/assets/images/banner.jpeg'
 
 import Vue from 'vue'
-import Loading from '@/common/components/Loading/Loading'
+import Loading from '@/common/plugins/Loading'
 
 Vue.use(Loading)
 
@@ -44,9 +44,12 @@ export default {
   },
   created() {
     this.$loading.show()
-    this.$nextTick(() => {
+    // this.$nextTick(() => {
+    //   this.$loading.hide()
+    // })
+    setTimeout(() => {
       this.$loading.hide()
-    })
+    }, 1000)
     // this.getUserInfo()
     const addressList = [
       '甘肃省临泽县新华镇大寨村六社39号',
