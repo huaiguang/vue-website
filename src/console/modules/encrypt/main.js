@@ -4,7 +4,7 @@ import { Vue } from 'common/assets/console-common-script.js'
 import app from './app.vue'
 import router from './router'
 
-// compiler
+// umd build of Vue, including compiler
 // new Vue({
 //   el: '#app',
 //   router: router,
@@ -13,7 +13,7 @@ import router from './router'
 //   components: { App }
 // })
 
-// runtime
+// runtime-only build of Vue
 new Vue({
   router,
   render: h => h(app)
