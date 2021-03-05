@@ -9,23 +9,23 @@
  * @returns {boolean} 是否为当前的类型
  */
 function isType(type) {
-  return function (obj) {
-    return {}.toString.call(obj) == "[object " + type + "]"
+  return function(obj) {
+    return {}.toString.call(obj) === '[object ' + type + ']'
   }
 }
 
-var isObject = isType("Object")
-var _maxExpireDate = new Date('Fri, 31 Dec 9999 23:59:59 UTC')
-var _defaultExpire = _maxExpireDate
+const isObject = isType('Object')
+const _maxExpireDate = new Date('Fri, 31 Dec 9999 23:59:59 UTC')
+let _defaultExpire = _maxExpireDate
 
 // https://github.com/jeromegn/Backbone.localStorage/blob/master/backbone.localStorage.js#L63
-var defaultSerializer = {
-  serialize: function (item) {
+const defaultSerializer = {
+  serialize(item) {
     return JSON.stringify(item)
   },
   // fix for "illegal access" error on Android when JSON.parse is
   // passed null
-  deserialize: function (data) {
+  deserialize(data) {
     return data && JSON.parse(data)
   }
 }
@@ -38,7 +38,7 @@ var defaultSerializer = {
  * @returns {object} 复制了props属性的obj对象
  */
 function _extend(obj, props) {
-  for (var key in props) obj[key] = props[key]
+  for (const key in props) obj[key] = props[key]
   return obj
 }
 
@@ -51,10 +51,10 @@ function _extend(obj, props) {
  * made to add something to storage that exceeded the quota."
  */
 function _isStorageSupported(storage) {
-  var supported = false
+  let supported = false
   if (storage && storage.setItem) {
     supported = true
-    var key = '__' + Math.round(Math.random() * 1e7)
+    const key = '__' + Math.round(Math.random() * 1e7)
     try {
       storage.setItem(key, key)
       storage.removeItem(key)
@@ -67,7 +67,7 @@ function _isStorageSupported(storage) {
 
 // get storage instance
 function _getStorageInstance(storage) {
-  var type = typeof storage
+  const type = typeof storage
   if (type === 'string' && window[storage] instanceof Storage) {
     return window[storage]
   }
@@ -104,7 +104,7 @@ function _getExpiresDate(expires, now) {
 
 // http://crocodillon.com/blog/always-catch-localstorage-security-and-quota-exceeded-errors
 function _isQuotaExceeded(e) {
-  var quotaExceeded = false
+  let quotaExceeded = false
   if (e) {
     if (e.code) {
       switch (e.code) {
@@ -131,7 +131,7 @@ function CacheItemConstructor(value, exp) {
   // createTime
   this.c = (new Date()).getTime()
   exp = exp || _defaultExpire
-  var expires = _getExpiresDate(exp)
+  const expires = _getExpiresDate(exp)
   // expiresTime
   this.e = expires.getTime()
   this.v = value
@@ -151,7 +151,7 @@ function _isCacheItem(item) {
 
 // check cacheItem If effective
 function _checkCacheItemIfEffective(cacheItem) {
-  var timeNow = (new Date()).getTime()
+  const timeNow = (new Date()).getTime()
   return timeNow < cacheItem.e
 }
 
@@ -164,30 +164,29 @@ function _checkAndWrapKeyAsString(key) {
 }
 
 // cache api
-var CacheAPI = {
+const CacheAPI = {
 
-  set: function (key, value, options) {},
+  set(key, value, options) {},
 
-  get: function (key) {},
+  get(key) {},
 
-  delete: function (key) {},
+  delete(key) {},
   // Try the best to clean All expires CacheItem.
-  deleteAllExpires: function () {},
+  deleteAllExpires() {},
   // Clear all keys
-  clear: function () {},
+  clear() {},
   // Add key-value item to memcached, success only when the key is not exists in memcached.
-  add: function (key, options) {},
+  add(key, options) {},
   // Replace the key's data item in cache, success only when the key's data item is exists in cache.
-  replace: function (key, value, options) {},
+  replace(key, value, options) {},
   // Set a new options for an existing key.
-  touch: function (key, exp) {}
+  touch(key, exp) {}
 }
 
 // cache api
-var CacheAPIImpl = {
+const CacheAPIImpl = {
 
-  set: function (key, val, options) {
-
+  set(key, val, options) {
     key = _checkAndWrapKeyAsString(key)
 
     options = _extend({
@@ -198,9 +197,9 @@ var CacheAPIImpl = {
       return this.delete(key)
     }
 
-    var value = defaultSerializer.serialize(val)
+    const value = defaultSerializer.serialize(val)
 
-    var cacheItem = new CacheItemConstructor(value, options.exp)
+    const cacheItem = new CacheItemConstructor(value, options.exp)
     try {
       this.storage.setItem(key, defaultSerializer.serialize(cacheItem))
     } catch (e) {
@@ -213,9 +212,9 @@ var CacheAPIImpl = {
 
     return val
   },
-  get: function (key) {
+  get(key) {
     key = _checkAndWrapKeyAsString(key)
-    var cacheItem = null
+    let cacheItem = null
     try {
       cacheItem = defaultSerializer.deserialize(this.storage.getItem(key))
     } catch (e) {
@@ -223,7 +222,7 @@ var CacheAPIImpl = {
     }
     if (_isCacheItem(cacheItem)) {
       if (_checkCacheItemIfEffective(cacheItem)) {
-        var value = cacheItem.v
+        const value = cacheItem.v
         return defaultSerializer.deserialize(value)
       } else {
         this.delete(key)
@@ -232,48 +231,48 @@ var CacheAPIImpl = {
     return null
   },
 
-  delete: function (key) {
+  delete(key) {
     key = _checkAndWrapKeyAsString(key)
     this.storage.removeItem(key)
     return key
   },
   //清除所有过期的数据条目
-  deleteAllExpires: function () {
-    var length = this.storage.length
-    var deleteKeys = []
-    var _this = this
-    for (var i = 0; i < length; i++) {
-      var key = this.storage.key(i)
-      var cacheItem = null
+  deleteAllExpires() {
+    const length = this.storage.length
+    const deleteKeys = []
+    const _this = this
+    for (let i = 0; i < length; i++) {
+      const key = this.storage.key(i)
+      let cacheItem = null
       try {
         cacheItem = defaultSerializer.deserialize(this.storage.getItem(key))
       } catch (e) {}
 
       if (cacheItem !== null && cacheItem.e !== undefined) {
-        var timeNow = (new Date()).getTime()
+        const timeNow = (new Date()).getTime()
         if (timeNow >= cacheItem.e) {
           deleteKeys.push(key)
         }
       }
     }
-    deleteKeys.forEach(function (key) {
+    deleteKeys.forEach(key => {
       _this.delete(key)
     })
     return deleteKeys
   },
 
-  clear: function () {
+  clear() {
     this.storage.clear()
   },
 
   //这个方法只能添加key不存在的数据条，可以避免数据被无意之间篡改
-  add: function (key, value, options) {
+  add(key, value, options) {
     key = _checkAndWrapKeyAsString(key)
     options = _extend({
       force: true
     }, options)
     try {
-      var cacheItem = defaultSerializer.deserialize(this.storage.getItem(key))
+      const cacheItem = defaultSerializer.deserialize(this.storage.getItem(key))
       if (!_isCacheItem(cacheItem) || !_checkCacheItemIfEffective(cacheItem)) {
         this.set(key, value, options)
         return true
@@ -285,9 +284,9 @@ var CacheAPIImpl = {
     return false
   },
 
-  replace: function (key, value, options) {
+  replace(key, value, options) {
     key = _checkAndWrapKeyAsString(key)
-    var cacheItem = null
+    let cacheItem = null
     try {
       cacheItem = defaultSerializer.deserialize(this.storage.getItem(key))
     } catch (e) {
@@ -304,9 +303,9 @@ var CacheAPIImpl = {
     return false
   },
   //重新设置每条数据的过期时间
-  touch: function (key, exp) {
+  touch(key, exp) {
     key = _checkAndWrapKeyAsString(key)
-    var cacheItem = null
+    let cacheItem = null
     try {
       cacheItem = defaultSerializer.deserialize(this.storage.getItem(key))
     } catch (e) {
@@ -315,7 +314,7 @@ var CacheAPIImpl = {
     if (_isCacheItem(cacheItem)) {
       if (_checkCacheItemIfEffective(cacheItem)) {
         this.set(key, this.get(key), {
-          exp: exp
+          exp
         })
         return true
       } else {
@@ -330,16 +329,15 @@ var CacheAPIImpl = {
  * Cache Constructor
  */
 function CacheConstructor(options) {
-
   // default options
-  var defaults = {
+  const defaults = {
     storage: 'localStorage',
     exp: Infinity //An expiration time, in seconds. default never .
   }
 
-  var opt = _extend(defaults, options)
+  const opt = _extend(defaults, options)
 
-  var expires = opt.exp
+  const expires = opt.exp
 
   if (expires && typeof expires !== 'number' && !_isValidDate(expires)) {
     throw new Error('Constructor `exp` parameter cannot be converted to a valid Date instance')
@@ -347,23 +345,22 @@ function CacheConstructor(options) {
     _defaultExpire = expires
   }
 
-  var storage = _getStorageInstance(opt.storage)
+  const storage = _getStorageInstance(opt.storage)
 
-  var isSupported = _isStorageSupported(storage)
+  const isSupported = _isStorageSupported(storage)
 
 
-  this.isSupported = function () {
+  this.isSupported = function() {
     return isSupported
   }
 
   if (isSupported) {
-
     this.storage = storage
 
-    this.quotaExceedHandler = function (key, val, options, e) {
+    this.quotaExceedHandler = function(key, val, options, e) {
       console.warn('Quota exceeded!')
       if (options && options.force === true) {
-        var deleteKeys = this.deleteAllExpires()
+        const deleteKeys = this.deleteAllExpires()
         console.warn('delete all expires CacheItem : [' + deleteKeys + '] and try execute `set` method again!')
         try {
           options.force = false
@@ -373,16 +370,13 @@ function CacheConstructor(options) {
         }
       }
     }
-
   } else { // if not support, rewrite all functions without doing anything
     _extend(this, CacheAPI)
   }
-
 }
 
 CacheConstructor.prototype = CacheAPIImpl
-CacheConstructor.getInstance = function (opt) {
+CacheConstructor.getInstance = function(opt) {
   return new CacheConstructor(opt)
-
 }
 export default CacheConstructor

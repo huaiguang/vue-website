@@ -1,11 +1,11 @@
 /**
  * download file
- * @param {string} data toDataURL(mine, ratio) 方法返回一个包含图片展示的 data URI
+ * @param {string} url toDataURL(mine, ratio) 方法返回一个包含图片展示的 data URI
  * @param {string} filename 下载文件的文件名
  */
-function download(data, filename) {
+function downloadFile(url, filename) {
   const aLink = document.createElement('a')
-  aLink.href = data
+  aLink.href = url
   aLink.download = filename
   const event = document.createEvent('MouseEvents')
   event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
@@ -92,7 +92,7 @@ function compressImageBySize(image, options) {
   const imageHeight = image.height
   // initial scale
   let scale = 1
-  const { orientation, width, ratio } = options
+  const { orientation, width, ratio, type } = options
   if (imageWidth > width) {
     scale = width / imageWidth
   }
@@ -102,7 +102,7 @@ function compressImageBySize(image, options) {
   context.drawImage(image, 0, 0, canvas.width, canvas.height)
   // output base64
   // ratio 0.92 default
-  const data = canvas.toDataURL('image/jpeg', ratio)
+  const data = canvas.toDataURL(type, ratio)
   return data
 }
 
@@ -133,6 +133,7 @@ function compressImage({ file, target }, callback) {
         orientation,
         width,
         ratio,
+        type: file.type
       })
       // download(data, file.name)
       const newFile = base64ToFile(data, file.name)
@@ -198,75 +199,75 @@ function compressImage({ file, target }, callback) {
  * @param {*} srcOrientation 源图片的翻转角度
  * @param {*} callback
  */
-// function resetOrientation(srcBase64, srcOrientation, callback) {
-//   const img = new Image()
+function resetOrientation(srcBase64, srcOrientation, callback) {
+  const img = new Image()
 
-//   img.onload = function() {
-//     let width = img.width
-//     let height = img.height
-//     const canvas = document.createElement('canvas')
-//     const ctx = canvas.getContext('2d')
+  img.onload = function() {
+    let width = img.width
+    let height = img.height
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
 
-//     // 可以设置最大宽高度
-//     const MAX_WIDTH = 1024
-//     const MAX_HEIGHT = 768
-//     if (width / MAX_WIDTH > height / MAX_HEIGHT) {
-//       if (width > MAX_WIDTH) {
-//         height *= MAX_WIDTH / width
-//         width = MAX_WIDTH
-//       }
-//     } else {
-//       if (height > MAX_HEIGHT) {
-//         width *= MAX_HEIGHT / height
-//         height = MAX_HEIGHT
-//       }
-//     }
-//     // set proper canvas dimensions before transform & export
-//     if ([5, 6, 7, 8].indexOf(srcOrientation) > -1) {
-//       canvas.width = height
-//       canvas.height = width
-//     } else {
-//       canvas.width = width
-//       canvas.height = height
-//     }
+    // 可以设置最大宽高度
+    const MAX_WIDTH = 1024
+    const MAX_HEIGHT = 768
+    if (width / MAX_WIDTH > height / MAX_HEIGHT) {
+      if (width > MAX_WIDTH) {
+        height *= MAX_WIDTH / width
+        width = MAX_WIDTH
+      }
+    } else {
+      if (height > MAX_HEIGHT) {
+        width *= MAX_HEIGHT / height
+        height = MAX_HEIGHT
+      }
+    }
+    // set proper canvas dimensions before transform & export
+    if ([5, 6, 7, 8].indexOf(srcOrientation) > -1) {
+      canvas.width = height
+      canvas.height = width
+    } else {
+      canvas.width = width
+      canvas.height = height
+    }
 
-//     // transform context before drawing image
-//     switch (srcOrientation) {
-//       case 2:
-//         ctx.transform(-1, 0, 0, 1, width, 0)
-//         break
-//       case 3:
-//         ctx.transform(-1, 0, 0, -1, width, height)
-//         break
-//       case 4:
-//         ctx.transform(1, 0, 0, -1, 0, height)
-//         break
-//       case 5:
-//         ctx.transform(0, 1, 1, 0, 0, 0)
-//         break
-//       case 6:
-//         ctx.transform(0, 1, -1, 0, height, 0)
-//         break
-//       case 7:
-//         ctx.transform(0, -1, -1, 0, height, width)
-//         break
-//       case 8:
-//         ctx.transform(0, -1, 1, 0, 0, width)
-//         break
-//       default:
-//         ctx.transform(1, 0, 0, 1, 0, 0)
-//     }
+    // transform context before drawing image
+    switch (srcOrientation) {
+      case 2:
+        ctx.transform(-1, 0, 0, 1, width, 0)
+        break
+      case 3:
+        ctx.transform(-1, 0, 0, -1, width, height)
+        break
+      case 4:
+        ctx.transform(1, 0, 0, -1, 0, height)
+        break
+      case 5:
+        ctx.transform(0, 1, 1, 0, 0, 0)
+        break
+      case 6:
+        ctx.transform(0, 1, -1, 0, height, 0)
+        break
+      case 7:
+        ctx.transform(0, -1, -1, 0, height, width)
+        break
+      case 8:
+        ctx.transform(0, -1, 1, 0, 0, width)
+        break
+      default:
+        ctx.transform(1, 0, 0, 1, 0, 0)
+    }
 
-//     // draw image
-//     ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+    // draw image
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
 
-//     // export base64
-//     callback(canvas.toDataURL())
-//   }
-//   img.src = srcBase64
-// }
+    // export base64
+    callback(canvas.toDataURL())
+  }
+  img.src = srcBase64
+}
 
-// 这里的获取exif要将图片转ArrayBuffer对象，这里假设获取了图片的baes64
+// 这里的获取exif要将图片转ArrayBuffer对象，这里假设获取了图片的base64
 // 步骤一
 // base64转ArrayBuffer对象
 function base64ToArrayBuffer(base64) {
@@ -367,11 +368,11 @@ function getOrientation(arrayBuffer) {
 }
 
 export {
-  download,
+  downloadFile,
   base64ToFile,
   compressImage,
   blobToBase64,
   base64ToArrayBuffer,
   getOrientation,
-  // resetOrientation
+  resetOrientation
 }

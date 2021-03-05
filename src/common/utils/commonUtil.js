@@ -31,9 +31,9 @@ function storageMethod(val) {
  * @param fileType  ：文件类 word(docx) excel(xlsx) ppt等
  */
 function downloadExportFile(blob, tagFileName, fileType) {
-  let downloadElement = document.createElement('a')
+  const downloadElement = document.createElement('a')
   let href = blob
-  if (typeof blob == 'string') {
+  if (typeof blob === 'string') {
     downloadElement.target = '_blank'
   } else {
     href = window.URL.createObjectURL(blob) //创建下载的链接
@@ -43,7 +43,7 @@ function downloadExportFile(blob, tagFileName, fileType) {
   document.body.appendChild(downloadElement)
   downloadElement.click() //点击下载
   document.body.removeChild(downloadElement) //下载完成移除元素
-  if (typeof blob != 'string') {
+  if (typeof blob !== 'string') {
     window.URL.revokeObjectURL(href) //释放掉blob对象
   }
 }
@@ -58,20 +58,20 @@ function downloadExportFile(blob, tagFileName, fileType) {
  */
 function numberFormat(number, decimals, dec_point, thousands_sep) {
   number = (number + '').replace(/[^0-9+-Ee.]/g, '')
-  var n = !isFinite(+number) ? 0 : +number,
+  const n = !isFinite(+number) ? 0 : +number
 
-    prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
-    sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
-    dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
-    s = '',
-    toFixedFix = function (n, prec) {
-      var k = Math.pow(10, prec)
-      return '' + calculateTwoNumber(Math.floor(calculateTwoNumber(n,k,'*')),k,'/')
-    }
+  const prec = !isFinite(+decimals) ? 0 : Math.abs(decimals)
+  const sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep
+  const dec = (typeof dec_point === 'undefined') ? '.' : dec_point
+  let s = ''
+  const toFixedFix = function(n, prec) {
+    const k = Math.pow(10, prec)
+    return '' + calculateTwoNumber(Math.floor(calculateTwoNumber(n,k,'*')),k,'/')
+  }
   s = (prec ? toFixedFix(n, prec) : '' + Math.floor(n)).split('.')
-  var re = /(-?\d+)(\d{3})/
+  const re = /(-?\d+)(\d{3})/
   while (re.test(s[0])) {
-    s[0] = s[0].replace(re, "$1" + sep + "$2")
+    s[0] = s[0].replace(re, '$1' + sep + '$2')
   }
 
   if ((s[1] || '').length < prec) {
@@ -89,7 +89,7 @@ function numberFormat(number, decimals, dec_point, thousands_sep) {
  */
 function throttle(fn, delay) {
   let timer
-  return function (...args) {
+  return function(...args) {
     if (timer) {
       clearTimeout(timer)
     }
@@ -108,9 +108,9 @@ function throttle(fn, delay) {
  */
 function calculateTwoNumber(arg1, arg2, type) {
   if (type === '*') { //乘法
-    let m = 0,
-      s1 = arg1.toString(),
-      s2 = arg2.toString()
+    let m = 0
+    const s1 = arg1.toString()
+    const s2 = arg2.toString()
     try {
       m += s1.split('.')[1].length
     } catch (e) {
@@ -121,7 +121,7 @@ function calculateTwoNumber(arg1, arg2, type) {
     }
     return Number(s1.replace('.', '')) * Number(s2.replace('.', '')) / Math.pow(10, m)
   } else if (type === '+' || type === '-') { //加减法
-    let sq1, sq2, x
+    let sq1; let sq2
     try {
       sq1 = arg1.toString().split('.')[1].length
     } catch (e) {
@@ -132,16 +132,15 @@ function calculateTwoNumber(arg1, arg2, type) {
     } catch (e) {
       sq2 = 0
     }
-    x = Math.pow(10, Math.max(sq1, sq2))
+    const x = Math.pow(10, Math.max(sq1, sq2))
     if (type === '+') {
       return (calculateTwoNumber(arg1, x, '*') + calculateTwoNumber(arg2, x, '*')) / x
     } else if (type === '-') {
       return (calculateTwoNumber(arg1, x, '*') - calculateTwoNumber(arg2, x, '*')) / x
     }
   } else if (type === '/') { //除法
-    let t1 = 0,
-      t2 = 0,
-      r1, r2
+    let t1 = 0
+    let t2 = 0
     try {
       t1 = arg1.toString().split('.')[1].length
     } catch (e) {
@@ -150,8 +149,8 @@ function calculateTwoNumber(arg1, arg2, type) {
       t2 = arg2.toString().split('.')[1].length
     } catch (e) {
     }
-    r1 = Number(arg1.toString().replace('.', ''))
-    r2 = Number(arg2.toString().replace('.', ''))
+    const r1 = Number(arg1.toString().replace('.', ''))
+    const r2 = Number(arg2.toString().replace('.', ''))
     return (r1 / r2) * Math.pow(10, t2 - t1)
   }
 }
@@ -167,11 +166,11 @@ function calculateTwoNumber(arg1, arg2, type) {
  */
 function getBase64(options, callback) {
   //通过构造函数来创建的img实例，在赋予src值后就会立刻下载图片，相比createElement()创建<img>省去了append()，也就避免了文档冗余和污染
-  var Img = new Image(), dataURL = ''
+  const Img = new Image(); let dataURL = ''
   Img.src = options.url
-  Img.onload = function () { //要先确保图片完整获取到，这是个异步事件
-    var canvas = document.createElement("canvas") //创建canvas元素
-    var scale = 1
+  Img.onload = function() { //要先确保图片完整获取到，这是个异步事件
+    const canvas = document.createElement('canvas') //创建canvas元素
+    let scale = 1
     if (Img.width > options.width || Img.height > options.height) { //1000只是示例，可以根据具体的要求去设定
       if (Img.width > Img.height) {
         scale = options.width / Img.width
@@ -203,7 +202,7 @@ function compressImage(file, callback) {
   }
   const fileSize = file.size / 1024 / 1024
   // let ratio = 0.92
-  let ratio = 1.07 - fileSize / 20
+  const ratio = 1.07 - fileSize / 20
   // 转base64
   reader.readAsDataURL(file)
   reader.onload = function(e) {
@@ -253,11 +252,11 @@ function compressImage(file, callback) {
  * @returns {File}
  */
 function dataURLtoFile(dataurl, filename) {
-  var arr = dataurl.split(','),
-    mime = arr[0].match(/:(.*?)/)[1],
-    bstr = atob(arr[1]),
-    n = bstr.length,
-    u8arr = new Uint8Array(n)
+  const arr = dataurl.split(',')
+  const mime = arr[0].match(/:(.*?)/)[1]
+  const bstr = atob(arr[1])
+  let n = bstr.length
+  const u8arr = new Uint8Array(n)
   while (n--) {
     u8arr[n] = bstr.charCodeAt(n)
   }
@@ -308,7 +307,7 @@ function importAll(context) {
   const map = {}
 
   context.keys().forEach(key => {
-    let route = key.substring(2)
+    const route = key.substring(2)
     map[route.replace(/\.vue$/, '')] = context(key).default
   })
 
@@ -320,7 +319,7 @@ const uniqueIds = []
  * create the unique number
  */
 function createUniqueId() {
-  const random = function () {
+  const random = function() {
     return Number(Math.random().toString().substr(2)).toString(36) // 转换成十六进制
   }
   function createId() {

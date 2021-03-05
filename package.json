@@ -4,8 +4,8 @@
   "description": "large website template based on vue",
   "main": "index.js",
   "scripts": {
-    "eslint": "eslint ./src/**",
-    "eslint:fix": "eslint ./src/** --fix",
+    "eslint": "eslint ./src --quiet",
+    "eslint:fix": "eslint ./src --fix --quiet",
     "dev": "node build/dev-server",
     "dev:server": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.test",
     "build": "node build/build.js"

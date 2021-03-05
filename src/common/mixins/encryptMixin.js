@@ -23,11 +23,9 @@ export default {
       const params = {
         key: rsaEncrypt(newAesKey)
       }
-      this.$httpPost(api.getAesKey, params).then(
-        () => {
-          this.aesKey = newAesKey
-        }
-      )
+      this.$httpPost(api.getAesKey, params).then(() => {
+        this.aesKey = newAesKey
+      })
     },
     aesEncrypt
   }

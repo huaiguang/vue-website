@@ -41,41 +41,32 @@ const productList = [
     group: '平台收款',
     options: [
       { name: '店铺提现', value: '01' },
-      { name: '店铺异常退款', value: '02' },
+      { name: '店铺异常退款', value: '02' }
     ]
   },
   {
     id: '001',
     group: '缴税付款',
-    options: [
-      { name: 'VAT', value: '07' }
-    ]
+    options: [{ name: 'VAT', value: '07' }]
   },
   {
     id: '002',
     group: '钱包提现',
-    options: [
-      { name: '钱包提现', value: '08' }
-    ]
+    options: [{ name: '钱包提现', value: '08' }]
   },
   {
     id: '004',
     group: '充值',
     options: [
       { name: '钱包充值', value: '09' },
-      { name: '充值异常资金退款', value: '10' },
+      { name: '充值异常资金退款', value: '10' }
     ]
   },
   {
     id: '001',
     group: '换汇',
-    options: [
-      { name: '换汇', value: '11' }
-    ]
-  },
+    options: [{ name: '换汇', value: '11' }]
+  }
 ]
 
-export {
-  activityTypes,
-  productList
-}
+export { activityTypes, productList }

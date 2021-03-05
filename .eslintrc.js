@@ -1,30 +1,26 @@
 module.exports = {
   parser: 'babel-eslint',
   parserOptions: {
-    sourceType: 'module'
+    sourceType: 'module',
   },
   env: {
     es6: true,
     browser: true,
-    node: true
+    node: true,
   },
-  plugins: [
-    'html',
-    'import'
-  ],
+  plugins: ['html', 'import'],
   settings: {
     'html/html-extensions': ['.html', '.vue'],
     'import/resolver': {
-      'webpack': {
-        'config': 'webpack.config.js'
-      }
-    }
+      webpack: {
+        config: 'webpack.config.js',
+      },
+    },
   },
   // global: {
   //   'define': true
   // },
   rules: {
-
     /********************************************************************************
      CORE: Possible Errors
     ********************************************************************************/
@@ -37,9 +33,13 @@ module.exports = {
 
     'no-useless-escape': 'error',
 
-    'wrap-iife': ['error', 'outside', {
-      functionPrototypeMethods: false
-    }],
+    'wrap-iife': [
+      'error',
+      'outside',
+      {
+        functionPrototypeMethods: false,
+      },
+    ],
 
     'no-loop-func': 'error',
 
@@ -53,13 +53,20 @@ module.exports = {
 
     'no-iterator': 'error',
 
-    'dot-notation': ['error', {
-      allowKeywords: true
-    }],
+    'dot-notation': [
+      'error',
+      {
+        allowKeywords: true,
+      },
+    ],
 
-    eqeqeq: ['error', 'always', {
-      null: 'ignore'
-    }],
+    eqeqeq: [
+      'error',
+      'always',
+      {
+        null: 'ignore',
+      },
+    ],
 
     'no-case-declarations': 'error',
 
@@ -69,7 +76,7 @@ module.exports = {
      CORE: Strict Mode
     ********************************************************************************/
 
-    'strict': 'off',
+    strict: 'off',
 
     /********************************************************************************
      CORE: Variables
@@ -80,10 +87,14 @@ module.exports = {
     //   classes: true,
     //   variables: true
     // }],
-    'no-use-before-define': ['error', { // 禁止定义前使用
-      'functions': false,
-      'classes': false
-    }],
+    'no-use-before-define': [
+      'error',
+      {
+        // 禁止定义前使用
+        functions: false,
+        classes: false,
+      },
+    ],
 
     'no-undef': 'error',
 
@@ -100,36 +111,44 @@ module.exports = {
 
     'no-array-constructor': 'error',
 
-    'quote-props': ['error', 'as-needed', {
-      keywords: false,
-      unnecessary: true,
-      numbers: false
-    }],
+    'quote-props': [
+      'error',
+      'as-needed',
+      {
+        keywords: false,
+        unnecessary: true,
+        numbers: false,
+      },
+    ],
 
-    quotes: ['error', 'single', {
-      avoidEscape: true
-    }],
+    quotes: [
+      'error',
+      'single',
+      {
+        avoidEscape: true,
+      },
+    ],
 
-    'func-style': ['error', 'declaration'],
+    'func-style': ['off', 'declaration'],
 
     // 'space-before-function-paren': ['error', {
     //   anonymous: 'always',
     //   named: 'never',
     //   asyncArrow: 'always'
     // }],
-    'space-before-function-paren': ['error', { // 要求或禁止函数圆括号之前有一个空格
-      'anonymous': 'never',
-      'named': 'never',
-      'asyncArrow': 'always'
-    }],
+    'space-before-function-paren': [
+      'error',
+      {
+        // 要求或禁止函数圆括号之前有一个空格
+        anonymous: 'never',
+        named: 'never',
+        asyncArrow: 'always',
+      },
+    ],
 
     'space-before-blocks': 'error',
 
-    'no-restricted-syntax': [
-      'error',
-      'LabeledStatement',
-      'WithStatement',
-    ],
+    'no-restricted-syntax': ['error', 'LabeledStatement', 'WithStatement'],
 
     'one-var': ['error', 'never'],
 
@@ -138,13 +157,20 @@ module.exports = {
 
     'no-nested-ternary': 'error',
 
-    'no-unneeded-ternary': ['error', {
-      defaultAssignment: false
-    }],
+    'no-unneeded-ternary': [
+      'error',
+      {
+        defaultAssignment: false,
+      },
+    ],
 
-    'brace-style': ['error', '1tbs', {
-      allowSingleLine: true
-    }],
+    'brace-style': [
+      'error',
+      '1tbs',
+      {
+        allowSingleLine: true,
+      },
+    ],
 
     // 'spaced-comment': ['error', 'always', {
     //   line: {
@@ -158,46 +184,53 @@ module.exports = {
     //   }
     // }],
 
-    // indent: ['error', 2, {
-    //   SwitchCase: 1,
-    //   VariableDeclarator: 1,
-    //   outerIIFEBody: 1,
-    //   FunctionDeclaration: {
-    //     parameters: 1,
-    //     body: 1
-    //   },
-    //   FunctionExpression: {
-    //     parameters: 1,
-    //     body: 1
-    //   }
-    // }],
-    'indent': ['off'],
+    'indent': [
+      'error',
+      2,
+      {
+        'SwitchCase': 1,
+        'VariableDeclarator': 'first',
+        'MemberExpression': 1,
+        'FunctionDeclaration': { 'body': 1, 'parameters': 2 },
+        'CallExpression': { 'arguments': 1 },
+        'ArrayExpression': 1,
+        'ObjectExpression': 1,
+        'ImportDeclaration': 1,
+        'ignoreComments': true
+      }
+    ],
 
     'space-before-blocks': 'error',
 
-    'keyword-spacing': ['error', {
-      before: true,
-      after: true,
-      overrides: {
-        return: {
-          after: true
+    'keyword-spacing': [
+      'error',
+      {
+        before: true,
+        after: true,
+        overrides: {
+          return: {
+            after: true,
+          },
+          throw: {
+            after: true,
+          },
+          case: {
+            after: true,
+          },
         },
-        throw: {
-          after: true
-        },
-        case: {
-          after: true
-        }
-      }
-    }],
+      },
+    ],
 
     'space-infix-ops': 'error',
 
     'eol-last': ['error', 'always'],
 
-    'newline-per-chained-call': ['error', {
-      ignoreChainWithDepth: 4
-    }],
+    'newline-per-chained-call': [
+      'error',
+      {
+        ignoreChainWithDepth: 4,
+      },
+    ],
 
     'no-whitespace-before-property': 'error',
 
@@ -217,7 +250,17 @@ module.exports = {
     //   ignoreTemplateLiterals: true,
     // }],
 
-    // 'comma-style': ['error', 'last'],
+    'comma-dangle': 0, // 要求或禁止使用拖尾逗号
+    'comma-dangle': [
+      'error',
+      {
+        arrays: 'never',
+        objects: 'never',
+        imports: 'never',
+        exports: 'never',
+        functions: 'never',
+      },
+    ],
     // 'comma-dangle': ['error', {
     //   arrays: 'always-multiline',
     //   objects: 'always-multiline',
@@ -225,21 +268,28 @@ module.exports = {
     //   exports: 'always-multiline',
     //   functions: 'always-multiline',
     // }],
-    'comma-dangle': 0, // 要求或禁止使用拖尾逗号
+    'comma-style': ['error', 'last'],
 
     // semi: ['error', 'always'],
-    'semi': ['error', 'never'], // 要求或禁止使用分号代替 ASI
+    semi: ['error', 'never'], // 要求或禁止使用分号代替 ASI
 
-    camelcase: ['error', {
-      properties: 'never'
-    }],
+    // 许多复制来的方法中存在以下划线(_)，中划线(-)连接的变量
+    camelcase: [
+      'warn',
+      {
+        properties: 'never',
+      },
+    ],
 
-    'new-cap': ['error', {
-      newIsCap: true,
-      newIsCapExceptions: [],
-      capIsNew: false,
-      capIsNewExceptions: ['Immutable.Map', 'Immutable.Set', 'Immutable.List'],
-    }],
+    'new-cap': [
+      'error',
+      {
+        newIsCap: true,
+        newIsCapExceptions: [],
+        capIsNew: false,
+        capIsNewExceptions: ['Immutable.Map', 'Immutable.Set', 'Immutable.List'],
+      },
+    ],
 
     // 'no-underscore-dangle': ['error', {
     //   allowAfterThis: false
@@ -252,15 +302,22 @@ module.exports = {
     ********************************************************************************/
     'no-var': 'error',
 
-    'prefer-const': ['error', {
-      'destructuring': 'any',
-      'ignoreReadBeforeAssign': false
-    }],
+    'prefer-const': [
+      'error',
+      {
+        destructuring: 'any',
+        ignoreReadBeforeAssign: false,
+      },
+    ],
 
-    'object-shorthand': ['error', 'always', {
-      'ignoreConstructors': false,
-      'avoidQuotes': true,
-    }],
+    'object-shorthand': [
+      'error',
+      'always',
+      {
+        ignoreConstructors: false,
+        avoidQuotes: true,
+      },
+    ],
 
     // 'prefer-template': 'error',
     'prefer-template': 'off',
@@ -271,27 +328,44 @@ module.exports = {
 
     'prefer-spread': 'error',
 
-    'prefer-arrow-callback': ['error', {
-      allowNamedFunctions: false,
-      allowUnboundThis: true,
-    }],
+    'prefer-arrow-callback': [
+      'error',
+      {
+        allowNamedFunctions: false,
+        allowUnboundThis: true,
+      },
+    ],
 
-    'arrow-spacing': ['error', {
-      before: true,
-      after: true
-    }],
+    'arrow-spacing': [
+      'error',
+      {
+        before: true,
+        after: true,
+      },
+    ],
 
-    'arrow-body-style': ['error', 'as-needed', {
-      requireReturnForObjectLiteral: false,
-    }],
+    'arrow-body-style': [
+      'error',
+      'as-needed',
+      {
+        requireReturnForObjectLiteral: false,
+      },
+    ],
 
-    'arrow-parens': ['error', 'as-needed', {
-      // requireForBlockBody: true,
-    }],
+    'arrow-parens': [
+      'error',
+      'as-needed',
+      {
+        // requireForBlockBody: true,
+      },
+    ],
 
-    'no-confusing-arrow': ['error', {
-      allowParens: true,
-    }],
+    'no-confusing-arrow': [
+      'error',
+      {
+        allowParens: true,
+      },
+    ],
 
     'no-useless-constructor': 'error',
 
@@ -299,10 +373,13 @@ module.exports = {
 
     'no-duplicate-imports': 'off',
 
-    'generator-star-spacing': ['error', {
-      before: false,
-      after: true
-    }],
+    'generator-star-spacing': [
+      'error',
+      {
+        before: false,
+        after: true,
+      },
+    ],
 
     /********************************************************************************
      PLUGIN: eslint-plugin-html
@@ -329,7 +406,6 @@ module.exports = {
     // }],
     'import/extensions': ['off'],
 
-    'no-undef': ['off']
-
-  }
+    'no-undef': ['off'],
+  },
 }

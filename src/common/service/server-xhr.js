@@ -53,7 +53,7 @@ function createXHR(opts) {
           for (const key in opts.data) {
             str += `${key}=${opts.data[key]}&`
           }
-          str = str.slice(0,-1)
+          str = str.slice(0, -1)
           xhr.send(str)
         } else if (opts.dataType === 'formData') {
           // formData lv2

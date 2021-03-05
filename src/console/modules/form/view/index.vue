@@ -3,24 +3,49 @@
     <label class="btn-upload" for="upload">点击上传图片</label>
     <input class="hidden" type="file" id="upload" />
     <div class="divider"></div>
-    <el-image ref="showcase" class="uploaded-image" fit="contain" :src="compressedImagesrc" @load="loadImg"></el-image>
+    <el-row>
+      <el-col :span="24" class="container-flexible">
+        <el-image
+          ref="showcase"
+          class="uploaded-image demo-image__error"
+          fit="contain"
+          :src="compressedImagesrc"
+          @load="loadImg"
+        >
+          <!-- 自定义加载失败内容 -->
+          <div slot="error" class="image-slot">
+            <i class="el-icon-picture-outline"></i>
+          </div>
+        </el-image>
+        <el-button
+          v-if="compressedImagesrc"
+          class="btn-download__cimg"
+          type="text"
+          @click="downloadCompressedImage"
+          >下载压缩后的图片</el-button
+        >
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
 import EXIF from 'exif-js'
-import { download, compressImage, blobToBase64 } from 'common/utils/compressImage'
+import { downloadFile, compressImage, blobToBase64 } from 'common/utils/compressImage'
 
 export default {
   name: 'index',
   data() {
     return {
+      fileName: '',
       compressedImagesrc: '',
     }
   },
   mounted() {
     document.getElementById('upload').addEventListener('change', e => {
       const fileObj = e.target.files[0]
+      console.log(fileObj)
+      this.fileName = fileObj.name
       this.getEXIFInfo(fileObj, orientation => {
         const target = {
           size: 30,
@@ -51,7 +76,7 @@ export default {
         callback(orientation)
       })
     },
-    loadImg(e) {
+    loadImg() {
       const img = document.querySelector('img')
       if (img.complete) {
         EXIF.getData(img, function() {
@@ -68,6 +93,9 @@ export default {
         })
       }
     },
+    downloadCompressedImage() {
+      downloadFile(this.compressedImagesrc, this.fileName)
+    },
   },
 }
 </script>
@@ -78,9 +106,33 @@ export default {
   border-bottom: 1px solid #666;
   cursor: pointer;
 }
+
+.container-flexible {
+  display: flex;
+  align-items: center;
+}
+
 .uploaded-image {
   width: 200px;
   height: 200px;
   object-fit: contain;
+}
+
+.btn-download__cimg {
+  margin-left: 10px;
+}
+</style>
+
+<style style="scss">
+.demo-image__error .image-slot,
+.demo-image__placeholder .image-slot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: #f5f7fa;
+  color: #909399;
+  font-size: 30px;
 }
 </style>

@@ -2,7 +2,7 @@ const RegionList = [
   {
     name: '北京',
     nameEn: 'beijing',
-    value: '01',
+    value: '01'
   },
   {
     name: '上海',
@@ -16,9 +16,9 @@ const RegionList = [
   },
   {
     name: '深圳',
-    nameEn: 'shenzhun',
+    nameEn: 'shenzhen',
     value: '04'
-  },
+  }
 ]
 
 export default RegionList
