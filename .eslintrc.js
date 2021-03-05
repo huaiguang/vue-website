@@ -1,25 +1,12 @@
 module.exports = {
-  parser: 'babel-eslint',
-  parserOptions: {
-    sourceType: 'module',
-  },
+  root: true,
   env: {
-    es6: true,
-    browser: true,
-    node: true,
+    node: true
   },
-  plugins: ['html', 'import'],
-  settings: {
-    'html/html-extensions': ['.html', '.vue'],
-    'import/resolver': {
-      webpack: {
-        config: 'webpack.config.js',
-      },
-    },
+  extends: ['plugin:vue/essential', 'plugin:vue/recommended'],
+  parserOptions: {
+    parser: 'babel-eslint'
   },
-  // global: {
-  //   'define': true
-  // },
   rules: {
     /********************************************************************************
      CORE: Possible Errors
@@ -37,8 +24,8 @@ module.exports = {
       'error',
       'outside',
       {
-        functionPrototypeMethods: false,
-      },
+        functionPrototypeMethods: false
+      }
     ],
 
     'no-loop-func': 'error',
@@ -56,16 +43,16 @@ module.exports = {
     'dot-notation': [
       'error',
       {
-        allowKeywords: true,
-      },
+        allowKeywords: true
+      }
     ],
 
     eqeqeq: [
       'error',
       'always',
       {
-        null: 'ignore',
-      },
+        null: 'ignore'
+      }
     ],
 
     'no-case-declarations': 'error',
@@ -92,8 +79,8 @@ module.exports = {
       {
         // 禁止定义前使用
         functions: false,
-        classes: false,
-      },
+        classes: false
+      }
     ],
 
     'no-undef': 'error',
@@ -117,16 +104,16 @@ module.exports = {
       {
         keywords: false,
         unnecessary: true,
-        numbers: false,
-      },
+        numbers: false
+      }
     ],
 
     quotes: [
       'error',
       'single',
       {
-        avoidEscape: true,
-      },
+        avoidEscape: true
+      }
     ],
 
     'func-style': ['off', 'declaration'],
@@ -142,8 +129,8 @@ module.exports = {
         // 要求或禁止函数圆括号之前有一个空格
         anonymous: 'never',
         named: 'never',
-        asyncArrow: 'always',
-      },
+        asyncArrow: 'always'
+      }
     ],
 
     'space-before-blocks': 'error',
@@ -160,16 +147,16 @@ module.exports = {
     'no-unneeded-ternary': [
       'error',
       {
-        defaultAssignment: false,
-      },
+        defaultAssignment: false
+      }
     ],
 
     'brace-style': [
       'error',
       '1tbs',
       {
-        allowSingleLine: true,
-      },
+        allowSingleLine: true
+      }
     ],
 
     // 'spaced-comment': ['error', 'always', {
@@ -184,19 +171,19 @@ module.exports = {
     //   }
     // }],
 
-    'indent': [
+    indent: [
       'error',
       2,
       {
-        'SwitchCase': 1,
-        'VariableDeclarator': 'first',
-        'MemberExpression': 1,
-        'FunctionDeclaration': { 'body': 1, 'parameters': 2 },
-        'CallExpression': { 'arguments': 1 },
-        'ArrayExpression': 1,
-        'ObjectExpression': 1,
-        'ImportDeclaration': 1,
-        'ignoreComments': true
+        SwitchCase: 1,
+        VariableDeclarator: 'first',
+        MemberExpression: 1,
+        FunctionDeclaration: { body: 1, parameters: 2 },
+        CallExpression: { arguments: 1 },
+        ArrayExpression: 1,
+        ObjectExpression: 1,
+        ImportDeclaration: 1,
+        ignoreComments: true
       }
     ],
 
@@ -209,16 +196,16 @@ module.exports = {
         after: true,
         overrides: {
           return: {
-            after: true,
+            after: true
           },
           throw: {
-            after: true,
+            after: true
           },
           case: {
-            after: true,
-          },
-        },
-      },
+            after: true
+          }
+        }
+      }
     ],
 
     'space-infix-ops': 'error',
@@ -228,8 +215,8 @@ module.exports = {
     'newline-per-chained-call': [
       'error',
       {
-        ignoreChainWithDepth: 4,
-      },
+        ignoreChainWithDepth: 4
+      }
     ],
 
     'no-whitespace-before-property': 'error',
@@ -258,8 +245,8 @@ module.exports = {
         objects: 'never',
         imports: 'never',
         exports: 'never',
-        functions: 'never',
-      },
+        functions: 'never'
+      }
     ],
     // 'comma-dangle': ['error', {
     //   arrays: 'always-multiline',
@@ -277,8 +264,8 @@ module.exports = {
     camelcase: [
       'warn',
       {
-        properties: 'never',
-      },
+        properties: 'never'
+      }
     ],
 
     'new-cap': [
@@ -287,8 +274,8 @@ module.exports = {
         newIsCap: true,
         newIsCapExceptions: [],
         capIsNew: false,
-        capIsNewExceptions: ['Immutable.Map', 'Immutable.Set', 'Immutable.List'],
-      },
+        capIsNewExceptions: ['Immutable.Map', 'Immutable.Set', 'Immutable.List']
+      }
     ],
 
     // 'no-underscore-dangle': ['error', {
@@ -306,8 +293,8 @@ module.exports = {
       'error',
       {
         destructuring: 'any',
-        ignoreReadBeforeAssign: false,
-      },
+        ignoreReadBeforeAssign: false
+      }
     ],
 
     'object-shorthand': [
@@ -315,8 +302,8 @@ module.exports = {
       'always',
       {
         ignoreConstructors: false,
-        avoidQuotes: true,
-      },
+        avoidQuotes: true
+      }
     ],
 
     // 'prefer-template': 'error',
@@ -332,24 +319,24 @@ module.exports = {
       'error',
       {
         allowNamedFunctions: false,
-        allowUnboundThis: true,
-      },
+        allowUnboundThis: true
+      }
     ],
 
     'arrow-spacing': [
       'error',
       {
         before: true,
-        after: true,
-      },
+        after: true
+      }
     ],
 
     'arrow-body-style': [
       'error',
       'as-needed',
       {
-        requireReturnForObjectLiteral: false,
-      },
+        requireReturnForObjectLiteral: false
+      }
     ],
 
     'arrow-parens': [
@@ -357,14 +344,14 @@ module.exports = {
       'as-needed',
       {
         // requireForBlockBody: true,
-      },
+      }
     ],
 
     'no-confusing-arrow': [
       'error',
       {
-        allowParens: true,
-      },
+        allowParens: true
+      }
     ],
 
     'no-useless-constructor': 'error',
@@ -377,20 +364,9 @@ module.exports = {
       'error',
       {
         before: false,
-        after: true,
-      },
+        after: true
+      }
     ],
-
-    /********************************************************************************
-     PLUGIN: eslint-plugin-html
-    ********************************************************************************/
-
-    /********************************************************************************
-     PLUGIN: eslint-plugin-import
-    ********************************************************************************/
-    'import/no-mutable-exports': 'error',
-
-    'import/prefer-default-export': 'error',
 
     // 'import/first': ['error', 'absolute-first'],
     'import/first': ['off'],
@@ -406,6 +382,6 @@ module.exports = {
     // }],
     'import/extensions': ['off'],
 
-    'no-undef': ['off'],
-  },
+    'no-undef': ['off']
+  }
 }
