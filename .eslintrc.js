@@ -8,14 +8,21 @@ module.exports = {
     parser: 'babel-eslint'
   },
   rules: {
-    /********************************************************************************
-     CORE: Possible Errors
-    ********************************************************************************/
-    'no-console': 'off', // 关闭console的输出检查
-
-    /********************************************************************************
-     CORE: Best Practices
-    ********************************************************************************/
+    indent: [
+      'error',
+      2,
+      {
+        SwitchCase: 1,
+        VariableDeclarator: 'first',
+        MemberExpression: 1,
+        FunctionDeclaration: { body: 1, parameters: 2 },
+        CallExpression: { arguments: 1 },
+        ArrayExpression: 1,
+        ObjectExpression: 1,
+        ImportDeclaration: 1,
+        ignoreComments: true
+      }
+    ],
     'array-callback-return': 'error',
 
     'no-useless-escape': 'error',
@@ -170,22 +177,6 @@ module.exports = {
     //     balanced: false,
     //   }
     // }],
-
-    indent: [
-      'error',
-      2,
-      {
-        SwitchCase: 1,
-        VariableDeclarator: 'first',
-        MemberExpression: 1,
-        FunctionDeclaration: { body: 1, parameters: 2 },
-        CallExpression: { arguments: 1 },
-        ArrayExpression: 1,
-        ObjectExpression: 1,
-        ImportDeclaration: 1,
-        ignoreComments: true
-      }
-    ],
 
     'space-before-blocks': 'error',
 

@@ -14,8 +14,8 @@ module.exports = {
       files: '*.vue',
       options: {
         parser: 'angular-html-parser',
-        wrapAttributes: false,
-        sortAttributes: false,
+        wrapAttributes: true,
+        sortAttributes: true,
       },
     },
   ],
