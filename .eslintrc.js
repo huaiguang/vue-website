@@ -3,7 +3,7 @@ module.exports = {
   env: {
     node: true
   },
-  extends: ['plugin:vue/essential', 'plugin:vue/recommended'],
+  extends: ['plugin:vue/recommended'],
   parserOptions: {
     parser: 'babel-eslint'
   },
@@ -373,6 +373,7 @@ module.exports = {
     // }],
     'import/extensions': ['off'],
 
-    'no-undef': ['off']
+    'no-undef': ['off'],
+    'html-self-close': '0'
   }
 }

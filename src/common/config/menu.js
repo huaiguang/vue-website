@@ -1,9 +1,10 @@
 const menu = [
-  // {
-  //   title: '首页',
-  //   icon: 'el-icon-s-home',
-  //   index: '1'
-  // },
+  {
+    title: '首页',
+    icon: 'el-icon-s-home',
+    index: '1',
+    url: '/console/home.html'
+  },
   {
     title: '表单',
     icon: 'el-icon-tickets',
