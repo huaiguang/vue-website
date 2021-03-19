@@ -2,48 +2,21 @@
   <website-layout>
     <div class="container-module">
       <div class="form-wrapper">
-        <h1 class="form-login__title">
-          登 陆
-        </h1>
-        <el-form
-          ref="loginForm"
-          class="form-login"
-          :model="loginForm"
-        >
-          <el-form-item
-            label=""
-            prop="username"
-          >
-            <el-input
-              v-model="loginForm.username"
-              placeholder="登陆邮箱"
-            />
+        <h1 class="form-login__title">登 陆</h1>
+        <el-form ref="loginForm" class="form-login" :model="loginForm">
+          <el-form-item label="" prop="username">
+            <el-input v-model="loginForm.username" placeholder="登陆邮箱"></el-input>
           </el-form-item>
-          <el-form-item
-            label=""
-            prop="password"
-          >
+          <el-form-item label="" prop="password">
             <el-input
               v-model="loginForm.password"
               type="password"
               placeholder="登陆密码"
-            />
+            ></el-input>
           </el-form-item>
           <el-form-item class="text-center">
-            <el-button
-              type="primary"
-              plain
-              @click="login"
-            >
-              登陆
-            </el-button>
-            <el-button
-              type="primary"
-              plain
-              @click="register"
-            >
-              注册
-            </el-button>
+            <el-button type="primary" plain @click="login">登陆</el-button>
+            <el-button type="primary" plain @click="register">注册</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -62,14 +35,14 @@ Vue.use(Loading)
 
 export default {
   components: {
-    WebsiteLayout
+    WebsiteLayout,
   },
   data() {
     return {
       loginForm: {
         username: '',
-        password: ''
-      }
+        password: '',
+      },
     }
   },
   created() {
@@ -86,7 +59,7 @@ export default {
       this.$httpGet(api.userList, this.loginForm).then(data => {
         this.$message({
           type: 'success',
-          message: data.message
+          message: data.message,
         })
       })
     },
@@ -94,7 +67,7 @@ export default {
       this.$httpPost(api.register, this.loginForm).then(data => {
         this.$message({
           type: 'success',
-          message: data.message
+          message: data.message,
         })
       })
     },
@@ -102,14 +75,14 @@ export default {
       this.$httpPost(api.login, this.loginForm).then(data => {
         this.$message({
           type: 'success',
-          message: data.message
+          message: data.message,
         })
         setTimeout(() => {
           window.location.href = '/console/home.html'
         })
       })
-    }
-  }
+    },
+  },
 }
 </script>
 
