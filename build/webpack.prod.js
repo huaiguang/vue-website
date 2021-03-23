@@ -47,7 +47,7 @@ const webpackConfig = merge(webpackBase, {
         cssProcessorPluginOptions: {
           preset: ['default', {
             normalizeUnicode: false
-          }],
+          }]
         },
         canPrint: true
       }),
@@ -61,8 +61,8 @@ const webpackConfig = merge(webpackBase, {
           test: /node_modules/,
           chunks: 'initial',
           minChunks: 3,
-          priority: 20,
-        },
+          priority: 20
+        }
         // styles: {
         //   name: 'common',
         //   test: /\.css$/,

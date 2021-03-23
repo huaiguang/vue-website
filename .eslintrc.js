@@ -374,6 +374,6 @@ module.exports = {
     'import/extensions': ['off'],
 
     'no-undef': ['off'],
-    'html-self-close': '0'
+    'html-self-close': 0
   }
 }
