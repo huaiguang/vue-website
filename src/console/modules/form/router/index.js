@@ -20,7 +20,7 @@ const routes = [
     component: () => import('../view/FormValid.vue')
   },
   {
-    name: 'index',
+    name: 'notFound',
     path: '/*',
     component: () => import('../view/index.vue')
   }
