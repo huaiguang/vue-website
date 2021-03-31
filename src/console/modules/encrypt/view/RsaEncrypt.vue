@@ -4,19 +4,19 @@
       <h2>生成唯一的随机数</h2>
       <div class="item-detail">
         <div class="item-name">10进制随机数:</div>
-        <div class="item-desc">{{ this.decRandomDigit }}</div>
+        <div class="item-desc">{{ decRandomDigit }}</div>
       </div>
       <div class="item-detail">
         <div class="item-name">10进制的随机数位数:</div>
-        <div class="item-desc">{{ this.decRandomDigit.length }}</div>
+        <div class="item-desc">{{ decRandomDigit.length }}</div>
       </div>
       <div class="item-detail">
         <div class="item-name">36进制随机数:</div>
-        <div class="item-desc">{{ this.s36RandomDigit }}</div>
+        <div class="item-desc">{{ s36RandomDigit }}</div>
       </div>
       <div class="item-detail">
         <div class="item-name">36进制随机数位数:</div>
-        <div class="item-desc">{{ this.s36RandomDigit.length }}</div>
+        <div class="item-desc">{{ s36RandomDigit.length }}</div>
       </div>
       <el-button @click="createUniqueRandomNumber">生成随机数</el-button>
     </div>
@@ -49,7 +49,7 @@
           <div class="item-name">解密后的数据:</div>
           <div class="item-desc">{{ decryptedRsaText02 }}</div>
         </div>
-        <el-button class="btn-encrypt"  @click="decryptTextByRsa">rsa解密</el-button>
+        <el-button class="btn-encrypt" @click="decryptTextByRsa">rsa解密</el-button>
       </div>
     </div>
   </div>
@@ -74,7 +74,7 @@ export default {
       decryptedRsaText01: '',
       // 解密的正文
       encryptedRsaText02: '',
-      decryptedRsaText02: '',
+      decryptedRsaText02: ''
     }
   },
   methods: {

@@ -2,7 +2,7 @@
   <website-layout>
     <div class="container-module">
       <div class="form-wrapper">
-        <h1 class="form-login__title">登 陆</h1>
+        <h1 class="form-login__title">登陆</h1>
         <el-form ref="loginForm" class="form-login" :model="loginForm">
           <el-form-item label="" prop="username">
             <el-input v-model="loginForm.username" placeholder="登陆邮箱"></el-input>
@@ -21,6 +21,7 @@
         </el-form>
       </div>
     </div>
+    <div class="hidden" id="version">{{ DateVersion }}</div>
   </website-layout>
 </template>
 
@@ -29,24 +30,27 @@ import Vue from 'vue'
 import Loading from '@/common/plugins/Loading'
 import WebsiteLayout from '@/common/components/BaseLayout/WebsiteLayout'
 import api from '@/common/service/api'
+import { dateFormat } from '@/common/utils/dateFormat'
 
 // 引入插件
 Vue.use(Loading)
 
 export default {
   components: {
-    WebsiteLayout,
+    WebsiteLayout
   },
   data() {
     return {
       loginForm: {
         username: '',
-        password: '',
+        password: ''
       },
+      DateVersion: ''
     }
   },
   created() {
     this.addLoading()
+    this.DateVersion = dateFormat(new Date(), 'yyyy-MM-dd hh:mm:ss')
   },
   methods: {
     addLoading() {
@@ -59,7 +63,7 @@ export default {
       this.$httpGet(api.userList, this.loginForm).then(data => {
         this.$message({
           type: 'success',
-          message: data.message,
+          message: data.message
         })
       })
     },
@@ -67,7 +71,7 @@ export default {
       this.$httpPost(api.register, this.loginForm).then(data => {
         this.$message({
           type: 'success',
-          message: data.message,
+          message: data.message
         })
       })
     },
@@ -75,14 +79,14 @@ export default {
       this.$httpPost(api.login, this.loginForm).then(data => {
         this.$message({
           type: 'success',
-          message: data.message,
+          message: data.message
         })
         setTimeout(() => {
           window.location.href = '/console/home.html'
         })
       })
-    },
-  },
+    }
+  }
 }
 </script>
 

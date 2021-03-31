@@ -144,7 +144,8 @@ module.exports = {
 
     'no-restricted-syntax': ['error', 'LabeledStatement', 'WithStatement'],
 
-    'one-var': ['error', 'never'],
+    // 'one-var': ['error', 'never'],
+    'one-var': 0,
 
     // 'no-plusplus': 'error',
     'no-plusplus': 'off', // 关闭++的写法校验
@@ -374,6 +375,9 @@ module.exports = {
     'import/extensions': ['off'],
 
     'no-undef': ['off'],
-    'html-self-close': 0
+    'vue/html-self-closing': 0,
+    'vue/max-attributes-per-line': 0,
+    'vue/singleline-html-element-content-newline': 0,
+    'vue/attributes-order': 0
   }
 }
