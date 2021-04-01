@@ -8,7 +8,23 @@ function downloadFile(url, filename) {
   aLink.href = url
   aLink.download = filename
   const event = document.createEvent('MouseEvents')
-  event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+  event.initMouseEvent(
+    'click',
+    true,
+    false,
+    window,
+    0,
+    0,
+    0,
+    0,
+    0,
+    false,
+    false,
+    false,
+    false,
+    0,
+    null
+  )
   aLink.dispatchEvent(event)
 }
 

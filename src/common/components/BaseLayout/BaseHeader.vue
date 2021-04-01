@@ -10,16 +10,10 @@
 export default {
   name: 'BaseHeader',
   data() {
-    return {
-
-    }
+    return {}
   },
-  created() {
-
-  },
-  mounted() {
-
-  },
+  created() {},
+  mounted() {},
   methods: {
     logout() {
       location.href = '../website/login.html'

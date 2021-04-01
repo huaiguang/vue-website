@@ -29,7 +29,6 @@ import Vue from 'vue'
 import Loading from '@/common/plugins/Loading'
 import WebsiteLayout from '@/common/components/BaseLayout/WebsiteLayout'
 import api from '@/common/service/api'
-import { dateFormat } from '@/common/utils/dateFormat'
 
 // 引入插件
 Vue.use(Loading)
@@ -52,7 +51,6 @@ export default {
   },
   methods: {
     createVersionInfo() {
-      // this.DateVersion = dateFormat(new Date(), 'yyyy-MM-dd hh:mm:ss')
       const versionInfoList = [
         {
           title: 'environment',
@@ -72,16 +70,24 @@ export default {
       ]
       function output(e) {
         const t = e.title,
-              c = e.content,
-              n = e.backgroundColor,
-              a = ['%c '.concat(t, ' %c ').concat(c, ' '), 'padding: 1px; border-radius: 3px 0 0 3px; color: #fff; background: '.concat('#606060', ';'), 'padding: 1px; border-radius: 0 3px 3px 0; color: #fff; background: '.concat(n, ';')]
+          c = e.content,
+          n = e.backgroundColor,
+          a = [
+            '%c '.concat(t, ' %c ').concat(c, ' '),
+            'padding: 1px; border-radius: 3px 0 0 3px; color: #fff; background: '.concat(
+              '#606060',
+              ';'
+            ),
+            'padding: 1px; border-radius: 0 3px 3px 0; color: #fff; background: '.concat(n, ';')
+          ]
 
-        console.log.apply(null, a)
         // return function() {
         //   let e
         //   window.console && typeof window.console.log === 'function' && (e = console).log.apply(e, arguments)
         // }
         //   .apply(void 0, a)
+        // console.log.apply(null, a)
+        console.log(...a)
       }
 
       versionInfoList.forEach(output)
@@ -123,7 +129,7 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .container-module {
   display: flex;
   align-items: center;

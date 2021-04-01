@@ -21,7 +21,7 @@ export default {
 .wrapper-item {
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #DCE5EB;
+  border-bottom: 1px solid #dce5eb;
   &:last-of-type {
     margin-bottom: 0;
   }
@@ -41,13 +41,13 @@ export default {
     margin-right: 10px;
     width: 140px;
     text-align: right;
-    color: #6F7F89;
+    color: #6f7f89;
     &.with-input {
       line-height: 40px;
     }
   }
   .item-desc {
-    color: #21333F;
+    color: #21333f;
   }
 }
 
@@ -55,7 +55,7 @@ export default {
   padding-top: 10px;
   padding-bottom: 10px;
   width: 80%;
-  border-bottom: 1px solid #DCE5EB;
+  border-bottom: 1px solid #dce5eb;
   &:last-of-type {
     border-bottom: none;
   }
@@ -80,4 +80,3 @@ export default {
   }
 }
 </style>
-

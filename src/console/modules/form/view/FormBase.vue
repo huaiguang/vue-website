@@ -1,13 +1,24 @@
 <template>
   <div class="module-wrapper">
-    <el-form ref="activeForm" class="form-demo" label-width="80px" label-suffix=":" :model="sizeForm">
+    <el-form
+      ref="activeForm"
+      class="form-demo"
+      label-width="80px"
+      label-suffix=":"
+      :model="sizeForm"
+    >
       <el-form-item label="活动名称" prop="name">
         <el-input v-model="sizeForm.name" placeholder="请填写活动名称"></el-input>
       </el-form-item>
       <el-form-item label="活动区域" prop="region">
         <el-col :span="11">
           <el-select v-model="sizeForm.region" placeholder="请选择活动区域">
-            <el-option v-for="item in regionList" :key="item.value" :label="item.name" :value="item.value">
+            <el-option
+              v-for="item in regionList"
+              :key="item.value"
+              :label="item.name"
+              :value="item.value"
+            >
               <span class="float-left">{{ item.name }}</span>
               <span class="float-right desc-added">{{ item.nameEn }}</span>
             </el-option>
@@ -30,7 +41,12 @@
         <el-col class="text-center" :span="2">-</el-col>
         <el-col :span="11">
           <el-form-item prop="endDate">
-            <el-date-picker type="date" placeholder="选择结束时间" v-model="sizeForm.endDate" value-format="yyyy-MM-dd">
+            <el-date-picker
+              type="date"
+              placeholder="选择结束时间"
+              v-model="sizeForm.endDate"
+              value-format="yyyy-MM-dd"
+            >
             </el-date-picker>
           </el-form-item>
         </el-col>
@@ -53,7 +69,14 @@
           </div> -->
           <div class="active-item" v-for="group in activityTypes" :key="group.id">
             <div class="active-name">{{ group.name }}:</div>
-            <el-checkbox v-for="item in group.options" :key="item.value" name="type" :label="item.value">{{ item.name }}</el-checkbox>
+            <el-checkbox
+              v-for="item in group.options"
+              :key="item.value"
+              name="type"
+              :label="item.value"
+            >
+              {{ item.name }}
+            </el-checkbox>
           </div>
         </el-checkbox-group>
       </el-form-item>
@@ -87,8 +110,8 @@ export default {
         startDate: null,
         endDate: undefined,
         type: [],
-        resource: '',
-      },
+        resource: ''
+      }
     }
   },
   methods: {
@@ -100,8 +123,8 @@ export default {
     },
     onSubmit() {
       console.log('submit!', this.sizeForm)
-    },
-  },
+    }
+  }
 }
 </script>
 

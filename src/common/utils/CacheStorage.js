@@ -89,8 +89,7 @@ function _getExpiresDate(expires, now) {
   now = now || new Date()
 
   if (typeof expires === 'number') {
-    expires = expires === Infinity ?
-      _maxExpireDate : new Date(now.getTime() + expires * 1000)
+    expires = expires === Infinity ? _maxExpireDate : new Date(now.getTime() + expires * 1000)
   } else if (typeof expires === 'string') {
     expires = new Date(expires)
   }
@@ -129,7 +128,7 @@ function _isQuotaExceeded(e) {
 // cache item constructor
 function CacheItemConstructor(value, exp) {
   // createTime
-  this.c = (new Date()).getTime()
+  this.c = new Date().getTime()
   exp = exp || _defaultExpire
   const expires = _getExpiresDate(exp)
   // expiresTime
@@ -151,7 +150,7 @@ function _isCacheItem(item) {
 
 // check cacheItem If effective
 function _checkCacheItemIfEffective(cacheItem) {
-  const timeNow = (new Date()).getTime()
+  const timeNow = new Date().getTime()
   return timeNow < cacheItem.e
 }
 
@@ -165,7 +164,6 @@ function _checkAndWrapKeyAsString(key) {
 
 // cache api
 const CacheAPI = {
-
   set(key, value, options) {},
 
   get(key) {},
@@ -185,13 +183,15 @@ const CacheAPI = {
 
 // cache api
 const CacheAPIImpl = {
-
   set(key, val, options) {
     key = _checkAndWrapKeyAsString(key)
 
-    options = _extend({
-      force: true
-    }, options)
+    options = _extend(
+      {
+        force: true
+      },
+      options
+    )
 
     if (val === undefined) {
       return this.delete(key)
@@ -203,7 +203,8 @@ const CacheAPIImpl = {
     try {
       this.storage.setItem(key, defaultSerializer.serialize(cacheItem))
     } catch (e) {
-      if (_isQuotaExceeded(e)) { //data wasn't successfully saved due to quota exceed so throw an error
+      if (_isQuotaExceeded(e)) {
+        //data wasn't successfully saved due to quota exceed so throw an error
         this.quotaExceedHandler(key, value, options, e)
       } else {
         console.error(e)
@@ -249,7 +250,7 @@ const CacheAPIImpl = {
       } catch (e) {}
 
       if (cacheItem !== null && cacheItem.e !== undefined) {
-        const timeNow = (new Date()).getTime()
+        const timeNow = new Date().getTime()
         if (timeNow >= cacheItem.e) {
           deleteKeys.push(key)
         }
@@ -268,9 +269,12 @@ const CacheAPIImpl = {
   //这个方法只能添加key不存在的数据条，可以避免数据被无意之间篡改
   add(key, value, options) {
     key = _checkAndWrapKeyAsString(key)
-    options = _extend({
-      force: true
-    }, options)
+    options = _extend(
+      {
+        force: true
+      },
+      options
+    )
     try {
       const cacheItem = defaultSerializer.deserialize(this.storage.getItem(key))
       if (!_isCacheItem(cacheItem) || !_checkCacheItemIfEffective(cacheItem)) {
@@ -349,7 +353,6 @@ function CacheConstructor(options) {
 
   const isSupported = _isStorageSupported(storage)
 
-
   this.isSupported = function() {
     return isSupported
   }
@@ -361,7 +364,9 @@ function CacheConstructor(options) {
       console.warn('Quota exceeded!')
       if (options && options.force === true) {
         const deleteKeys = this.deleteAllExpires()
-        console.warn('delete all expires CacheItem : [' + deleteKeys + '] and try execute `set` method again!')
+        console.warn(
+          'delete all expires CacheItem : [' + deleteKeys + '] and try execute `set` method again!'
+        )
         try {
           options.force = false
           this.set(key, val, options)
@@ -370,7 +375,8 @@ function CacheConstructor(options) {
         }
       }
     }
-  } else { // if not support, rewrite all functions without doing anything
+  } else {
+    // if not support, rewrite all functions without doing anything
     _extend(this, CacheAPI)
   }
 }

@@ -9,28 +9,18 @@
 
 <script>
 import BaseHeader from './BaseHeader'
-import BaseAside from './BaseAside'
 
 export default {
   name: 'WebsiteLayout',
   components: {
-    BaseHeader,
-    BaseAside
+    BaseHeader
   },
   data() {
-    return {
-
-    }
+    return {}
   },
-  created() {
-
-  },
-  mounted() {
-
-  },
-  methods: {
-
-  }
+  created() {},
+  mounted() {},
+  methods: {}
 }
 </script>
 

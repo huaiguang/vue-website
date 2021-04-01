@@ -6,6 +6,8 @@
   "scripts": {
     "eslint": "eslint ./src --quiet",
     "eslint:fix": "eslint ./src --fix --quiet",
+    "prettier:check": "prettier --check src/**/*.{vue,js,css}",
+    "prettier:write": "prettier --write src/**/*.{vue,js,css}",
     "dev": "node build/dev-server",
     "dev:server": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.test",
     "build": "node build/build.js"
@@ -42,6 +44,7 @@
     "opn": "^6.0.0",
     "optimize-css-assets-webpack-plugin": "^4.0.3",
     "ora": "^4.0.4",
+    "prettier": "^1.19.1",
     "rimraf": "^3.0.2",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",

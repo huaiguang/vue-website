@@ -26,8 +26,18 @@
       <el-table-column prop="name" label="作品名" min-width="160"></el-table-column>
       <el-table-column prop="tagName" label="标签" min-width="260"></el-table-column>
       <el-table-column prop="developer" label="开发商" min-width="140"></el-table-column>
-      <el-table-column prop="ownedText" label="是否持有" min-width="90" align="center"></el-table-column>
-      <el-table-column prop="clearedText" label="是否通关" min-width="90" align="center"></el-table-column>
+      <el-table-column
+        prop="ownedText"
+        label="是否持有"
+        min-width="90"
+        align="center"
+      ></el-table-column>
+      <el-table-column
+        prop="clearedText"
+        label="是否通关"
+        min-width="90"
+        align="center"
+      ></el-table-column>
       <el-table-column label="操作" width="120" fixed="right">
         <template slot-scope="scope">
           <el-button type="text" @click="showDetail(scope, scope.row)">详情</el-button>
@@ -47,7 +57,6 @@
       @current-change="handleCurrentChange"
     ></el-pagination>
     <!-- 对话框 -->
-
   </div>
 </template>
 
@@ -61,7 +70,7 @@ export default {
       searchForm: {
         name: '',
         owned: '',
-        cleared: '',
+        cleared: ''
       },
       // 源数据
       gameList: [],
@@ -114,7 +123,10 @@ export default {
       const length = filteredGameList.length
       const { currentPage, pageSize } = params
       const totalPage = Math.ceil(length / pageSize)
-      const currentList = filteredGameList.slice(pageSize * (currentPage - 1), pageSize * currentPage)
+      const currentList = filteredGameList.slice(
+        pageSize * (currentPage - 1),
+        pageSize * currentPage
+      )
 
       currentList.forEach(item => {
         item.tagName = item.tagList.join(',')
@@ -139,6 +151,6 @@ export default {
     beforeUpdateDetail(row) {
       console.log(row)
     }
-  },
+  }
 }
 </script>

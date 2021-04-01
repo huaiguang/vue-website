@@ -10,7 +10,7 @@
   background-color: #fff;
   overflow-x: hidden;
   overflow-y: auto;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.08);;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.08);
 }
 
 .wrap-content {
@@ -20,7 +20,7 @@
 }
 
 .divider {
-  margin: .5em auto;
+  margin: 0.5em auto;
   height: 1px;
   background-color: #cdcdcd;
 }
@@ -31,7 +31,7 @@
   /* 需要大于4(element中复制的操作栏为4) */
   z-index: 9;
   border-bottom: 1px solid #eee;
-  background-color: rgba(255, 255, 255, .75);
+  background-color: rgba(255, 255, 255, 0.75);
   box-shadow: 6px 6px 3px #fff;
 }
 
