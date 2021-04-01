@@ -21,7 +21,6 @@
         </el-form>
       </div>
     </div>
-    <div class="hidden" id="version">{{ DateVersion }}</div>
   </website-layout>
 </template>
 
@@ -44,15 +43,49 @@ export default {
       loginForm: {
         username: '',
         password: ''
-      },
-      DateVersion: ''
+      }
     }
   },
   created() {
     this.addLoading()
-    this.DateVersion = dateFormat(new Date(), 'yyyy-MM-dd hh:mm:ss')
+    this.createVersionInfo()
   },
   methods: {
+    createVersionInfo() {
+      // this.DateVersion = dateFormat(new Date(), 'yyyy-MM-dd hh:mm:ss')
+      const versionInfoList = [
+        {
+          title: 'environment',
+          content: process.env.NODE_ENV,
+          backgroundColor: '#42c02e'
+        },
+        {
+          title: 'version',
+          content: '1.0.0',
+          backgroundColor: '#1475b2'
+        },
+        {
+          title: 'Build Date ',
+          content: BuildDate,
+          backgroundColor: '#1475b2'
+        }
+      ]
+      function output(e) {
+        const t = e.title,
+              c = e.content,
+              n = e.backgroundColor,
+              a = ['%c '.concat(t, ' %c ').concat(c, ' '), 'padding: 1px; border-radius: 3px 0 0 3px; color: #fff; background: '.concat('#606060', ';'), 'padding: 1px; border-radius: 0 3px 3px 0; color: #fff; background: '.concat(n, ';')]
+
+        console.log.apply(null, a)
+        // return function() {
+        //   let e
+        //   window.console && typeof window.console.log === 'function' && (e = console).log.apply(e, arguments)
+        // }
+        //   .apply(void 0, a)
+      }
+
+      versionInfoList.forEach(output)
+    },
     addLoading() {
       this.$loading.show()
       this.$nextTick(() => {

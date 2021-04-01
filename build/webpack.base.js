@@ -82,12 +82,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: devMode ? 'static/css/[name].[hash:8].css' : 'static/css/[name].[contenthash:8].css'
     }),
-    new ESLintWebpackPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-      'process.env.APP_ENV': JSON.stringify(process.env.APP_ENV),
-      'process.env.API': JSON.stringify('/api/V4/')
-    })
+    new ESLintWebpackPlugin()
   ].concat(
     htmlHandler({
       template: path.resolve(__dirname, '../public/index.html'),

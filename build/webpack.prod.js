@@ -1,14 +1,22 @@
 const path = require('path')
 const merge = require('webpack-merge')
-const htmlHandler = require('./html-handler')
-const webpackBase = require('./webpack.base')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
+const htmlHandler = require('./html-handler')
+const webpackBase = require('./webpack.base')
+const { getDate } = require('./utils')
+
+const currentDate = getDate()
 
 const webpackConfig = merge(webpackBase, {
   mode: 'production',
   devtool: '#cheap-module-source-map',
-  plugins: [].concat(
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': require('../config/prod.env'),
+      BuildDate: JSON.stringify(currentDate)
+    })
+  ].concat(
     htmlHandler({
       template: path.resolve(__dirname, '../public/index.html'),
       chunksSortMode: 'dependency',

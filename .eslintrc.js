@@ -303,9 +303,11 @@ module.exports = {
 
     'template-curly-spacing': 'error',
 
-    'prefer-rest-params': 'error',
+    // 'prefer-rest-params': 'error',
+    'prefer-rest-params': 'warn',
 
-    'prefer-spread': 'error',
+    // 'prefer-spread': 'error',
+    'prefer-spread': 'warn',
 
     'prefer-arrow-callback': [
       'error',
