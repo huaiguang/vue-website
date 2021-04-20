@@ -12,5 +12,7 @@ yarn.lock
 *.njsproj
 *.sln
 
+
+.husky
 node_modules/
 dist/

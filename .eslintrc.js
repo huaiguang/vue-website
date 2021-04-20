@@ -9,7 +9,7 @@ module.exports = {
   },
   rules: {
     indent: [
-      'error',
+      'warn',
       2,
       {
         SwitchCase: 1,
@@ -20,6 +20,7 @@ module.exports = {
         ArrayExpression: 1,
         ObjectExpression: 1,
         ImportDeclaration: 1,
+        offsetTernaryExpressions: false,
         ignoreComments: true
       }
     ],

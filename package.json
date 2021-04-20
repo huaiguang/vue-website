@@ -4,13 +4,26 @@
   "description": "large website template based on vue",
   "main": "index.js",
   "scripts": {
-    "eslint": "eslint ./src --quiet",
-    "eslint:fix": "eslint ./src --fix --quiet",
-    "prettier:check": "prettier --check src/**/*.{vue,js,css}",
-    "prettier:write": "prettier --write src/**/*.{vue,js,css}",
+    "eslint": "eslint src/ --ext .js,.vue --quiet",
+    "eslint:fix": "eslint src/ --ext .js,.vue --fix --quiet",
+    "prettier:check": "prettier --check \"src/**/*.{vue,js,css}\"",
+    "prettier:write": "prettier --write \"src/**/*.{vue,js,css}\"",
     "dev": "node build/dev-server",
     "dev:server": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.test",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "test": "lint-staged"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js, vue, css, md, json}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{vue, js}": "eslint --fix"
   },
   "author": "Carlos",
   "private": false,

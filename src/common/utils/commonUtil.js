@@ -17,13 +17,8 @@ import storage from './CacheStorage'
  * touch-->重新设置每条数据的过期时间
  * */
 function storageMethod(val) {
-  return val === 'local'
-    ? storage.getInstance({
-        storage: 'localStorage'
-      })
-    : storage.getInstance({
-        storage: 'sessionStorage'
-      })
+  const storageType = val === 'local' ? 'localStorage' : 'sessionStorage'
+  return storage.getInstance({ storageType })
 }
 
 /**
@@ -61,11 +56,11 @@ function downloadExportFile(blob, tagFileName, fileType) {
 function numberFormat(number, decimals, dec_point, thousands_sep) {
   number = (number + '').replace(/[^0-9+-Ee.]/g, '')
   const n = !isFinite(+number) ? 0 : +number
-
   const prec = !isFinite(+decimals) ? 0 : Math.abs(decimals)
   const sep = typeof thousands_sep === 'undefined' ? ',' : thousands_sep
   const dec = typeof dec_point === 'undefined' ? '.' : dec_point
   let s = ''
+
   const toFixedFix = function(n, prec) {
     const k = Math.pow(10, prec)
     return '' + calculateTwoNumber(Math.floor(calculateTwoNumber(n, k, '*')), k, '/')
