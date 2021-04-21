@@ -24,24 +24,24 @@ function storageMethod(val) {
 /**
  *下载导出文件
  * @param blob  ：返回数据的blob对象或链接
- * @param tagFileName  ：下载后文件名标记
+ * @param fileName  ：下载后文件名标记
  * @param fileType  ：文件类 word(docx) excel(xlsx) ppt等
  */
-function downloadExportFile(blob, tagFileName, fileType) {
-  const downloadElement = document.createElement('a')
+function downloadExportFile(blob, fileName, fileType) {
+  const elementA = document.createElement('a')
   let href = blob
   if (typeof blob === 'string') {
-    downloadElement.target = '_blank'
+    elementA.target = '_blank'
   } else {
     href = window.URL.createObjectURL(blob) //创建下载的链接
   }
-  downloadElement.href = href
-  downloadElement.download = tagFileName + '.' + fileType //下载后文件名
-  document.body.appendChild(downloadElement)
-  downloadElement.click() //点击下载
-  document.body.removeChild(downloadElement) //下载完成移除元素
+  elementA.href = href
+  elementA.download = fileName + '.' + fileType //下载后文件名
+  document.body.appendChild(elementA)
+  elementA.click() // 模拟点击
+  document.body.removeChild(elementA) // 下载完成移除元素
   if (typeof blob !== 'string') {
-    window.URL.revokeObjectURL(href) //释放掉blob对象
+    window.URL.revokeObjectURL(href) // 释放掉blob对象
   }
 }
 
@@ -49,16 +49,16 @@ function downloadExportFile(blob, tagFileName, fileType) {
  * 格式化数字
  * @param number
  * @param decimals  保留几位小数
- * @param dec_point   小数点符号
- * @param thousands_sep  千分位符号
+ * @param decPoint   小数点符号
+ * @param thousandsSep  千分位符号
  * @returns {string}
  */
-function numberFormat(number, decimals, dec_point, thousands_sep) {
+function numberFormat(number, decimals, decPoint, thousandsSep) {
   number = (number + '').replace(/[^0-9+-Ee.]/g, '')
   const n = !isFinite(+number) ? 0 : +number
   const prec = !isFinite(+decimals) ? 0 : Math.abs(decimals)
-  const sep = typeof thousands_sep === 'undefined' ? ',' : thousands_sep
-  const dec = typeof dec_point === 'undefined' ? '.' : dec_point
+  const sep = typeof thousandsSep === 'undefined' ? ',' : thousandsSep
+  const dec = typeof decPoint === 'undefined' ? '.' : decPoint
   let s = ''
 
   const toFixedFix = function(n, prec) {
@@ -249,12 +249,12 @@ function compressImage(file, callback) {
 
 /**
  * 将base64转换为文件
- * @param dataurl  传入的base64文件
- * @param filename  文件名称
+ * @param dataUrl  传入的base64文件
+ * @param fileName  文件名称
  * @returns {File}
  */
-function dataURLtoFile(dataurl, filename) {
-  const arr = dataurl.split(',')
+function dataURLtoFile(dataUrl, fileName) {
+  const arr = dataUrl.split(',')
   const mime = arr[0].match(/:(.*?)/)[1]
   const bstr = atob(arr[1])
   let n = bstr.length
@@ -262,7 +262,7 @@ function dataURLtoFile(dataurl, filename) {
   while (n--) {
     u8arr[n] = bstr.charCodeAt(n)
   }
-  return new File([u8arr], filename, {
+  return new File([u8arr], fileName, {
     type: mime
   })
 }
@@ -273,8 +273,6 @@ function dataURLtoFile(dataurl, filename) {
  * @param {*} cache 缓存数组
  */
 function deepCopy(obj, cache = []) {
-  // typeof [] => 'object'
-  // typeof {} => 'object'
   if (obj === null || typeof obj !== 'object') {
     return obj
   }
