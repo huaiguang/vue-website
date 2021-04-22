@@ -66,7 +66,7 @@ module.exports = merge(webpackBaseConfig, {
       new TerserWebpackPlugin({
         terserOptions: {
           compress: {
-            drop_console: true
+            // drop_console: true
           },
           format: {
             comments: false

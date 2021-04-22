@@ -9,18 +9,15 @@ module.exports = {
   },
   rules: {
     indent: [
-      'warn',
+      'error',
       2,
       {
         SwitchCase: 1,
         VariableDeclarator: 1,
         MemberExpression: 1,
-        FunctionDeclaration: { body: 1, parameters: 2 },
+        FunctionDeclaration: { body: 1, parameters: 1 },
         CallExpression: { arguments: 1 },
-        ArrayExpression: 1,
-        ObjectExpression: 1,
-        ImportDeclaration: 1,
-        offsetTernaryExpressions: false,
+        offsetTernaryExpressions: true,
         ignoreComments: true
       }
     ],
@@ -285,7 +282,8 @@ module.exports = {
     'prefer-const': [
       'error',
       {
-        destructuring: 'any',
+        // 只有当解构中的变量全部为const时才必须用const
+        destructuring: 'all',
         ignoreReadBeforeAssign: false
       }
     ],
@@ -381,6 +379,8 @@ module.exports = {
     'vue/html-self-closing': 0,
     'vue/max-attributes-per-line': 0,
     'vue/singleline-html-element-content-newline': 0,
-    'vue/attributes-order': 0
+    'vue/attributes-order': 0,
+    // [deprecated]
+    'vue/no-reserved-keys': 0
   }
 }
