@@ -6,7 +6,7 @@
 
       <el-menu-item index="1">
         <i class="el-icon-s-home"></i>
-        <a slot="title" href="/console/home.html">首页</a>
+        <a slot="title" href="./home.html">首页</a>
       </el-menu-item>
       <el-submenu v-for="item in activeMenu" :index="item.index" :key="item.index">
         <template slot="title">

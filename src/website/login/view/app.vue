@@ -121,7 +121,7 @@ export default {
           message: data.message
         })
         setTimeout(() => {
-          window.location.href = '/console/home.html'
+          location.href = '../console/home.html'
         })
       })
     }
