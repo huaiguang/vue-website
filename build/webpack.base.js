@@ -1,10 +1,10 @@
 const path = require('path')
 const glob = require('glob')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const webpack = require('webpack')
 const ESLintWebpackPlugin = require('eslint-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const htmlHandler = require('./html-handler')
+const config = require('../config')
 const devMode = process.env.NODE_ENV !== 'production'
 
 function getEntriesWithHMR(globPath) {
@@ -22,8 +22,9 @@ module.exports = {
   entry: entries,
   output: {
     path: path.resolve(__dirname, '../dist'),
-    publicPath: '/',
-    filename: devMode ? 'static/js/[name].[hash:8].js' : 'static/js/[name].[chunkhash:8].js'
+    filename: devMode ? 'static/js/[name].[hash:8].js' : 'static/js/[name].[chunkhash:8].js',
+    // publicPath: '/',
+    publicPath: devMode ? config.dev.assetsPublicPath : config.build.assetsPublicPath
   },
   module: {
     rules: [
@@ -57,23 +58,31 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|jpeg|gif)$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            limit: 8192,
-            name: devMode ? 'static/images/[name].[hash:8].[ext]' : 'static/images/[name].[contenthash:8].[ext]'
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: devMode
+                ? 'static/images/[name].[hash:8].[ext]'
+                : 'static/images/[name].[contenthash:8].[ext]'
+            }
           }
-        }]
+        ]
       },
       {
         test: /\.(eot|ttf|woff2?|svg)$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            limit: 8192,
-            name: devMode ? 'static/fonts/[name].[hash:8].[ext]' : 'static/fonts/[name].[contenthash:8].[ext]'
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: devMode
+                ? 'static/fonts/[name].[hash:8].[ext]'
+                : 'static/fonts/[name].[contenthash:8].[ext]'
+            }
           }
-        }]
+        ]
       }
     ]
   },
