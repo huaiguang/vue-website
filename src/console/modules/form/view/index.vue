@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       fileName: '',
-      compressedImagesrc: '',
+      compressedImagesrc: ''
     }
   },
   mounted() {
@@ -50,7 +50,7 @@ export default {
         const target = {
           size: 30,
           width: 1920,
-          orientation,
+          orientation
         }
         compressImage({ file: fileObj, target }, file => {
           // console.log('done', file)
@@ -95,8 +95,8 @@ export default {
     },
     downloadCompressedImage() {
       downloadFile(this.compressedImagesrc, this.fileName)
-    },
-  },
+    }
+  }
 }
 </script>
 

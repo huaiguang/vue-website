@@ -30,7 +30,13 @@ function splitAddress(str) {
   // 4个直辖市
   const specialCites = ['北京市', '上海市', '重庆市', '天津市']
   // 5个自治区
-  const specialDistrict = ['内蒙古自治区', '西藏自治区', '广西壮族自治区', '宁夏回族自治区', '新疆维吾尔自治区']
+  const specialDistrict = [
+    '内蒙古自治区',
+    '西藏自治区',
+    '广西壮族自治区',
+    '宁夏回族自治区',
+    '新疆维吾尔自治区'
+  ]
   // 判断是否为直辖市
   const isSpecialCity = specialCites.some(item => str.startsWith(item))
   // 判断是否为自治区
@@ -53,7 +59,6 @@ function splitAddress(str) {
   return tempArray
 }
 
-
 function testSplitAddress() {
   const addressList = [
     '甘肃省临泽县新华镇大寨村六社39号',
@@ -71,7 +76,4 @@ function testSplitAddress() {
   })
 }
 
-export {
-  splitAddress,
-  testSplitAddress
-}
+export { splitAddress, testSplitAddress }

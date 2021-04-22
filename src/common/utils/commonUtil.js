@@ -17,34 +17,31 @@ import storage from './CacheStorage'
  * touch-->重新设置每条数据的过期时间
  * */
 function storageMethod(val) {
-  return val === 'local' ? storage.getInstance({
-    storage: 'localStorage'
-  }) : storage.getInstance({
-    storage: 'sessionStorage'
-  })
+  const storageType = val === 'local' ? 'localStorage' : 'sessionStorage'
+  return storage.getInstance({ storageType })
 }
 
 /**
  *下载导出文件
  * @param blob  ：返回数据的blob对象或链接
- * @param tagFileName  ：下载后文件名标记
+ * @param fileName  ：下载后文件名标记
  * @param fileType  ：文件类 word(docx) excel(xlsx) ppt等
  */
-function downloadExportFile(blob, tagFileName, fileType) {
-  const downloadElement = document.createElement('a')
+function downloadExportFile(blob, fileName, fileType) {
+  const elementA = document.createElement('a')
   let href = blob
   if (typeof blob === 'string') {
-    downloadElement.target = '_blank'
+    elementA.target = '_blank'
   } else {
     href = window.URL.createObjectURL(blob) //创建下载的链接
   }
-  downloadElement.href = href
-  downloadElement.download = tagFileName + '.' + fileType //下载后文件名
-  document.body.appendChild(downloadElement)
-  downloadElement.click() //点击下载
-  document.body.removeChild(downloadElement) //下载完成移除元素
+  elementA.href = href
+  elementA.download = fileName + '.' + fileType //下载后文件名
+  document.body.appendChild(elementA)
+  elementA.click() // 模拟点击
+  document.body.removeChild(elementA) // 下载完成移除元素
   if (typeof blob !== 'string') {
-    window.URL.revokeObjectURL(href) //释放掉blob对象
+    window.URL.revokeObjectURL(href) // 释放掉blob对象
   }
 }
 
@@ -52,21 +49,21 @@ function downloadExportFile(blob, tagFileName, fileType) {
  * 格式化数字
  * @param number
  * @param decimals  保留几位小数
- * @param dec_point   小数点符号
- * @param thousands_sep  千分位符号
+ * @param decPoint   小数点符号
+ * @param thousandsSep  千分位符号
  * @returns {string}
  */
-function numberFormat(number, decimals, dec_point, thousands_sep) {
+function numberFormat(number, decimals, decPoint, thousandsSep) {
   number = (number + '').replace(/[^0-9+-Ee.]/g, '')
   const n = !isFinite(+number) ? 0 : +number
-
   const prec = !isFinite(+decimals) ? 0 : Math.abs(decimals)
-  const sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep
-  const dec = (typeof dec_point === 'undefined') ? '.' : dec_point
+  const sep = typeof thousandsSep === 'undefined' ? ',' : thousandsSep
+  const dec = typeof decPoint === 'undefined' ? '.' : decPoint
   let s = ''
+
   const toFixedFix = function(n, prec) {
     const k = Math.pow(10, prec)
-    return '' + calculateTwoNumber(Math.floor(calculateTwoNumber(n,k,'*')),k,'/')
+    return '' + calculateTwoNumber(Math.floor(calculateTwoNumber(n, k, '*')), k, '/')
   }
   s = (prec ? toFixedFix(n, prec) : '' + Math.floor(n)).split('.')
   const re = /(-?\d+)(\d{3})/
@@ -107,21 +104,22 @@ function throttle(fn, delay) {
  * @returns {number}
  */
 function calculateTwoNumber(arg1, arg2, type) {
-  if (type === '*') { //乘法
+  if (type === '*') {
+    //乘法
     let m = 0
     const s1 = arg1.toString()
     const s2 = arg2.toString()
     try {
       m += s1.split('.')[1].length
-    } catch (e) {
-    }
+    } catch (e) {}
     try {
       m += s2.split('.')[1].length
-    } catch (e) {
-    }
-    return Number(s1.replace('.', '')) * Number(s2.replace('.', '')) / Math.pow(10, m)
-  } else if (type === '+' || type === '-') { //加减法
-    let sq1; let sq2
+    } catch (e) {}
+    return (Number(s1.replace('.', '')) * Number(s2.replace('.', ''))) / Math.pow(10, m)
+  } else if (type === '+' || type === '-') {
+    //加减法
+    let sq1
+    let sq2
     try {
       sq1 = arg1.toString().split('.')[1].length
     } catch (e) {
@@ -138,17 +136,16 @@ function calculateTwoNumber(arg1, arg2, type) {
     } else if (type === '-') {
       return (calculateTwoNumber(arg1, x, '*') - calculateTwoNumber(arg2, x, '*')) / x
     }
-  } else if (type === '/') { //除法
+  } else if (type === '/') {
+    //除法
     let t1 = 0
     let t2 = 0
     try {
       t1 = arg1.toString().split('.')[1].length
-    } catch (e) {
-    }
+    } catch (e) {}
     try {
       t2 = arg2.toString().split('.')[1].length
-    } catch (e) {
-    }
+    } catch (e) {}
     const r1 = Number(arg1.toString().replace('.', ''))
     const r2 = Number(arg2.toString().replace('.', ''))
     return (r1 / r2) * Math.pow(10, t2 - t1)
@@ -166,12 +163,15 @@ function calculateTwoNumber(arg1, arg2, type) {
  */
 function getBase64(options, callback) {
   //通过构造函数来创建的img实例，在赋予src值后就会立刻下载图片，相比createElement()创建<img>省去了append()，也就避免了文档冗余和污染
-  const Img = new Image(); let dataURL = ''
+  const Img = new Image()
+  let dataURL = ''
   Img.src = options.url
-  Img.onload = function() { //要先确保图片完整获取到，这是个异步事件
+  Img.onload = function() {
+    //要先确保图片完整获取到，这是个异步事件
     const canvas = document.createElement('canvas') //创建canvas元素
     let scale = 1
-    if (Img.width > options.width || Img.height > options.height) { //1000只是示例，可以根据具体的要求去设定
+    if (Img.width > options.width || Img.height > options.height) {
+      //1000只是示例，可以根据具体的要求去设定
       if (Img.width > Img.height) {
         scale = options.width / Img.width
       } else {
@@ -232,7 +232,9 @@ function compressImage(file, callback) {
         u8arr[n] = bstr.charCodeAt(n)
       }
       // 转成file
-      const newFile = new window.File([new Blob([u8arr], { type: mime })], file.name, { type: 'image/jpeg' })
+      const newFile = new window.File([new Blob([u8arr], { type: mime })], file.name, {
+        type: 'image/jpeg'
+      })
       // todo
 
       console.group()
@@ -247,12 +249,12 @@ function compressImage(file, callback) {
 
 /**
  * 将base64转换为文件
- * @param dataurl  传入的base64文件
- * @param filename  文件名称
+ * @param dataUrl  传入的base64文件
+ * @param fileName  文件名称
  * @returns {File}
  */
-function dataURLtoFile(dataurl, filename) {
-  const arr = dataurl.split(',')
+function dataURLtoFile(dataUrl, fileName) {
+  const arr = dataUrl.split(',')
   const mime = arr[0].match(/:(.*?)/)[1]
   const bstr = atob(arr[1])
   let n = bstr.length
@@ -260,7 +262,7 @@ function dataURLtoFile(dataurl, filename) {
   while (n--) {
     u8arr[n] = bstr.charCodeAt(n)
   }
-  return new File([u8arr], filename, {
+  return new File([u8arr], fileName, {
     type: mime
   })
 }
@@ -271,8 +273,6 @@ function dataURLtoFile(dataurl, filename) {
  * @param {*} cache 缓存数组
  */
 function deepCopy(obj, cache = []) {
-  // typeof [] => 'object'
-  // typeof {} => 'object'
   if (obj === null || typeof obj !== 'object') {
     return obj
   }
@@ -320,7 +320,11 @@ const uniqueIds = []
  */
 function createUniqueId() {
   const random = function() {
-    return Number(Math.random().toString().substr(2)).toString(36) // 转换成十六进制
+    return Number(
+      Math.random()
+        .toString()
+        .substr(2)
+    ).toString(36) // 转换成十六进制
   }
   function createId() {
     const num = random()

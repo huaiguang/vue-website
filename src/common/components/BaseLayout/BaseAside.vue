@@ -1,9 +1,6 @@
 <template>
   <el-aside style="width: 200px;">
-    <el-menu
-      unique-opened
-      :default-active="realIndex"
-      @select="handleSelect">
+    <el-menu unique-opened :default-active="realIndex" @select="handleSelect">
       <!-- .is-active 指当前选中的 menuItem, .is-opened 指当前展开的 submenu
       .is-active.is-opened 指当前展开的 submenu 中有选中的 menuItem -->
 
@@ -88,7 +85,7 @@ export default {
 <style lang="scss" scoped>
 .el-aside {
   color: #333;
-  background-color: #D3DCE6;
+  background-color: #d3dce6;
 }
 
 .menu-route {

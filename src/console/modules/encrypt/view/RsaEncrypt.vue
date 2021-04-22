@@ -79,7 +79,9 @@ export default {
   },
   methods: {
     createUniqueRandomNumber() {
-      const decRandomDigit = Math.random().toString().substr(2)
+      const decRandomDigit = Math.random()
+        .toString()
+        .substr(2)
       const s36RandomDigit = Number(decRandomDigit).toString(36)
       console.group()
       console.log(decRandomDigit, decRandomDigit.length)

@@ -33,7 +33,4 @@ function httpPost(url, params, options) {
   })
 }
 
-export {
-  httpGet,
-  httpPost
-}
+export { httpGet, httpPost }

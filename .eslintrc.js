@@ -9,17 +9,18 @@ module.exports = {
   },
   rules: {
     indent: [
-      'error',
+      'warn',
       2,
       {
         SwitchCase: 1,
-        VariableDeclarator: 'first',
+        VariableDeclarator: 1,
         MemberExpression: 1,
         FunctionDeclaration: { body: 1, parameters: 2 },
         CallExpression: { arguments: 1 },
         ArrayExpression: 1,
         ObjectExpression: 1,
         ImportDeclaration: 1,
+        offsetTernaryExpressions: false,
         ignoreComments: true
       }
     ],

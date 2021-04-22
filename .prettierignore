@@ -1,0 +1,10 @@
+# Ignore artifacts:
+dist
+docs
+# coverage
+
+# Ignore all HTML files:
+# *.html
+
+# Ignore compressed files:
+*.min.js

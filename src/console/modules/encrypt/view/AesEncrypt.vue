@@ -64,7 +64,7 @@ export default {
       encryptedAesText01: '',
       decryptedAesText01: '',
       encryptedAesText02: '',
-      decryptedAesText02: '',
+      decryptedAesText02: ''
     }
   },
   created() {
@@ -81,7 +81,7 @@ export default {
       console.log(typeof this.encryptedAesText02, this.encryptedAesText02)
       console.log(typeof this.decryptedAesText02, this.decryptedAesText02)
       console.groupEnd()
-    },
-  },
+    }
+  }
 }
 </script>
