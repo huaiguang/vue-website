@@ -1,16 +1,16 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const webpackBase = require('./webpack.base')
+const webpackBaseConfig = require('./webpack.config.base')
 const { getDate } = require('./utils')
 
 const currentDate = getDate()
 
-Object.keys(webpackBase.entry).forEach(name => {
+Object.keys(webpackBaseConfig.entry).forEach(name => {
   // entry 中相对于根地址
-  webpackBase.entry[name] = ['./build/dev-client'].concat(webpackBase.entry[name])
+  webpackBaseConfig.entry[name] = ['./build/dev-client'].concat(webpackBaseConfig.entry[name])
 })
 
-const webpackConfig = merge(webpackBase, {
+const webpackConfig = merge(webpackBaseConfig, {
   mode: 'development',
   plugins: [
     new webpack.DefinePlugin({

@@ -70,23 +70,27 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg2?)$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            limit: 8192,
-            name: 'static/images/[name].[ext]?v=[hash:8]'
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: 'static/images/[name].[ext]?v=[hash:8]'
+            }
           }
-        }]
+        ]
       },
       {
         test: /\.(eot|ttf|woff2?)$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            limit: 8192,
-            name: 'static/fonts/[name].[ext]?v=[hash:8]'
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: 'static/fonts/[name].[ext]?v=[hash:8]'
+            }
           }
-        }]
+        ]
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)$/,

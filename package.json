@@ -9,7 +9,7 @@
     "prettier:check": "prettier --check \"src/**/*.{vue,js,css}\"",
     "prettier:write": "prettier --write \"src/**/*.{vue,js,css}\"",
     "dev": "node build/dev-server",
-    "dev:server": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.test",
+    "dev:server": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.config.test",
     "build": "node build/build.js",
     "precommit": "lint-staged"
   },

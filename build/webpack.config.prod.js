@@ -2,14 +2,14 @@ const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
+const TerserWebpackPlugin = require('terser-webpack-plugin')
 const htmlHandler = require('./html-handler')
-const webpackBase = require('./webpack.base')
+const webpackBaseConfig = require('./webpack.config.base')
 const { getDate } = require('./utils')
 
 const currentDate = getDate()
 
-const webpackConfig = merge(webpackBase, {
+module.exports = merge(webpackBaseConfig, {
   mode: 'production',
   devtool: '#cheap-module-source-map',
   plugins: [
@@ -63,7 +63,17 @@ const webpackConfig = merge(webpackBase, {
         },
         canPrint: true
       }),
-      new TerserPlugin()
+      new TerserWebpackPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true
+          },
+          format: {
+            comments: false
+          }
+        },
+        extractComments: false
+      })
     ],
     splitChunks: {
       cacheGroups: {
@@ -94,5 +104,3 @@ const webpackConfig = merge(webpackBase, {
     }
   }
 })
-
-module.exports = webpackConfig
