@@ -23,7 +23,6 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: devMode ? 'static/js/[name].[hash:8].js' : 'static/js/[name].[chunkhash:8].js',
-    // publicPath: '/',
     publicPath: devMode ? config.dev.assetsPublicPath : config.build.assetsPublicPath
   },
   module: {
@@ -77,6 +76,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 8192,
+              publicPath: '../../',
               name: devMode
                 ? 'static/fonts/[name].[hash:8].[ext]'
                 : 'static/fonts/[name].[contenthash:8].[ext]'
