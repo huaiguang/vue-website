@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const merge = require('webpack-merge')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
@@ -53,9 +54,12 @@ const webpackConfig = merge(webpackBase, {
           }
         },
         cssProcessorPluginOptions: {
-          preset: ['default', {
-            normalizeUnicode: false
-          }]
+          preset: [
+            'default',
+            {
+              normalizeUnicode: false
+            }
+          ]
         },
         canPrint: true
       }),
