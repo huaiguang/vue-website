@@ -17,8 +17,7 @@ const webpackConfig = merge(webpackBaseConfig, {
       'process.env': require('../config/dev.env'),
       BuildDate: JSON.stringify(currentDate)
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin()
   ],
   devtool: '#cheap-module-eval-source-map'
 })

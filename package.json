@@ -14,11 +14,11 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js, vue, css, md, json}": [
+    "*.{js,vue,css,md,json}": [
       "prettier --write",
       "git add"
     ],
-    "*.{vue, js}": "eslint --fix"
+    "*.{vue,js}": "eslint --fix"
   },
   "author": "Carlos",
   "private": false,
